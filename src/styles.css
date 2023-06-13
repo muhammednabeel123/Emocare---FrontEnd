@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #ffffff;
+  }
+  
+  .material-icons.text-base {
+    font-size: inherit;
+  }
+  
+  .bg-secondary {
+    background-color:#ffffff;
+  }
+  
+  .bg-gradient {
+    background: linear-gradient(132deg, #FC415A, #591BC5, #212335);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+  }
+  a {
+    font-family: 'Quicksand';
+    font-size: 0.8rem;
+    line-height: 20px;
+    opacity: 1;
+    font-weight: 700;
+    color: rgb(121, 121, 121);
+    text-align: left;
+ 
+    letter-spacing: unset;
+  }
+
+  li {
+    color: rgb(121, 121, 121);
+  }
+  
+  
