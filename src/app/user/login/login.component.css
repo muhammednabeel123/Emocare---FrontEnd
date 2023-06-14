@@ -6,11 +6,9 @@ a {
     font-weight: 700;
     color: rgb(121, 121, 121);
     text-align: left;
+ 
     letter-spacing: unset;
-    transition: background-color 0.3s;
   }
-  
-  a:hover {
-    color:rgb(239, 68, 68)
-  }
-  
+  .vertical-line {
+    height: 1.5rem; /* Adjust the height as needed */
+}
