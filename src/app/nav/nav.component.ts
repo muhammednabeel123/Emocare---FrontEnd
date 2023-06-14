@@ -8,13 +8,14 @@ import { Component } from '@angular/core';
 export class NavComponent {
   isMenuOpen: boolean = false;
 
-  onToggleMenu(): void {
+  toggleNavbar() {
     this.isMenuOpen = !this.isMenuOpen;
-    const navLinks = document.querySelector('.nav-links');
-    if (navLinks) {
-      navLinks.classList.toggle('hidden');
-      navLinks.classList.toggle('top-[-100%]');
-    }
   }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+
   
 }
