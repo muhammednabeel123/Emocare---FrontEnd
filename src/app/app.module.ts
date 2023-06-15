@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
 import { UserModule } from './user/user.module';
 import { NavComponent } from './nav/nav.component';
+import { InputComponent } from './shared/input/input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    InputComponent
   ],
   imports: [
     IonicModule.forRoot(),
