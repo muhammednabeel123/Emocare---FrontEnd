@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModuleSharedModule } from "../shared/shared.module";
+import { UserRoutinMOdule } from './user-routing.module';
+
 
 
 
@@ -19,7 +21,7 @@ import { ModuleSharedModule } from "../shared/shared.module";
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        ModuleSharedModule
+        ModuleSharedModule,UserRoutinMOdule
     ]
 })
 export class UserModule { }
