@@ -1,14 +1,4 @@
-a {
-    font-family: 'Quicksand';
-    font-size: 0.97rem;
-    line-height: 20px;
-    opacity: 1;
-    font-weight: 700;
-    color: rgb(121, 121, 121);
-    text-align: left;
- 
-    letter-spacing: unset;
-  }
+
   .vertical-line {
     height: 1.5rem; /* Adjust the height as needed */
 }

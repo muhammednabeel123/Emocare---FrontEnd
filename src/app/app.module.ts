@@ -21,9 +21,9 @@ import { ModuleSharedModule } from './shared/shared.module';
   imports: [
     IonicModule.forRoot(),
     BrowserModule,
-    AppRoutingModule,
-    UserModule,
-    ModuleSharedModule
+     UserModule,
+    ModuleSharedModule,
+    AppRoutingModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]

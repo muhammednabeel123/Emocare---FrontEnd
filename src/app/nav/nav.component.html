@@ -8,7 +8,7 @@
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
       </a>
       <div class="flex md:order-2">
-        <button type="button" (click)="toggleNavbar()" class="text-white bg-red-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-quicksand font-medium rounded-full text-sm px-6 py-2 text-center mr-3 md:mr-0 bg-red-500 dark:hover:bg-red-400 dark:focus:ring-blue-800">Login</button>
+        <a routerLink="login"><button type="button" (click)="toggleNavbar()" class="text-white bg-red-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-quicksand font-medium rounded-full text-sm px-6 py-2 text-center mr-3 md:mr-0 bg-red-500 dark:hover:bg-red-400 dark:focus:ring-red-50">Login</button></a>
 
         <button type="button" (click)="toggleMenu()" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'">
           <span class="sr-only">Open main menu</span>
@@ -20,7 +20,7 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky" [ngClass]="{ 'hidden': !isMenuOpen }">
         <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
           <li>
-            <a href="#" class="text-gray-700 rounded md:bg-transparent md:text-gray-700 md:p-0 md:dark:text-gray-500" aria-current="page">Home</a>
+            <a routerLink="login" class="text-gray-700 rounded md:bg-transparent md:text-gray-700 md:p-0 md:dark:text-gray-500" aria-current="page">Home</a>
           </li>
           <li>
             <a href="#" class="text-gray-700 rounded hover:bg-orange-500 hover:text-white md:hover:bg-transparent md:hover:text-white md:p-0 md:dark:hover:text-gray-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>

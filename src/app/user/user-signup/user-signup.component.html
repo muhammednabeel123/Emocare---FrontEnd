@@ -1,79 +1,67 @@
-<!-- component -->
-<!--
-  UI Design Prototype
-  Link : https://dribbble.com/shots/10452538-React-UI-Components
--->
-<div style="background-image: url('https://cdn.theinnerhour.com/assets/images/authentication/banner.png')" class="w-full h-screen bg-no-repeat  bg-cover bg-fixed">
-  <div style="display: flex;">
-    <div style="flex: 1;">
+<div class="w-full min-h-screen bg-no-repeat bg-cover bg-fixed" style="background-image: url('https://cdn.theinnerhour.com/assets/images/authentication/banner.png')">
+  <div class="flex flex-col sm:flex-row justify-center items-center h-screen">
+    <div class="flex-1 hidden sm:block items-start">
       <!-- Content for the left side -->
- 
+      <h1 class="text-4xl sm:text-5xl md:text-5xl leading-40 font-bold text-green-800 text-center mt-0 mb-4 sm:mt-2 sm:mb-8 md:mt-4 md:mb-10 mx-4 sm:mx-8 md:mx-12 font-quicksand font-semibold">
+        Welcome to
+      </h1>
+      <h1 class="text-4xl sm:text-5xl md:text-5xl leading-40 font-bold text-green-800 text-center mt-0 mb-8 sm:mt-2 sm:mb-10 md:mt-4 md:mb-12 mx-4 sm:mx-8 md:mx-12 font-quicksand font-semibold">
+        Emocare !
+      </h1>
     </div>
-    <div style="flex: 1; ">
+    
+    
+
+    <div class="flex-1 mt-8">
       <!-- Content for the right side -->
-      <div class="min-h-screen  py-6 flex flex-col justify-center sm:py-12">
-      <!-- component -->
-<!--
-  UI Design Prototype
-  Link : https://dribbble.com/shots/10452538-React-UI-Components
--->
-<div class="min-h-screen  py-6 flex flex-col justify-center sm:py-12">
-    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-      <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-2xl sm:p-10">
-        <div class="w-96 mx-auto" >
-          <app-alert *ngIf="showAlert" [color]="alertColor" >
-            {{ alertMsg }}
-          </app-alert>
-            <div class="flex items-center justify-center space-x-5">
-                <div class="block pl-2 font-semibold text-xl text-gray-700 text-center" style="font-family: 'Quicksand', sans-serif;">
-                    <h2 class="text-center">Sign up</h2>
+      <div class="min-h-screen py-6 flex flex-col justify-center sm:py-12">
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-2xl sm:p-10">
+            <div class="w-full mx-auto">
+              <app-alert *ngIf="showAlert" [color]="alertColor">
+                {{ alertMsg }}
+              </app-alert>
+              <div class="flex items-center justify-center space-x-5">
+                <div class="block pl-2 font-semibold text-xl text-gray-700 text-center font-quicksand">
+                  <h2 class="text-center">Sign up</h2>
                 </div>
-            </div>
-            
-            <div class="flex items-center justify-center mt-4" style="font-family: 'Quicksand', sans-serif;">
-                <p class="text-gray-500">
-                    Already have an account?
-                    <a href="#" style="color: rgb(231, 105, 67); font-size: inherit;">Login</a>
-                </p>
-            </div>
-            <hr class="mt-4 border-gray-300">
-            
-            <div class="flex items-center justify-center mt-4">
-              <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-300 rounded-full shadow flex items-center text-sm">
-                <a title="Google Inc., Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Google_%22G%22_Logo.svg">
-                  <img width="20" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
-                </a>
-                <span class="ml-1">Sign up with Google</span>
-              </button>
-              
               </div>
-              
-              
-              
-              
-            
-            
+
+              <div class="flex items-center justify-center mt-4 font-quicksand">
+                <p class="text-gray-500">
+                  Already have an account?
+                  <a routerLink="login" class="text-red-500 font-semibold">Login</a>
+                </p>
+              </div>
+              <hr class="mt-4 border-gray-300">
+
+              <div class="flex items-center justify-center mt-4">
+                <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-300 rounded-full shadow flex items-center text-sm">
+                  <a title="Google Inc., Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Google_%22G%22_Logo.svg">
+                    <img width="20" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
+                  </a>
+                  <span class="ml-1">Sign up with Google</span>
+                </button>
+              </div>
+
               <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <div class="divide-y divide-white">
                   <div class="py-8 text-base leading-6 space-y-4 text-gray-300 sm:text-lg sm:leading-7">
                     <div class="flex flex-col">
-                      <!-- <name> -->
                       <app-input [control]="name" type="text" placeholder="Enter Name"></app-input>
                     </div>
                     <div class="flex flex-col">
-                      <!-- <mail> -->
                       <app-input [control]="email" type="email" placeholder="Enter Email"></app-input>
                     </div>
                     <div class="flex flex-col mb-4">
-                      <!-- <Password> -->
                       <app-input [control]="password" type="password" placeholder="Password (min 8 characters)*"></app-input>
                     </div>
                     <div class="flex flex-col mt-4 pt-7 space-y-2">
-                      <label class="inline-flex items-center text-gray-500 text-xs" style="font-family: 'Quicksand', sans-serif;">
+                      <label class="inline-flex items-center text-gray-500 text-xs">
                         <input type="checkbox" class="form-checkbox h-3 w-3 text-red-500" formControlName="age" (change)="updateButtonColor()">
                         <span class="ml-2 text-sm">I am above 18 years of age</span>
                       </label>
-                      <label class="inline-flex items-center text-gray-500 text-xs" style="font-family: 'Quicksand', sans-serif;">
+                      <label class="inline-flex items-center text-gray-500 text-xs">
                         <input type="checkbox" class="form-checkbox h-3 w-3 text-red-500" formControlName="terms" (change)="updateButtonColor()">
                         <span class="ml-2 text-sm">I accept Terms & Conditions and Privacy Policy</span>
                       </label>
@@ -84,16 +72,12 @@
                   </div>
                 </div>
               </form>
-              
-              
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-          
-       
-          
-      </div>
-    </div>
-  </div>
 </div>
+
+ 
