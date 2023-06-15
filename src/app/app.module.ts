@@ -8,19 +8,22 @@ import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
 import { UserModule } from './user/user.module';
 import { NavComponent } from './nav/nav.component';
-import { InputComponent } from './shared/input/input.component';
+
+import { ModuleSharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    InputComponent
+    
   ],
   imports: [
     IonicModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    UserModule
+    UserModule,
+    ModuleSharedModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]

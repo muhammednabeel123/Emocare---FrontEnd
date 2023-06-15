@@ -1,1 +1,20 @@
-<p>input works!</p>
+<input [type]="type" [formControl]="control" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+[ngClass]="{'border-red-500': control.touched  &&  control.errors?.required || control.errors?.minlength || control.errors?.email || control.errors?.pattern }"
+[placeholder]="placeholder" >
+
+<ng-container *ngIf="control.touched && control.dirty">
+    <p *ngIf="control.errors?.required" class="text-red-500 text-xs font-quicksand tracking-wide antialiased">
+        feild required
+      </p>
+      <p *ngIf="control.errors?.minlength" class="text-red-500 text-xs font-quicksand tracking-wide antialiased">
+        feild required
+      </p>
+      <p *ngIf="control.errors?.email" class="text-red-500 text-xs font-quicksand tracking-wide antialiased">
+        enter a valid email
+      </p>
+      <p *ngIf="control.errors?.pattern" class="text-red-500 text-xs font-quicksand tracking-wide antialiased">
+        password must have 1 uppercase letter,1 lowercase letter and 1 number  
+      </p>
+</ng-container>
+
+
