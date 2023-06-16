@@ -46,9 +46,8 @@ export class UserSignupComponent {
     this.showAlert = true;
     this.alertMsg = 'Please! Your Account is being created.';
     this.alertColor = 'blue';
-    console.log(this.registerForm.value.name,"this is register form");
     this.http.post("http://localhost:5000/register",this.registerForm.value,{withCredentials:true}).subscribe(()=>
-      this.router.navigate(['/login']),(err)=>{ 
+      this.router.navigate(['/']),(err)=>{ 
         this.showAlert = true;
         this.alertMsg = err.error.message ;
         this.alertColor = 'red';

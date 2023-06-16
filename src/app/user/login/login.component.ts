@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -7,6 +10,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  constructor(
+    private http: HttpClient,
+    private router : Router
+  ){}
  
   email = new FormControl('', [
     Validators.required,
@@ -30,8 +37,15 @@ export class LoginComponent {
 
   login(): void {
     this.showAlert = true;
-    this.alertMsg = 'Please! Your Account is being created.';
+    this.alertMsg = 'Please! Your beign logged';
     this.alertColor = 'blue';
+    this.http.post("http://localhost:5000/login",this.LoginForm.value,{withCredentials:true}).subscribe((res)=>
+    
+      this.router.navigate(['/']),(err) => { 
+        this.showAlert = true;
+        this.alertMsg = err.error.message;
+        this.alertColor = 'red';
+       })
   }
 
  

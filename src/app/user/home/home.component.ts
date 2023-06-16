@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Emitter } from '../emitters/emitter';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,10 @@ export class HomeComponent implements OnInit {
       withCredentials:true
     }).subscribe((res:any)=>{
       this.message = `Hi ${res.name}`
+      Emitter.authEmitter.emit(true)
     },(err)=>{
-      this.message = err
+      this.message = 'you are no authenticated'
+      Emitter.authEmitter.emit(false)
     })
   }
 
