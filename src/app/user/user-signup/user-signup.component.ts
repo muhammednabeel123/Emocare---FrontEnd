@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-signup',
@@ -7,6 +9,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./user-signup.component.css']
 })
 export class UserSignupComponent {
+  constructor(private http:HttpClient,private router:Router,){}
+
+
   name = new FormControl('', [
     Validators.required,
     Validators.minLength(3)
@@ -41,6 +46,15 @@ export class UserSignupComponent {
     this.showAlert = true;
     this.alertMsg = 'Please! Your Account is being created.';
     this.alertColor = 'blue';
+    console.log(this.registerForm.value.name,"this is register form");
+    this.http.post("http://localhost:5000/register",this.registerForm.value,{withCredentials:true}).subscribe(()=>
+      this.router.navigate(['/login']),(err)=>{ 
+        this.showAlert = true;
+        this.alertMsg = err.error.message ;
+        this.alertColor = 'red';
+       })
+    
+
   }
 
   updateButtonColor(): void {

@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { ModuleSharedModule } from './shared/shared.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,9 +22,9 @@ import { ModuleSharedModule } from './shared/shared.module';
   imports: [
     IonicModule.forRoot(),
     BrowserModule,
-     UserModule,
+    UserModule,
     ModuleSharedModule,
-    AppRoutingModule
+    AppRoutingModule,
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]

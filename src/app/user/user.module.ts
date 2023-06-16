@@ -5,6 +5,8 @@ import { UserSignupComponent } from './user-signup/user-signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModuleSharedModule } from "../shared/shared.module";
 import { UserRoutinMOdule } from './user-routing.module';
+import {HttpClientModule} from '@angular/common/http';
+import { HomeComponent } from './home/home.component'
 
 
 
@@ -12,7 +14,8 @@ import { UserRoutinMOdule } from './user-routing.module';
 @NgModule({
     declarations: [
         LoginComponent,
-        UserSignupComponent
+        UserSignupComponent,
+        HomeComponent
     ],
     exports: [
         LoginComponent,
@@ -21,7 +24,9 @@ import { UserRoutinMOdule } from './user-routing.module';
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        ModuleSharedModule,UserRoutinMOdule
+        ModuleSharedModule,
+        UserRoutinMOdule,
+        HttpClientModule
     ]
 })
 export class UserModule { }
