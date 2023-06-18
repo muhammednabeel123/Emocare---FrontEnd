@@ -7,6 +7,10 @@ module.exports = {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
       },
+      backgroundColor: {
+        'rgb-249-218-208': 'rgb(249, 218, 208)',
+        'rg-78-97-55':'rgb(78, 97, 55)'
+      },
     },
   },
   plugins: [],

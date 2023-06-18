@@ -1,7 +1,12 @@
+import { RegisterResponse } from './interface/registerForm';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ServiceNameService } from 'src/app/auth.service';
+
+
+
 
 @Component({
   selector: 'app-user-signup',
@@ -9,8 +14,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-signup.component.css']
 })
 export class UserSignupComponent {
-  constructor(private http:HttpClient,private router:Router,){}
-
+  
+  
+  constructor(private http:HttpClient,private router:Router,private auth:ServiceNameService ){}
+  token:any
+  userId:any
 
   name = new FormControl('', [
     Validators.required,
@@ -42,25 +50,53 @@ export class UserSignupComponent {
     terms: this.terms
   });
 
-  register(): void {
-    this.showAlert = true;
-    this.alertMsg = 'Please! Your Account is being created.';
-    this.alertColor = 'blue';
-    this.http.post("http://localhost:5000/register",this.registerForm.value,{withCredentials:true}).subscribe(()=>
-      this.router.navigate(['/']),(err)=>{ 
-        this.showAlert = true;
-        this.alertMsg = err.error.message ;
-        this.alertColor = 'red';
-       })
+  // register(): void {
+  //   this.showAlert = true;
+  //   this.alertMsg = 'Please! Your Account is being created.';
+  //   this.alertColor = 'blue';
+  //   this.http.post("http://localhost:5000/register",this.registerForm.value,{withCredentials:true}).subscribe((res)=>
+  //     console.log(res),(err)=>{ 
+  //       this.showAlert = true;
+  //       this.alertMsg = err.error.message ;
+  //       this.alertColor = 'red';
+  //      })
     
 
+  // }
+  register(): void {
+    this.showAlert = true;
+    this.alertMsg = 'Please! Verify Your mail.';
+    this.alertColor = 'blue';
+    this.http.post<RegisterResponse>("http://localhost:5000/register", this.registerForm.value, { withCredentials: true })
+      .subscribe((res: RegisterResponse) => {
+        console.log(res, "this is response");
+  
+        this.token = res.token;
+        console.log(this.token, "this is token");
+  
+        this.userId = res.userId;
+        console.log(this.userId, "this is id");
+  
+        // Registration successful, do not call verifyEmail() here
+      }, (err) => {
+        this.showAlert = true;
+        this.alertMsg = err.error.message;
+        this.alertColor = 'red';
+      });
   }
-
+  
+  
+  
+  
   updateButtonColor(): void {
     if (this.terms.value) {
       this.alertColor = 'red';
     } else {
       this.alertColor = 'blue';
     }
+  }
+
+  signInWithGoogle(){
+  this.auth.googleSignIn()
   }
 }

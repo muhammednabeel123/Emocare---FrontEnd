@@ -10,6 +10,8 @@ import { UserModule } from './user/user.module';
 import { NavComponent } from './nav/nav.component';
 
 import { ModuleSharedModule } from './shared/shared.module';
+import { ServiceNameService } from './auth.service';
+
 
 
 
@@ -17,7 +19,7 @@ import { ModuleSharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     NavComponent,
-    
+   
   ],
   imports: [
     IonicModule.forRoot(),
@@ -26,7 +28,7 @@ import { ModuleSharedModule } from './shared/shared.module';
     ModuleSharedModule,
     AppRoutingModule,
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [ServiceNameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

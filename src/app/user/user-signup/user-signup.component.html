@@ -36,12 +36,14 @@
               <hr class="mt-4 border-gray-300">
 
               <div class="flex items-center justify-center mt-4">
+                <a title="Google Inc., Public domain, via Wikimedia Commons" (click)="signInWithGoogle()">
                 <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-300 rounded-full shadow flex items-center text-sm">
-                  <a title="Google Inc., Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Google_%22G%22_Logo.svg">
+                
                     <img width="20" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
-                  </a>
+                
                   <span class="ml-1">Sign up with Google</span>
                 </button>
+              </a>
               </div>
 
               <form [formGroup]="registerForm" (ngSubmit)="register()">
