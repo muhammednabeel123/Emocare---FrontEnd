@@ -7,10 +7,15 @@ import { AppComponent } from './app.component';
 
 import { IonicModule } from '@ionic/angular';
 import { UserModule } from './user/user.module';
-import { NavComponent } from './nav/nav.component';
+
+
 
 import { ModuleSharedModule } from './shared/shared.module';
 import { ServiceNameService } from './auth.service';
+import { CounselorModule } from './counselor/counselor.module';
+import { AdminModule } from './admin/admin.module';
+
+
 
 
 
@@ -18,7 +23,8 @@ import { ServiceNameService } from './auth.service';
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
+  
+    
    
   ],
   imports: [
@@ -26,6 +32,8 @@ import { ServiceNameService } from './auth.service';
     BrowserModule,
     UserModule,
     ModuleSharedModule,
+    CounselorModule,
+    AdminModule,
     AppRoutingModule,
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ServiceNameService],

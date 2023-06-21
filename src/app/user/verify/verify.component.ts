@@ -34,6 +34,7 @@ export class VerifyComponent implements OnInit {
     this.http.get(`http://localhost:5000/user/${this.userId}/verify/${this.token}`)
       .subscribe(
         (res) => {
+     console.log(res,"verify response");
      
         },
         (err:any) => {

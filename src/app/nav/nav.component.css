@@ -4,7 +4,7 @@ a {
     line-height: 20px;
     opacity: 1;
     font-weight: 700;
-    color: rgb(121, 121, 121);
+
     text-align: left;
     letter-spacing: unset;
     transition: background-color 0.3s;
@@ -12,5 +12,9 @@ a {
   
   a:hover {
     color:rgb(239, 68, 68)
+  }
+  .text-green-800 {
+    color:rgb(239, 68, 68)
+
   }
   
