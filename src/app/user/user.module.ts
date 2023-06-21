@@ -11,6 +11,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment.development';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { VerifyComponent } from './verify/verify.component';
+import { NavComponent } from '../nav/nav.component';
  
 
 
@@ -22,7 +23,8 @@ import { VerifyComponent } from './verify/verify.component';
         LoginComponent,
         UserSignupComponent,
         HomeComponent,
-        VerifyComponent
+        VerifyComponent,
+        NavComponent,
     ],
     exports: [
         LoginComponent,
