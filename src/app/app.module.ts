@@ -14,6 +14,7 @@ import { ModuleSharedModule } from './shared/shared.module';
 import { ServiceNameService } from './auth.service';
 import { CounselorModule } from './counselor/counselor.module';
 import { AdminModule } from './admin/admin.module';
+import { CounsellorsComponent } from './admin/counsellors/counsellors.component';
 
 
 
@@ -23,6 +24,7 @@ import { AdminModule } from './admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
+    
   
     
    
@@ -32,7 +34,6 @@ import { AdminModule } from './admin/admin.module';
     BrowserModule,
     UserModule,
     ModuleSharedModule,
-    CounselorModule,
     AdminModule,
     AppRoutingModule,
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],

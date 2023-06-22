@@ -1,1 +1,75 @@
-<p>customers works!</p>
+<app-admin-nav></app-admin-nav>
+
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-white  border-dashed rounded-lg dark:border-white">
+       
+          
+       </div>
+      
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
+        
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr >
+                        <th scope="col" class="p-4">
+                          
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Position
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users ; let i = index " class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="w-4 p-4">
+                            <div class="flex items-center">
+                               
+                                <label for="checkbox-table-search-1" class="sr-only">No</label>
+                            </div>
+                        </td>
+                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                            <img class="w-10 h-10 rounded-full" src="data:image/png;base64,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" alt="Jese image">
+                            <div class="pl-3">
+                                <div class="text-base font-semibold">{{ user.name }}</div>
+                                <div class="font-normal text-gray-500">{{ user.email }}</div>
+                            </div>  
+                        </th>
+                        <td class="px-6 py-4">
+                            React Developer
+                        </td>
+                        <td class="px-6 py-4" >
+                            <div class="flex items-center">
+                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2" [ngClass]="{'bg-green-500': user.verified, 'bg-red-500': !user.verified}"></div> Active
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            
+                              <button (click)="blockUser(user._id)" class="bg-red-600 hover:bg-red-400 text-white font-bold py-2 px-4 rounded">
+                                Block User
+                              </button>
+                          
+                          </td>
+                          
+                          
+                          
+                    </tr>
+                    
+                    
+                    
+                    
+                </tbody>
+            </table>
+    </div>
+   
+</div>
+</div>
