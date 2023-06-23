@@ -6,6 +6,13 @@ export const environment = {
         projectId: "emocare-75329",
         storageBucket: "emocare-75329.appspot.com",
         messagingSenderId: "134401673664",
-        appId: "1:134401673664:web:c537f52d11065ff0c6e025"
-      }
+        appId: "1:134401673664:web:c537f52d11065ff0c6e025",
+       
+     
+      },
+      admin:"Nabeel@2000",
+      a_password:'1234',
+      admin_api:`http://localhost:5000/admin`,
+      user_api:'http://localhost:5000',
+      counselor_api:'http://localhost:5000/counselor'
 };
