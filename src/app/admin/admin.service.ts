@@ -12,7 +12,14 @@ export class AdminService {
   
   constructor(private http: HttpClient) { }
 
-  ViewCounselor(){}  
+  ViewCounselor(id: any): Observable<any> {
+    return this.http.get<any>(`${this.url}/counselor`, { withCredentials: true }).pipe(
+      map((response: any) => {
+        const user = response.find((counselor: any) => counselor._id === id);
+        return user;
+      })
+    );
+  }
 
 
   getCounselor(): Observable<any> {

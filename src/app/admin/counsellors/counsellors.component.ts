@@ -27,7 +27,4 @@ export class CounsellorsComponent implements OnInit{
     this.adminService.getCounselor().subscribe((res)=>{this.counselor$ = res})}
 
   viewCounselor(id: any): void {this.router.navigate(['admin/view-counselor',id]);}
-
-    
-
 }

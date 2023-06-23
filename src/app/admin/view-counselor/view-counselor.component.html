@@ -1,3 +1,28 @@
 <app-admin-nav></app-admin-nav>
 
-<p>view-counselor works!</p>
+
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-white">
+      <div style="height: 100vh; border-radius: 10px;" class=" dark:bg-gray-900 flex flex-row">
+        <div class="flex-1 dark:bg-gray-900">
+            <div class="mt-10 ml-10 p-10" > 
+                <h1 class="text-gray-100 p-5">NAME : <span>{{  user$.name }}</span></h1>
+                <h1 class="text-gray-100  p-5">EMAIL : <span>{{  user$.email }}</span></h1>
+                <h1 class="text-gray-100 p-5">PROFESSION : <span>{{  user$.profession }}</span></h1>
+                <h1 class="text-gray-100  p-5">EXPERIENCE : <span>{{  user$.experience }} year</span></h1>
+                <h1 class="text-gray-100  p-5">ADDRESS : <span>{{  user$.address }}</span></h1>
+               
+                <h1 class="text-gray-100  p-5">PINCODE : <span>{{  user$.pincode }}</span></h1>
+                <h1 class="text-gray-100  p-5">STATE : <span>{{  user$.state }}</span></h1>
+                <h1 class="text-gray-100  p-5">COUNTRY : <span>{{  user$.country }}</span></h1>
+            </div>
+        </div>
+        <div class="flex-1 dark:bg-gray-900">
+            {{ user$.id_proof[0] }}
+        </div>
+        
+    </div>
+    </div>
+  </div>
+  
+  
