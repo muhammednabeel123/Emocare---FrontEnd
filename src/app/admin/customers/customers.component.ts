@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { HttpClient } from '@angular/common/http';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
@@ -9,27 +9,34 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
+  users$: any;
 
-  users:any
+  constructor(
+    private adminService: AdminService,
+    private http: HttpClient,
 
-  constructor(private adminService :AdminService,private http:HttpClient ){}
+  ) {}
+
   ngOnInit(): void {
-    this.adminService.getUsers().subscribe((res:any) =>{
-      this.users = res
-      console.log(this.users,"this is data");
-      
-      })
-    }
+    this.GetAll();
+  }
 
-    blockUser(id:any) {
+  GetAll(): void {
+    this.adminService.getUsers().subscribe((res: any) => {
+      this.users$ = res;
+      console.log(this.users$, "this is data");
 
-      this.adminService.blockUser(id).subscribe((res:any) =>{
-        this.users = res
-        
-      })
-    }
+    });
+  }
 
-
-
-
+  blockUser(id: any): void {
+    console.log("reaching here");
+    
+    this.adminService.blockUser(id).subscribe((res: any) => {
+    
+     
+    });
+    this.ngOnInit()
+    
+  }
 }

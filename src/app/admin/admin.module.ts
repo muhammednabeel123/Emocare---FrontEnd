@@ -9,6 +9,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { environment } from 'src/environments/environment';
 import { ModuleSharedModule } from '../shared/shared.module';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { ViewCounselorComponent } from './view-counselor/view-counselor.component';
 
 
 
@@ -22,7 +23,8 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
          DashboardComponent,
          CustomersComponent,
          AdminNavComponent,
-         CounsellorsComponent
+         CounsellorsComponent,
+         ViewCounselorComponent
       
   ],
   imports: [

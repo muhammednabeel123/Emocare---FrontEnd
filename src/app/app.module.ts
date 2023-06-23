@@ -36,6 +36,7 @@ import { CounsellorsComponent } from './admin/counsellors/counsellors.component'
     ModuleSharedModule,
     AdminModule,
     AppRoutingModule,
+    CounselorModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ServiceNameService],
   bootstrap: [AppComponent]

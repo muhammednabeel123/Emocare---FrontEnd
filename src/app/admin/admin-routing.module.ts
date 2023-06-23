@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 
 import { CustomersComponent } from './customers/customers.component';
 import { CounsellorsComponent } from './counsellors/counsellors.component';
+import { ViewCounselorComponent } from './view-counselor/view-counselor.component';
 
 
 const routes:Routes =[{
@@ -14,6 +15,7 @@ const routes:Routes =[{
     {path:'admin',children:[
         {path:'dashboard',component:DashboardComponent},
         {path:'counselor',component:CounsellorsComponent},
+        {path:'view-counselor/:id',component:ViewCounselorComponent},
         {path:'customers',component:CustomersComponent}
     ]}
 ]

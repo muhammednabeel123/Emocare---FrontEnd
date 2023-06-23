@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment.development';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { VerifyComponent } from './verify/verify.component';
 import { NavComponent } from '../nav/nav.component';
+
  
 
 
