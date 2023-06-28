@@ -1,7 +1,9 @@
+import { map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Toast } from '../../sweet alert/sweetalert'
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+   
+  services:any
+  professions:''
+
   credentials = {
     name: '',
     email: '',
@@ -24,6 +30,8 @@ export class SignupComponent implements OnInit {
     certificate:''
   };
 
+
+
   form: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -32,8 +40,15 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.http.get('http://localhost:5000/counselor/services').subscribe((res: any) => {
+      this.services = Object.values(res).map((service: any) => service);
+      console.log(this.services); 
+    });
+    
+    
+    
     this.form = this.formBuilder.group({
-      // Define form fields and validators here
+     
     });
   }
 
@@ -59,9 +74,21 @@ export class SignupComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+  onServiceSelection() {
+    console.log(this.credentials.profession); // Log the selected profession ID
+    // You can make an HTTP request to the backend with the selected ID here
+    // Example: this.backendService.updateProfession(this.credentials.professionId).subscribe(...);
+  }
 
 
   submit(): void {
+
+    Toast.fire({
+      icon: 'info',
+      title: 'Please wait...',
+      text: 'Processing your request',
+      showConfirmButton: false,
+    })
     const formData = new FormData();
     formData.append('name', this.credentials.name);
     formData.append('email', this.credentials.email);
@@ -75,20 +102,34 @@ export class SignupComponent implements OnInit {
     formData.append('age', this.credentials.age);
     formData.append('idProof', this.credentials.idProof);
     formData.append('certificate', this.credentials.certificate);
-    console.log(this.credentials,"this  is data");
-    
 
-    this.http
-      .post('http://localhost:5000/counselor/signup',formData)
+
+    console.log(this.credentials,"this is form data");
+    this.http.post('http://localhost:5000/counselor/signup', formData)
       .subscribe(
         (response) => {
-          // Handle success response
           console.log('Success:', this.credentials);
+          Toast.fire({
+            icon: 'success',
+            title: 'Request sent successfully!'
+          });
         },
         (error) => {
-          // Handle error response
-          console.error('Error:', error);
+          console.error('Failed to sent the request');
+          Toast.fire({
+            icon: 'error',
+            title:'Failed to sent the request'
+          });
         }
-      );
+    );
+    
   }
+
+  
+
+
+    // ...
+    
+    
+    
 }

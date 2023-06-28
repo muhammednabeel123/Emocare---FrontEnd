@@ -12,6 +12,7 @@ export class AdminService {
   
   constructor(private http: HttpClient) { }
 
+//counselor section
   ViewCounselor(id: any): Observable<any> {
     return this.http.get<any>(`${this.url}/counselor`, { withCredentials: true }).pipe(
       map((response: any) => {
@@ -23,6 +24,7 @@ export class AdminService {
 
 
   getCounselor(): Observable<any> {
+
     return this.http.get<any>(`${this.url}/counselor`, { withCredentials: true }).pipe(
       map((response: any) => {
         const verifiedCounselors = response.filter((counselor: any) => counselor.is_verified=== true);
@@ -30,19 +32,69 @@ export class AdminService {
       })
     );
   }
+  
+ getCounselorById(id: any): Observable<any> {
+  return this.http.get<any>(`${this.url}/counselor`, { withCredentials: true }).pipe(
+    map((response: any) => {
+      const verifiedCounselors = response.filter((counselor: any) => counselor.is_verified === true && counselor.service === id);
+      return verifiedCounselors;
+    })
+  );
+}
 
+
+  getNewCounselor(): Observable<any>{
+    return this.http.get<any>(`${this.url}/counselor`,{ withCredentials: true }).pipe(
+      map((response: any) => {
+        const verifiedCounselors = response.filter((counselor: any) => counselor.is_verified=== false);
+        return verifiedCounselors;
+      })
+    );}
+
+    AcceptCounselor(id: any): Observable<any> {
+      return this.http.patch<any>(`${this.url}/accept-counselor`,{ id: id }, { withCredentials: true });
+    }
+    
+    DeclineCounselor(id:any):Observable<any>{
+      return this.http.delete<any>(`${this.url}/counselor/${id}`, { withCredentials: true });
+    }
 
  
   login(data: any) {
     return this.http.post(`${this.url}/login`, data, { withCredentials: true });
   }
 
+  //user section
   getUsers(): Observable<any> {
     return this.http.get<any>(`${this.url}/customers`, { withCredentials: true });
   }
 
-  blockUser(id: any) {
-    return this.http.patch(`${this.url}/block/${id}`, { withCredentials: true });
+  blockUser(id: any): Observable<any> {
+    return this.http.post(`${this.url}/block/${id}`, null, { withCredentials: true });
   }
 
+  blockCounselor(id:any):Observable<any>{
+    return this.http.post<any>(`${this.url}/block-Counselor/${id}`,{withCredentials: true })
+  }
+  unblockCounselor(id:any):Observable<any>{
+    return this.http.post<any>(`${this.url}/unblock-Counselor/${id}`,{withCredentials: true })
+  }
+
+  // service section  
+  addService(data:any):Observable<any>{
+    return this.http.post<any>(`${this.url}/add-service`,data,{withCredentials: true })
+  }
+  getService():Observable<any>{
+    return this.http.get<any>(`${this.url}/services`,{withCredentials: true })
+  }
+
+  getCookie():Observable<any>{ 
+    return this.http.get<any>(`${this.url}/cookie`,{withCredentials: true })
+  }
+
+  Logout():Observable<any>{
+    return this.http.post<any>(`${this.url}/logout`,{withCredentials: true })
+  }
+
+ 
 }

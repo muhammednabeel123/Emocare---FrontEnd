@@ -3,23 +3,40 @@
 
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-white">
-      <div style="height: 100vh; border-radius: 10px;" class=" dark:bg-gray-900 flex flex-row">
+      <div style="height: 120vh; border-radius: 10px;" class=" dark:bg-gray-900 flex flex-row">
         <div class="flex-1 dark:bg-gray-900">
-            <div class="mt-10 ml-10 p-10" > 
+            <div class="mt-10 ml-10 p-5" > 
                 <h1 class="text-gray-100 p-5">NAME : <span>{{  user$.name }}</span></h1>
                 <h1 class="text-gray-100  p-5">EMAIL : <span>{{  user$.email }}</span></h1>
-                <h1 class="text-gray-100 p-5">PROFESSION : <span>{{  user$.profession }}</span></h1>
+                <h1 class="text-gray-100 p-5">PROFESSION : <span>{{  user$.service.name }}</span></h1>
                 <h1 class="text-gray-100  p-5">EXPERIENCE : <span>{{  user$.experience }} year</span></h1>
                 <h1 class="text-gray-100  p-5">ADDRESS : <span>{{  user$.address }}</span></h1>
                
                 <h1 class="text-gray-100  p-5">PINCODE : <span>{{  user$.pincode }}</span></h1>
                 <h1 class="text-gray-100  p-5">STATE : <span>{{  user$.state }}</span></h1>
                 <h1 class="text-gray-100  p-5">COUNTRY : <span>{{  user$.country }}</span></h1>
+                <div class="mt-24 ml-96">
+                    <button *ngIf="!user$.is_verified" (click)="Accept(user$._id)" class="bg-green-500 w-32 h-12"  >Accept</button>
+                </div>
             </div>
         </div>
-        <div class="flex-1 dark:bg-gray-900">
-            {{ user$.id_proof[0] }}
-        </div>
+        <div class="flex-1 dark:bg-gray-900 p-5 mt-10 ">
+            <label for="idProof" class="text-white font-bold " >ID Proof</label>
+            <img [src]="user$.id_proof" alt="ID Proof" class="w-72 max-h-xs pt-5">
+            <br>
+            <label for="idProof" class="text-white font-bold">Certicate</label>
+            <img [src]="user$.certificates" alt="ID Proof" class="w-72 h-72 pt-5">
+            <div class="">
+                <button *ngIf="!user$.is_verified" (click)="Decline(user$._id)"  class="bg-red-500 w-32 h-12 " style="margin-top: 205px ;" >Reject</button>
+            </div>
+          </div>
+
+
+          <div>
+           
+            <button>hsdasdase</button>
+             </div>
+          
         
     </div>
     </div>

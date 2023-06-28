@@ -22,6 +22,7 @@
     "@ionic/angular": "^7.0.12",
     "flowbite": "^1.6.5",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.7.12",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
