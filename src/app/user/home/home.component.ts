@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
     this.http.get('http://localhost:5000/user',{
       withCredentials:true
     }).subscribe((res:any)=>{
-      this.message = `Hi ${res.name}`
+     if(res.user.is_blocked){
+      
+     }
+      
       Emitter.authEmitter.emit(true)
     },(err)=>{
       this.message = 'you are no authenticated'
