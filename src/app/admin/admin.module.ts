@@ -10,6 +10,10 @@ import { environment } from 'src/environments/environment';
 import { ModuleSharedModule } from '../shared/shared.module';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { ViewCounselorComponent } from './view-counselor/view-counselor.component';
+import { NewCounselorComponent } from './new-counselor/new-counselor.component';
+import { ServicesComponent } from './services/services.component';
+import { AddServicesComponent } from './add-services/add-services.component';
+import { ServiceViewComponent } from './service-view/service-view.component';
 
 
 
@@ -19,12 +23,16 @@ import { ViewCounselorComponent } from './view-counselor/view-counselor.componen
 @NgModule({
   declarations: [
     
-    LoginComponent,
+          LoginComponent,
          DashboardComponent,
          CustomersComponent,
          AdminNavComponent,
          CounsellorsComponent,
-         ViewCounselorComponent
+         ViewCounselorComponent,
+         NewCounselorComponent,
+         ServicesComponent,
+         AddServicesComponent,
+         ServiceViewComponent
       
   ],
   imports: [

@@ -16,25 +16,32 @@ export class VerifyComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.token = params['token'];
+      console.log(this.token,"token");
+      
     });
     this.route.params.subscribe(params => {
       this.userId = params['id'];
+      console.log(this.userId,"this");
+      
     });
-    this.verifyEmail()
+  
   }
 
   submit(){
-    this.router.navigate(['/'])
+    this.verifyEmail()
+   
     
 
-
+ 
     
   }
   verifyEmail(): void {
     this.http.get(`http://localhost:5000/user/${this.userId}/verify/${this.token}`)
       .subscribe(
         (res) => {
-     console.log(res,"verify response");
+          console.log(res,"this signup");
+          
+          this.router.navigate(['/login']);
      
         },
         (err:any) => {

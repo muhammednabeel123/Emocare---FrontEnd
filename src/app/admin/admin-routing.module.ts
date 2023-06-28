@@ -8,17 +8,32 @@ import { LoginComponent } from './login/login.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CounsellorsComponent } from './counsellors/counsellors.component';
 import { ViewCounselorComponent } from './view-counselor/view-counselor.component';
+import { NewCounselorComponent } from './new-counselor/new-counselor.component';
+import { ServicesComponent } from './services/services.component';
+import { AddServicesComponent } from './add-services/add-services.component';
+import { AuthGuardGuard } from './auth-guard.guard';
 
 
-const routes:Routes =[{
-    path:'admin',component:LoginComponent},
-    {path:'admin',children:[
-        {path:'dashboard',component:DashboardComponent},
-        {path:'counselor',component:CounsellorsComponent},
-        {path:'view-counselor/:id',component:ViewCounselorComponent},
-        {path:'customers',component:CustomersComponent}
-    ]}
-]
+
+const routes: Routes = [
+    {
+      path: 'admin',
+      component: LoginComponent
+    },
+    {
+      path: 'admin',
+      canActivate: [AuthGuardGuard],
+      children: [
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'counselor', component: CounsellorsComponent },
+        { path: 'view-counselor/:id', component: ViewCounselorComponent },
+        { path: 'customers', component: CustomersComponent },
+        { path: 'new-counselor', component: NewCounselorComponent },
+        { path: 'services', component: ServicesComponent },
+        { path: 'add-services', component: AddServicesComponent }
+      ]
+    }
+  ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]

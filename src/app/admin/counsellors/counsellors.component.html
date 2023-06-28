@@ -4,7 +4,7 @@
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-white  border-dashed rounded-lg dark:border-white">
         <div style="display: flex; justify-content: flex-end;">
-            <button style="width: 200px;" class="hover:bg-blue-400 bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <button  (click)="Requests()"  style="width: 200px;" class="hover:bg-blue-400 bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Requests
             </button>
         </div>
@@ -25,13 +25,16 @@
                             Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Position
+                            Service
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Action
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            
                         </th>
                     </tr>
                 </thead>
@@ -51,21 +54,31 @@
                             </div>  
                         </th>
                         <td class="px-6 py-4">
-                            React Developer
+                           {{ counselor.service.name }}
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
-                              <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                              <div *ngIf="!counselor.is_Blocked" class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                              <div *ngIf="counselor.is_Blocked" class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
                      
-                              <span class="ml-1">Active</span>
+                              <span *ngIf="!counselor.is_Blocked" class="ml-1">Active</span>
+                              <span *ngIf="counselor.is_Blocked" class="ml-1">Blocked</span>
                             </div>
                           </td>
                           
-                          <td class="px-6 py-4">
-                            <button (click)="viewCounselor(counselor._id)" class="hover:bg-green-400 bg-green-600 text-white font-bold py-2 px-4 rounded">
-                                VIEW
-                            </button>
+                          <td class="">
+                                <button (click)="viewCounselor(counselor._id)" class="hover:bg-blue-400 bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                VIEW</button>
                           </td>
+
+                          <td class="px-6 py-4">
+                                <button *ngIf="!counselor.is_Blocked"  (click)="block(counselor._id)" class="hover:bg-red-400 bg-red-600 text-white font-bold py-2 px-4 rounded">
+                                BLOCK</button>
+                                <button *ngIf="counselor.is_Blocked" (click)="unblock(counselor._id)" class="hover:bg-green-400 bg-green-600 text-white font-bold py-2 px-4 rounded">
+                           
+                                    UNBLOCK</button>
+                          </td>
+                          
                           
                           
                     </tr>

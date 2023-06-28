@@ -4,88 +4,75 @@
   Link: https://dribbble.com/shots/10452538-React-UI-Components
 -->
 <!-- component -->
+<div class="w-full min-h-screen bg-no-repeat bg-cover bg-fixed" style="background-image: url('https://cdn.theinnerhour.com/assets/images/authentication/banner.png')">
 <div class="w-full min-h-screen bg-no-repeat bg-cover ">
+    
     <div>
-        <section class="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-10  ">
-            <h1 class="text-xl font-bold text-white capitalize dark:text-white">Counselor Login</h1>
+        <section class="max-w-6xl p-6 mx-auto bg-white   bg-opacity-50 rounded-md shadow-md  pt-24 ">
+            <h2 class="align text-center  font-quicksand font-extrabold text-3xl text-gray-500  pb-10" > Grap Your Spot on Emocare  !</h2>
+           
             <form #registerForm="ngForm" (ngSubmit)="submit()" enctype="multipart/form-data">
                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                     <div>
-                        <label class="text-white dark:text-gray-200" for="username">Username</label>
-                        <input name="username" [(ngModel)]="credentials.name"  type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <input name="username" minlength="4" required #name="ngModel" [(ngModel)]="credentials.name" placeholder="Username" type="text" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                        <p  *ngIf="name.invalid && name.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
+                        
                     </div>
         
                     <div>
-                        <label class="text-white dark:text-gray-200" for="emailAddress">Email Address</label>
-                        <input  [(ngModel)]="credentials.email" name="email" type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+                        <input [(ngModel)]="credentials.email" name="email" type="email" placeholder="Email Address" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring" required #email="ngModel" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+                        <p  *ngIf="email.invalid && email.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
                     </div>
         
                     <div>
-                        <label class="text-white dark:text-gray-200" for="password">Password</label>
-                        <input name="password" [(ngModel)]="credentials.password" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <input name="password" [(ngModel)]="credentials.password" required #password="ngModel" minlength="3" placeholder="Password" type="password" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                        <p  *ngIf="password.invalid && password.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
                     </div>
-        
+                    
                     <div>
-                        <label class="text-white dark:text-gray-200" for="passwordConfirmation">State</label>
-                        <input name="State" type="text" [(ngModel)]="credentials.state" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <input name="State" type="text" [(ngModel)]="credentials.state" required #state="ngModel" placeholder="State" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                        <p  *ngIf="state.invalid && state.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
                     </div>
+                    
                     <div>
-                        <label class="text-white dark:text-gray-200" >PRIMARY ADDRESS</label>
-                        <input name="address" [(ngModel)]="credentials.primaryAddress" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <input name="address" [(ngModel)]="credentials.primaryAddress" required #address="ngModel" placeholder="Primary Address" type="text" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                        <p  *ngIf="address.invalid && address.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
                     </div>
+                    
                     <div>
                         <label class="text-white dark:text-gray-200" for="passwordConfirmation">Profession</label>
-                        <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring " [(ngModel)]="credentials.profession">
-                            <option>Surabaya</option>
-                            <option>Jakarta</option>
-                            <option>Tangerang</option>
-                            <option>Bandung</option>
+                    <select name="service" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring"
+                            [(ngModel)]="credentials.profession" (change)="onServiceSelection()">
+                        <option *ngFor="let service of services" [value]="service._id">{{ service.name }}</option>
                         </select>
-                    </div>
-                    <div>
-                        <label class="text-white dark:text-gray-200" for="passwordConfirmation">Country</label>
-                        <input name="country" type="text"  [(ngModel)]="credentials.country" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    </div>
-                    <div>
-                        <label class="text-white dark:text-gray-200" for="passwordConfirmation">Pincode</label>
-                        <input name="pincode" [(ngModel)]="credentials.pincode" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    </div>
-                    <div>
-                        <label class="text-white dark:text-gray-200" for="passwordConfirmation">Year of Experience</label>
-                        <input name="experience" type="number" [(ngModel)]="credentials.experience" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    </div>
-                    <div>
-                        <label class="text-white dark:text-gray-200" for="passwordConfirmation">Age</label>
-                        <input name="textarea"  [(ngModel)]="credentials.age" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    </div>
-                 
-                    <div>
+                        </div>
+
+                      
+                      
+                      
+                      
+                        <div>
+                            <input name="country" type="text"  [(ngModel)]="credentials.country"  required #country="ngModel" placeholder="Country" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                            <p  *ngIf="country.invalid && country.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
+                        </div>
                         
                         <div>
-                            <label class="text-white dark:text-gray-200">ID Proof</label>
-                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                <div class="space-y-1 text-center">
-                                    <svg class="mx-auto h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <div class="flex text-sm text-gray-600">
-                                        <label for="idProofInput" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                            <span>Upload a file</span>
-                                            <input id="idProofInput" name="idProof" type="file" accept="image/png, image/jpeg, image/gif" class="sr-only" (change)="onIdProofChange($event)">
-                                        </label>
-                                        <p class="pl-1 text-white">or drag and drop</p>
-                                    </div>
-                                    <p class="text-xs text-white">PNG, JPG, GIF up to 10MB</p>
-                                    <div *ngIf="idProofPreview">
-                                        <img [src]="idProofPreview" alt="ID Proof Preview" class="mt-2 max-w-full">
-                                    </div>
-                                </div>
-                            </div>
+                            <input name="pincode" [(ngModel)]="credentials.pincode" type="number"  required #pincode="ngModel" placeholder="Pincode" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                            <p  *ngIf="pincode.invalid && pincode.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
                         </div>
-    
+                        
+                        <div>
+                            <input name="experience" type="number" [(ngModel)]="credentials.experience" required #experience="ngModel" placeholder="Year of Experience" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                            <p  *ngIf="experience.invalid && experience.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
+                        </div>
+                        
+                        <div>
+                            <input name="age"  [(ngModel)]="credentials.age" type="number" placeholder="Age" required #age="ngModel" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                            <p  *ngIf="age.invalid && age.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
+                        </div>
                         <div>
                             <label class="text-white dark:text-gray-200">Certificate</label>
-                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-orange-500 border-dashed rounded-md">
                                 <div class="space-y-1 text-center">
                                     <svg class="mx-auto h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -93,25 +80,54 @@
                                     <div class="flex text-sm text-gray-600">
                                         <label for="certificateInput" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                             <span>Upload a file</span>
-                                            <input id="certificateInput" name="certificate" type="file" accept="image/png, image/jpeg, image/gif" class="sr-only" (change)="onCertificateChange($event)">
+                                            <input id="certificateInput" [(ngModel)]="credentials.certificate" required  name="certificate" type="file" accept="image/png, image/jpeg, image/gif" class="sr-only" (change)="onCertificateChange($event)">
                                         </label>
-                                        <p class="pl-1 text-white">or drag and drop</p>
+                                        <div *ngIf="!credentials.certificate" class="error-message">Please select an image.</div>
+                                        <p class="pl-1 text-gray-500">or drag and drop</p>
                                     </div>
-                                    <p class="text-xs text-white">PNG, JPG, GIF up to 10MB</p>
+                                    <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                     <div *ngIf="certificatePreview">
-                                        <img [src]="certificatePreview" alt="Certificate Preview" class="mt-2 max-w-full">
+                                        <img [src]="certificatePreview" alt="Certificate Preview" class="mt-2 w-32">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                 
+                    <div>
+                        
+                        <div>
+                            <label class="text-white dark:text-gray-500 font-quicksand">ID Proof</label>
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-orange-500 border-dashed rounded-md">
+                                <div class="space-y-1 text-center">
+                                    <svg class="mx-auto h-6 w-6 text-gray-500" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="idProofInput" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                            <span>Upload a file</span>
+                                            <input id="idProofInput" name="idProof" [(ngModel)]="credentials.idProof" required  type="file" accept="image/png, image/jpeg, image/gif" class="sr-only" (change)="onIdProofChange($event)">
+                                        </label>
+                                        <div *ngIf="!credentials.idProof" class="error-message">Please select an image.</div>
+                                        <p class="pl-1 text-gray-500">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                    <div *ngIf="idProofPreview">
+                                        <img [src]="idProofPreview" alt="ID Proof Preview" class="mt-2 w-32">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                       
                     </div>
                 </div>
         
                 <div class="flex justify-end mt-6">
-                    <button type="submit" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Save</button>
+                    <button [disabled]="registerForm.invalid"  type="submit" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600 disabled:bg-gray-300 text-xs font-quicksand tracking-wider font-semibold" >Save</button>
                 </div>
             </form>
         </section>
     </div>
 </div>
-
+</div>

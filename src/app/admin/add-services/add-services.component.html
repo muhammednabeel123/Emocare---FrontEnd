@@ -1,0 +1,20 @@
+<app-admin-nav></app-admin-nav>
+
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-white  border-dashed rounded-lg dark:border-white">
+        <form  #registerForm="ngForm" (ngSubmit)="submit()" enctype="multipart/form-data">
+            <input type="text" [(ngModel)]="credentials.name" name="name" placeholder="Service name"> <input type="file" (change)="onFileSelected($event)">
+            <div *ngIf="selectedImage">
+              <img [src]="selectedImage" alt="Selected Image">
+            </div>
+            <input type="text-area"  [(ngModel)]="credentials.description" name="description" placeholder="description">
+        <br>
+        <button class="bg-yellow-500">Submit </button>
+        </form>
+        
+        
+    </div>
+      
+            
+ </div>
+   

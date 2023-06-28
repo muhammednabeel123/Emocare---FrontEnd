@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SwalService } from 'src/app/swal.service';
 
 @Component({
   selector: 'app-customers',
@@ -14,6 +15,7 @@ export class CustomersComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private http: HttpClient,
+    private swalService: SwalService
 
   ) {}
 
@@ -30,13 +32,21 @@ export class CustomersComponent implements OnInit {
   }
 
   blockUser(id: any): void {
-    console.log("reaching here");
-    
-    this.adminService.blockUser(id).subscribe((res: any) => {
-    
-     
+    this.swalService.confirmBlock().then((result) => {
+      if (result.isConfirmed) {
+        console.log("reaching here");
+        this.adminService.blockUser(id).subscribe(
+          (res: any) => {
+            this.ngOnInit()
+            console.log(res);
+          },
+          (err: any) => {
+            console.log(err);
+          }
+        );
+      }
     });
-    this.ngOnInit()
-    
   }
+  
+   
 }

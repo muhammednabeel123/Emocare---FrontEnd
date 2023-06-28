@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment.development';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { VerifyComponent } from './verify/verify.component';
 import { NavComponent } from '../nav/nav.component';
+import { BookingHomeComponent } from './booking-home/booking-home.component';
 
  
 
@@ -26,6 +27,7 @@ import { NavComponent } from '../nav/nav.component';
         HomeComponent,
         VerifyComponent,
         NavComponent,
+        BookingHomeComponent,
     ],
     exports: [
         LoginComponent,
