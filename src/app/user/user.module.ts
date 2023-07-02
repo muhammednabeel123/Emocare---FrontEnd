@@ -15,6 +15,8 @@ import { NavComponent } from '../nav/nav.component';
 import { BookingHomeComponent } from './booking-home/booking-home.component';
 import { UserInterceptorInterceptor } from './user-interceptor.interceptor';
 import { SlotBookingComponent } from './slot-booking/slot-booking.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SlotTimeComponent } from './slot-time/slot-time.component';
 
  
 
@@ -31,6 +33,7 @@ import { SlotBookingComponent } from './slot-booking/slot-booking.component';
         NavComponent,
         BookingHomeComponent,
         SlotBookingComponent,
+        SlotTimeComponent,
     ],
     exports: [
         LoginComponent,
@@ -42,8 +45,10 @@ import { SlotBookingComponent } from './slot-booking/slot-booking.component';
         ModuleSharedModule,
         UserRoutinMOdule,
         HttpClientModule,
+        NgxPaginationModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule
+        AngularFireAuthModule,
+      
     ],
     providers:[
         {provide:HTTP_INTERCEPTORS,useClass:UserInterceptorInterceptor,multi:true}

@@ -54,7 +54,7 @@ export class LoginComponent {
           this.alertColor = 'red';
         } else {
           localStorage.setItem('userToken',res.token)
-          this.router.navigate(['/']);
+          this.router.navigate(['/booking-home']);
         }
       },
       (err) => {

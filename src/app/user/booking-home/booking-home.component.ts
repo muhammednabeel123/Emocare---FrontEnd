@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserServiceService } from '../user.service.service';
+import { Emitter } from '../emitters/emitter';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-home',
@@ -7,30 +10,47 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./booking-home.component.css']
 })
 export class BookingHomeComponent implements OnInit {
-  counselor:any
+  counselors: any[] = [];
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalItems = 2; 
+
+  message:any
   ngOnInit(): void {
-  
-   }
+    this.userService.getUser().subscribe((res:any)=>{
+      
+      Emitter.authEmitter.emit(true)
+    },(err)=>{
+      this.message = 'you are no authenticated'
+      Emitter.authEmitter.emit(false)
+    })
+  }
    isClicked: string | null = null;
 
-   constructor(private http:HttpClient){}
+   constructor(private http:HttpClient, private userService:UserServiceService,private router: Router){}
    getServices(id: string) {
-    this.http.get(`http://localhost:5000/services/${id}`)
+      this.userService.getServiceById(id)
         .subscribe(
             (response) => {
-                this.counselor = response;
-                this.isClicked = id === this.isClicked ? null : id; // Toggle the clicked state
-                console.log(response, "this data");
+                this.counselors = response;
+                this.totalItems = this.counselors.length;
+                this.isClicked = id === this.isClicked ? null : id; 
+              
             },
             (error) => {
+        
            console.log(error);
            
             }
         );
 }
+onPageChange(pageNumber: number): void {
+  this.currentPage = pageNumber;
+}
 
 BookId(id:any){
   console.log(id);
+  this.router.navigate(['/slot',id]);
   
 }
 

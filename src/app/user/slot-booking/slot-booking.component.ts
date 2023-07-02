@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserServiceService } from '../user.service.service';
+import { Emitter } from '../emitters/emitter';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
-interface Slot {
-  startTime: string;
-  endTime: string;
-  booked: boolean;
-  expired: boolean;
-}
+
 @Component({
   selector: 'app-slot-booking',
   templateUrl: './slot-booking.component.html',
@@ -15,33 +13,55 @@ interface Slot {
 export class SlotBookingComponent {
   
 
-  slots: Slot[] = [];
 
-  constructor(private http: HttpClient) {}
 
+  constructor(private http: HttpClient,private userService : UserServiceService,private activatedRoute: ActivatedRoute,
+    private router: Router ) {}
+message:any
+servicer:any
   ngOnInit() {
-    this.getSlots();
+   
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.User()
+    this.services(id)
+
+    
+
+
   }
 
-  getSlots() {
-    this.http.get<any[]>('http://localhost:5000/slots')
-    .subscribe(
-      (response) => {
-        this.slots = response.filter(slot => !slot.booked && !slot.expired);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  services(id: any) {
+    this.userService.getServicer(id).subscribe((res: any) => {
+      this.servicer = res
+      console.log(this.servicer);
+      
+    });
   }
 
-  bookSlot(slot: Slot) {
-    this.http.post(`http://localhost:5000/book/${this.slots.indexOf(slot)}`, {})
-      .subscribe(response => {
-        console.log(response);
-        this.getSlots();
-      }, error => {
-        console.error("thisssa",error);
-      });
+  User(){
+    this.userService.getUser().subscribe((res:any)=>{
+      console.log(res);
+      
+      Emitter.authEmitter.emit(true)
+    },(err)=>{
+      this.message = 'you are no authenticated'
+      Emitter.authEmitter.emit(false)
+    })
   }
-}
+
+  bookingTime(id:any){
+     this.router.navigate([`/slot/${id}/time`])
+  }
+
+
+
+//   bookSlot(slot: Slot) {
+//     this.http.post(`http://localhost:5000/book/${this.slots.indexOf(slot)}`, {})
+//       .subscribe(response => {
+//         console.log(response);
+//         this.getSlots();
+//       }, error => {
+//         console.error("thisssa",error);
+//       });
+//   }
+ }

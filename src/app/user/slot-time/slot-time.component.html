@@ -1,17 +1,3 @@
-<!-- <p>slot-booking works!</p>
-
-`
-<h2 class="text-2xl font-bold mb-4">Available Slots</h2>
-<ul class="grid grid-cols-2 gap-4">
-  <li *ngFor="let slot of slots">
-    <div class="flex justify-between">
-      <span class="text-gray-700">{{ slot.startTime }}</span>
-      <span class="text-gray-700">{{ slot.endTime }}</span>
-    </div>
-    <button class="bg-orange-500 text-white py-2 px-4 rounded" (click)="bookSlot(slot)" [disabled]="slot.booked || slot.expired">Book</button>
-  </li>
-</ul> -->
-
 <div class="h-screen bg-gray-200">
     <div class="flex">
         <div class="w-3/12 h-screen " style="background-color: #d3dfc6;">
@@ -107,31 +93,46 @@
             
         
         <div class="w-9/12 min-h-screen" style="background-color: #fafafa;">
-            <h1 class="text-3xl font-extrabold font-quicksand text-gray-700 text-center pt-11">Book Your Session</h1>
-            <p class="text-gray-900 pt-6 text-center font-quicksand">Book an appointment to connect with a health expert</p>
-            <div class="w-3/4 mx-auto my-10 mb-12">
-              <div class="w-full h-1/2 flex-col relative">
-                <h3 class="text-lg font-quicksand font-extrabold text-gray-700 text-center pt-5">1. Select Session</h3>
-                <div class="mt-10 rounded-lg mx-auto w-24 h-16 flex justify-center items-center shadow-lg">
-                  <img src="../../../assets/video.png" alt="Video Image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <h1 class="text-2xl align text-center text-gray-700 font-quicksand font-extrabold pt-24"> Choose Your Slot</h1>
+            <div class="flex items-center justify-center h-24 mt-12">
+                <div class="h-24 w-80 border rounded-xl border-gray-300">
+                    <h1 class=" font-quicksand  text-lg font-extrabold pt-5 ml-28">{{ date | date:'d MMMM yyyy' }}</h1>
+
+                    <h1 class="font-quicksand text-sm font-bold text-gray-500 ml-32"> {{ date | date:'EEEE' }}</h1>
+                    <div>
+                        <button (click)="toggleAM()">AM</button>
+                        <button (click)="togglePM()">PM</button>
+                      </div>
+                      
+                      <div *ngIf="showAM">
+                        <h2>AM Slots</h2>
+                        <ul>
+                          <li *ngFor="let slot of amSlots">{{ slot.startTime }}</li>
+                        </ul>
+                      </div>
+                      
+                      <div *ngIf="showPM">
+                        <h2>PM Slots</h2>
+                        <ul>
+                          <li *ngFor="let slot of pmSlots">{{ slot.startTime }}</li>
+                        </ul>
+                      </div>
+
+
+
                 </div>
               </div>
-              <div class="h-1 bg-gray-200 shadow-lg mt-10"></div>
-              <div class="flex w-full h-1/2 flex-col relative mt-4">
-                <h3 class="text-lg font-quicksand font-extrabold text-gray-700 text-center pt-3">2. Select Session Duration</h3>
-                <div class="mt-10 rounded-lg mx-auto w-24 h-16 flex justify-center items-center shadow-lg">
-                  <h1 class="font-quicksand text-5xl font-extrabold">50</h1>
-                  <br>
-                  <p class="font-quicksand">mins</p>
-                </div>
-              </div>
+              
+              
+            <ul>
+             
+            </ul>
+          `
+           
               <div class="flex justify-center items-center mt-20">
-                <button (click)="bookingTime(servicer._id)" class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold" style="letter-spacing: 1px; background-color: #4e6137">PROCEED</button>
+                <button class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold" style="letter-spacing: 1px; background-color: #4e6137">PROCEED</button>
               </div>
             </div>
           </div>
           
     </div>
-
-    
-
