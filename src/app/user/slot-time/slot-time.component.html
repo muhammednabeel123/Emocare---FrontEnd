@@ -132,7 +132,7 @@
               </div>
 
               <div *ngIf="showPM" class="h-72 w-96 flex justify-center items-center border border-gray-400 border-t-0 rounded-b-lg" style="margin-left: 360px;">
-                <ul class="flex flex-wrap gap-3 ml-7">
+                <ul class="flex flex-wrap gap-3 ml-9">
                   <li *ngFor="let slot of pmSlots">
                     <div class="bg-white font-quicksand border text-sm border-gray-400 text-gray-800 px-4 py-2 rounded-full cursor-pointer" 
                     [class.bg-gray-800]="slot.selected"
@@ -144,7 +144,7 @@
                 </ul>
               </div>
               <div *ngIf="showAM" class="h-72 w-96 flex justify-center items-center border border-gray-400 border-t-0 rounded-b-lg" style="margin-left: 360px;">
-                <ul class="flex flex-wrap gap-3 ml-7">
+                <ul class="flex flex-wrap gap-3 ml-9">
                   <li *ngFor="let slot of amSlots">
                     <div class="bg-white font-quicksand border text-sm border-gray-400 text-gray-800 px-4 py-2 rounded-full cursor-pointer"
                     [class.bg-gray-800]="slot.selected"
