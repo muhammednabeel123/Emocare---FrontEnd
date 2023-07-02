@@ -1,0 +1,15 @@
+.invisible-button {
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  .underline {
+    text-decoration: underline;
+
+    text-decoration-color: darkgreen;
+    border-bottom: 2px solid darkgreen; /* Adjust the value to control the width */
+  }
+  

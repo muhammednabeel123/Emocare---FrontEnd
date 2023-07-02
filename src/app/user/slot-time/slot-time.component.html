@@ -99,12 +99,12 @@
                     <h1 class=" font-quicksand  text-lg font-extrabold pt-5 ml-28">{{ date | date:'d MMMM yyyy' }}</h1>
 
                     <h1 class="font-quicksand text-sm font-bold text-gray-500 ml-32"> {{ date | date:'EEEE' }}</h1>
-                    <div>
+                     <!-- <div>
                         <button (click)="toggleAM()">AM</button>
                         <button (click)="togglePM()">PM</button>
                       </div>
                       
-                      <div *ngIf="showAM">
+                       <div *ngIf="showAM">
                         <h2>AM Slots</h2>
                         <ul>
                           <li *ngFor="let slot of amSlots">{{ slot.startTime }}</li>
@@ -116,18 +116,54 @@
                         <ul>
                           <li *ngFor="let slot of pmSlots">{{ slot.startTime }}</li>
                         </ul>
-                      </div>
+                      </div>  -->
 
 
 
                 </div>
+            </div>
+            <div class="h-10 w-96 mt-5 flex justify-center items-center border border-gray-400 border-b-0 rounded-t-lg" style="margin-left: 360px;">
+                <div class="h-full w-1/2" [class.underline]="showAM">
+                  <button class="invisible-button ml-20 pt-3 text-2xl font-quicksand font-extrabold text-gray-500" (click)="toggleAM()">AM</button>
+                </div>
+                <div class="h-full w-1/2 " [class.underline]="showPM" >
+                  <button class="invisible-button ml-20 pt-3 text-2xl font-quicksand font-extrabold text-gray-500 " (click)="togglePM()">PM</button>
+                </div>
+              </div>
+
+              <div *ngIf="showPM" class="h-72 w-96 flex justify-center items-center border border-gray-400 border-t-0 rounded-b-lg" style="margin-left: 360px;">
+                <ul class="flex flex-wrap gap-3 ml-7">
+                  <li *ngFor="let slot of pmSlots">
+                    <div class="bg-white font-quicksand border text-sm border-gray-400 text-gray-800 px-4 py-2 rounded-full cursor-pointer" 
+                    [class.bg-gray-800]="slot.selected"
+                    [class.text-white]="slot.selected"
+                    (click)="selectSlot(slot)">
+                      {{ slot.startTime }}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div *ngIf="showAM" class="h-72 w-96 flex justify-center items-center border border-gray-400 border-t-0 rounded-b-lg" style="margin-left: 360px;">
+                <ul class="flex flex-wrap gap-3 ml-7">
+                  <li *ngFor="let slot of amSlots">
+                    <div class="bg-white font-quicksand border text-sm border-gray-400 text-gray-800 px-4 py-2 rounded-full cursor-pointer"
+                    [class.bg-gray-800]="slot.selected"
+                    [class.text-white]="slot.selected" (click)="selectSlot(slot)">
+                      {{ slot.startTime }}
+                    </div>
+                  </li>
+                </ul>
               </div>
               
               
-            <ul>
-             
-            </ul>
-          `
+              
+              
+              
+              
+              
+              
+        
+          
            
               <div class="flex justify-center items-center mt-20">
                 <button class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold" style="letter-spacing: 1px; background-color: #4e6137">PROCEED</button>

@@ -102,4 +102,11 @@ showPM: boolean = false;
     this.showAM = false;
   }
 
+  selectSlot(slot: any) {
+    slot.selected = !slot.selected;
+    // Perform actions with the selected slot
+    console.log('Selected slot:', slot);
+    // Bind the selected slot's time value to a variable or perform any other necessary operations
+  }
+
 }
