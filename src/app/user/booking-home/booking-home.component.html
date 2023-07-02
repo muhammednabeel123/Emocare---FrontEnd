@@ -1,7 +1,7 @@
 <app-nav></app-nav>
 <div class="w-screen h-20 bg-custom-color mt-16 relative">
     <button type="button"
-        class="text-black mt-6  bg-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ml-16 dark:bg-white dark:hover:bg-orange-500 dark:focus:ring-orange-500">
+        class="text-black mt-6 bg-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ml-4 md:ml-16 dark:bg-white dark:hover:bg-orange-500 dark:focus:ring-orange-500">
         <svg aria-hidden="true" class="w-4 h-4 transform rotate-180"
             fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
@@ -15,45 +15,67 @@
     <hr class="absolute bottom-0 left-0 w-screen border-gray-400 mt-4">
 </div>
 
-<div class="w-screen h-24   bg-custom-color">
-    <h2 class="align text-center text-gray-500 font-quicksand text-2xl pt-12 font-extrabold">Who Do You Want To Consult ?</h2>
+<div class="w-screen h-24 bg-custom-color">
+    <h2 class="text-center text-gray-500 font-quicksand text-2xl pt-12 font-extrabold">Who Do You Want To Consult?</h2>
 </div>
-<div class="w-full h-20 bg-custom-color relative flex flex-col-3 items-center">
-   
-        <div class=" flex justify-end bg-custom-color text-white w-6/12 h-24">
-            <div class="mt-6 h-12 bg-white w-44 relative  rounded-l-full">
-                <button class=" mt-3 text-orange-500 font-quicksand ml-14 font-semibold" >Docters</button>
-                <!-- Content of the div -->
-                <div class="w-0.5 bg-gray-300 absolute top-0 right-0 bottom-0 transform translate-x-full">
-                
 
+<div class="w-full h-20 bg-custom-color relative flex flex-col md:flex-row items-center">
+    <div class="flex justify-end bg-custom-color text-white w-full md:w-6/12 h-24">
+        <div class="mt-6 h-12 bg-white w-full md:w-44 relative rounded-l-full" [ngClass]="{'clicked': isClicked === '649842b7a6c9977f197ccfed'}">
+            <button class="mt-3 font-quicksand ml-4 md:ml-14 font-semibold" [ngStyle]="{'color': isClicked === '649842b7a6c9977f197ccfed' ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices('649842b7a6c9977f197ccfed')">Doctors</button>
+            <div class="w-0.5 bg-gray-300 absolute top-0 right-0 bottom-0 transform translate-x-full"></div>
+        </div>
+        
+    </div>
+    
+    <div class="bg-custom-color text-white w-full md:w-2/12 h-24">
+        <div class="mt-6 h-12 bg-white w-full md:w-30" [ngClass]="{'clicked': isClicked === '64983199fe52376aa4502fa0'}">
+            <button class="mt-3 font-quicksand ml-4 md:ml-16 font-semibold" [ngStyle]="{'color': isClicked === '64983199fe52376aa4502fa0' ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices('64983199fe52376aa4502fa0')">Fitness Trainer</button>
+        </div>
+    </div>
+    
+    <div class="bg-custom-color text-white w-full md:w-6/12 h-24">
+        <div class="mt-6 h-12 bg-white w-full md:w-44 relative rounded-r-full" [ngClass]="{'clicked': isClicked === '649833882629f63a73adab60'}">
+            <button class="mt-3 font-quicksand ml-4 md:ml-10 font-semibold" [ngStyle]="{'color': isClicked === '649833882629f63a73adab60' ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices('649833882629f63a73adab60')">Therapist</button>
+            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+        </div>
+    </div>
+    
+    
+</div>
+
+<div class="w-screen h-20 bg-custom-color relative">
+    <h3 class="p-8 font-quicksand font-extrabold text-gray-500 text-center">Consult a healthcare professional for your common health concerns.</h3>
+</div>
+
+<div class="w-screen h-20 bg-white relative">
+    <h3 class="p-8 font-quicksand font-extrabold text-gray-500 text-center"></h3>
+</div>
+
+<div class="h-screen w-screen">
+    <div class="h-1/2 flex">
+        <div class="flex-1 bg-white" *ngFor="let counselor of counselor">
+            <div class="flex flex-col items-center bg-white border border-gray-300 ml-4 md:ml-16 rounded-lg shadow md:flex-col md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-white dark:hover:bg-slate-100">
+                <img class="object-cover w-full rounded-t-lg h-52 md:h-auto md:w-40 md:rounded-none md:rounded-l-lg" src="https://cdn-icons-png.flaticon.com/512/8815/8815112.png" alt="https://cdn-icons-png.flaticon.com/512/8815/8815112.png">
+                <div class="flex flex-col justify-between p-4 leading-normal">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-green-600 font-quicksand align text-center" style="color:rgb(78, 97, 55);">{{ counselor.name }}</h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ counselor.experience }}+ years of experience</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 align text-center">{{counselor.state}}, {{ counselor.country }}</p>
                 </div>
-              </div>
-              
+                <div class="dark:text-white w-full md:w-80 h-8 rounded-lg align text-center mb-6" style="background-color: rgb(78, 97, 55);">
+                    <button class="dark:text-white font-quicksand p-1" (click)="BookId(counselor._id)">BOOK NOW</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-        </div>
-        <div class=" bg-custom-color text-white w-2/12 h-24">
-            <div class="mt-6 h-12 bg-white w-30  ">    <button class=" mt-3 text-orange-500 font-quicksand ml-16 font-semibold" >Fitness Trainer</button></div>
-            <!-- Content of the second flex box -->
-        </div>
-        <div class=" bg-custom-color text-white w-6/12 h-24">
-            <div class="mt-6 h-12 bg-white w-44 relative rounded-r-full">
-                <button class=" mt-3 text-orange-500 font-quicksand ml-10 font-semibold" >Therapist</button>
-                <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-300 "></div>
-              </div>
-        </div>
-   
-    </div>
-    <div class="w-screen h-20 bg-custom-color  relative">
-        <h3 class="p-8  font-quicksand font-extrabold text-gray-500 align text-center"> Consult a healthcare professional for your common health concerns."</h3>
-    </div>
-    
-    <div class="h-72 w-1/3 rounded-xl ml-28 mt-32 bg-green-500 relative">
-        <div class="h-56 ml-3 absolute top-8 w-2/3 rounded-xl bg-slate-200"></div>
-        <div class="mt-12 ml-3 w-1/3 h-10 bg-red-500"></div>
-    </div>
-    
-    <div class="h-14 w-1/3 ml-28 bg-slate-950 flex-"></div>
+
+            
+      
+      
+      
+
 
     

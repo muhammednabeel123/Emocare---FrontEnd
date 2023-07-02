@@ -5,10 +5,10 @@ import { UserSignupComponent } from './user/user-signup/user-signup.component';
 import { HomeComponent } from './user/home/home.component';
 
 
+
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'login',component:LoginComponent},
-  {path:'sign-up',component:UserSignupComponent}
+  {path:'',loadChildren:()=>import('./user/user.module').then(mod => mod.UserModule)},
+  
 
 
 

@@ -13,7 +13,7 @@ export class AdminNavComponent {
   logout(){
     console.log("cookiis");
     
-    this.AdminService.Logout().subscribe((res)=>console.log(res)
+    this.AdminService.Logout().subscribe((res)=>{ this.router.navigate(['/admin'])}
     ,(err)=>{console.log(err);
     })
   }

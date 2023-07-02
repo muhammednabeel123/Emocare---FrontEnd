@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Emitter } from '../emitters/emitter';
+import { UserServiceService } from '../user.service.service';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,9 @@ export class HomeComponent implements OnInit {
 
   
   message:any
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient,private userService:UserServiceService){}
   ngOnInit(): void {
-    this.http.get('http://localhost:5000/user',{
-      withCredentials:true
-    }).subscribe((res:any)=>{
-     if(res.user.is_blocked){
-      
-     }
+    this.userService.getUser().subscribe((res:any)=>{
       
       Emitter.authEmitter.emit(true)
     },(err)=>{
