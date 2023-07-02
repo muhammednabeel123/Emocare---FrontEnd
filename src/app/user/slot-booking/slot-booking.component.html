@@ -1,0 +1,105 @@
+<!-- <p>slot-booking works!</p>
+
+`
+<h2 class="text-2xl font-bold mb-4">Available Slots</h2>
+<ul class="grid grid-cols-2 gap-4">
+  <li *ngFor="let slot of slots">
+    <div class="flex justify-between">
+      <span class="text-gray-700">{{ slot.startTime }}</span>
+      <span class="text-gray-700">{{ slot.endTime }}</span>
+    </div>
+    <button class="bg-orange-500 text-white py-2 px-4 rounded" (click)="bookSlot(slot)" [disabled]="slot.booked || slot.expired">Book</button>
+  </li>
+</ul> -->
+
+<div class="h-screen bg-gray-200">
+    <div class="flex">
+        <div class="w-3/12 h-screen " style="background-color: #d3dfc6;">
+            <button type="button"
+            class="text-black mt-6 bg-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center  md:ml-4 dark:bg-white dark:hover:bg-orange-500 dark:focus:ring-orange-500">
+            <svg aria-hidden="true" class="w-4 h-4 transform rotate-180"
+                fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Icon description</span>
+            </button>
+            <div class="h-28 w-80 ml-5 rounded-lg mt-8  bg-white">
+                <div class="h-full w-2/6 rounded-l-lg bg-slate-950">  
+            </div>
+            <div class="p-4 mt-4">
+                <div class="container">
+                  <div class="flex flex-col md:grid grid-cols-12 text-gray-50 mt-16 mr-7">
+              
+                    <div class="flex md:contents">
+                      <div class="col-start-2 col-end-4 mr-10 md:mx-auto relative">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-gray-500 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-green-500 shadow text-center" >
+                          <i class="fas fa-check-circle text-white"></i>
+                        </div>
+                      </div>
+                      <div class=" col-start-4 col-end-12 p-4 rounded-xl my-4 mr-auto shadow-md w-full" style="background-color: #4e6137">
+                       
+                        <p class="leading-tight text-justify w-full font-extrabold font-quicksand">
+                       Duration
+                        </p>
+                      </div>
+                    </div>
+              
+                    <div class="flex md:contents">
+                      <div class="col-start-2 col-end-4 mr-10 md:mx-auto relative">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-gray-500 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-white shadow text-center">
+                          <!-- <i class="fas fa-check-circle text-white"></i> -->
+                        </div>
+                      </div>
+                      <div class="col-start-4 col-end-12 p-4 rounded-xl my-4 mr-auto shadow-md w-full">
+                    
+                        <p class="leading-tight text-justify font-quicksand font-extrabold">
+                         Slot Selection
+                        </p>
+                      </div>
+                    </div>
+              
+                    <div class="flex md:contents">
+                      <div class="col-start-2 col-end-4 mr-10 md:mx-auto relative">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-gray-500 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-white shadow text-center">
+                          <!-- <i class="fas fa-times-circle text-white"></i> -->
+                        </div>
+                      </div>
+                      <div class=" col-start-4 col-end-12 p-4 rounded-xl my-4 mr-auto shadow-md w-full" style="background-color: #d3dfc6;">
+                       
+                        <p class="leading-tight text-justify font-quicksand font-extrabold" style="color: #fafafa;">
+                         Confirmation
+                        </p>
+                      </div>
+                    </div>
+              
+                    
+              
+                  </div>
+                </div>
+              </div>
+              
+                
+        </div>
+        
+            
+        </div>
+        <div class="w-9/12 h-screen" style="background-color: #fafafa;">
+            <h1 class="text-3xl font-bold text-white">Right Div</h1>
+            <p class="text-white">This is the content of the right div.</p>
+        </div>
+    </div>
+</div>
+    
+

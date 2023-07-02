@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiResponse } from '../user-signup/interface/message';
+import { UserServiceService } from '../user.service.service';
 
 
 @Component({
@@ -12,7 +14,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(
     private http: HttpClient,
-    private router : Router
+    private router : Router,
+    private userService:UserServiceService
   ){}
  
   email = new FormControl('', [
@@ -37,17 +40,39 @@ export class LoginComponent {
 
   login(): void {
     this.showAlert = true;
-    this.alertMsg = 'Please! Your beign logged';
+    this.alertMsg = 'Please! You are being logged';
     this.alertColor = 'blue';
-    this.http.post("http://localhost:5000/login",this.LoginForm.value,{withCredentials:true}).subscribe((res)=>
-    
-      this.router.navigate(['/']),(err) => { 
+  
+    this.userService.login(this.LoginForm.value).subscribe(
+      (res: any) => {
+        console.log(res,"anything");
+        
+      
+        if (res.message === 'Forbidden') {
+          this.showAlert = true;
+          this.alertMsg = 'You are temporarily blocked';
+          this.alertColor = 'red';
+        } else {
+          localStorage.setItem('userToken',res.token)
+          this.router.navigate(['/']);
+        }
+      },
+      (err) => {
         this.showAlert = true;
-        this.alertMsg = err.error.message;
+        this.alertMsg = 'something went wrong';
         this.alertColor = 'red';
-       })
+      }
+    );
   }
+  
+  
+    
+
+   
+      
+  }
+
 
  
 
-}
+
