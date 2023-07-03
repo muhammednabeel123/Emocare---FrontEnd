@@ -52,7 +52,7 @@
                         <div class="h-full w-6 flex items-center justify-center">
                           <div class="h-full w-1 bg-gray-500 pointer-events-none"></div>
                         </div>
-                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-green-500 shadow text-center">
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg--500 shadow text-center">
                            <i class="fas fa-check-circle text-white"></i> 
                         </div>
                       </div>
@@ -69,11 +69,11 @@
                         <div class="h-full w-6 flex items-center justify-center">
                           <div class="h-full w-1 bg-gray-500 pointer-events-none"></div>
                         </div>
-                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-white shadow text-center">
-                          <!-- <i class="fas fa-times-circle text-white"></i> -->
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-green-500 shadow text-center">
+                            <i class="fas fa-check-circle text-white"></i> 
                         </div>
                       </div>
-                      <div class=" col-start-4 col-end-12 p-4 rounded-xl my-4 mr-auto shadow-md w-full" style="background-color: #d3dfc6;">
+                      <div class=" col-start-4 col-end-12 p-4 rounded-xl my-4 mr-auto shadow-md w-full" style="background-color: #4e6137">
                        
                         <p class="leading-tight text-justify font-quicksand font-extrabold" style="color: #fafafa;">
                          Confirmation
@@ -93,12 +93,13 @@
             
         
         <div class="w-9/12 min-h-screen" style="background-color: #fafafa;">
-            <h1 class="text-2xl align text-center text-gray-700 font-quicksand font-extrabold pt-24"> Choose Your Slot</h1>
+            <h1 class="text-2xl align text-center text-gray-700 font-quicksand font-extrabold pt-24">Confirmation</h1>
             <div class="flex items-center justify-center h-24 mt-12">
                 <div class="h-24 w-80 border rounded-xl border-gray-300">
-                    <h1 class=" font-quicksand  text-lg font-extrabold pt-5 ml-28">{{ date | date:'d MMMM yyyy' }}</h1>
+                    <h1 class=" font-quicksand  text-lg font-extrabold pt-5 ml-28"></h1>
 
-                    <h1 class="font-quicksand text-sm font-bold text-gray-500 ml-32"> {{ date | date:'EEEE' }}</h1>
+                    <h1 class="font-quicksand text-lg font-bold text-gray-500 ml-32"> {{ time.startTime }}</h1>
+                    <h1 class="font-quicksand text-sm font-bold text-gray-500 pt-2 ml-32">amount:500/-</h1>
                      <!-- <div>
                         <button (click)="toggleAM()">AM</button>
                         <button (click)="togglePM()">PM</button>
@@ -122,55 +123,17 @@
 
                 </div>
             </div>
-            <div class="h-10 w-96 mt-5 flex justify-center items-center border border-gray-400 border-b-0 rounded-t-lg" style="margin-left: 360px;">
-                <div class="h-full w-1/2" [class.underline]="showAM">
-                  <button class="invisible-button ml-20 pt-3 text-2xl font-quicksand font-extrabold text-gray-500" (click)="toggleAM()">AM</button>
-                </div>
-                <div class="h-full w-1/2 " [class.underline]="showPM" >
-                  <button class="invisible-button ml-20 pt-3 text-2xl font-quicksand font-extrabold text-gray-500 " (click)="togglePM()">PM</button>
-                </div>
-              </div>
+            
 
-              <div *ngIf="showPM" class="h-72 w-96 flex justify-center items-center border border-gray-400 border-t-0 rounded-b-lg" style="margin-left: 360px;">
-                <ul class="flex flex-wrap gap-3 ml-9">
-                  <li *ngFor="let slot of pmSlots">
-                    <div class="bg-white font-quicksand border text-sm border-gray-400 text-gray-800 px-4 py-2 rounded-full cursor-pointer" 
-                    [class.bg-green-800]="slot.selected"
-                    [class.text-white]="slot.selected"
-                    (click)="selectSlot(slot,servicer._id)">
-                      {{ slot.startTime }}
-                      <button (click)="bookSlot(slot)" [disabled]="slot.booked || slot.expired">Book</button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div *ngIf="showAM" class="h-72 w-96 flex justify-center items-center border border-gray-400 border-t-0 rounded-b-lg" style="margin-left: 360px;">
-                <ul class="flex flex-wrap gap-3 ml-9">
-                  <li *ngFor="let slot of amSlots" >
-                    <div class="bg-white font-quicksand border text-sm border-gray-400 text-gray-800 px-4 py-2 rounded-full cursor-pointer"
-                    [class.bg-green-800]="slot.selected"
-                    [class.text-white]="slot.selected" (click)="selectSlot(slot,servicer._id)">
-                      {{ slot.startTime }}
-                      <button (click)="bookSlot(slot)" [disabled]="slot.booked || slot.expired">Book</button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
               
               
               
-              
-              
-              
-              
-              
-        
-          
-           
+
               <div class="flex justify-center items-center mt-20">
-                <button (click)="submit()" class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold" style="letter-spacing: 1px; background-color: #4e6137">PROCEED</button>
+                <button class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold" style="letter-spacing: 1px; background-color: #4e6137">PROCEED</button>
               </div>
             </div>
           </div>
           
     </div>
+

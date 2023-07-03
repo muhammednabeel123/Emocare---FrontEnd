@@ -3,6 +3,7 @@ import { UserServiceService } from '../user.service.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Emitter } from '../emitters/emitter';
 import { HttpClient } from '@angular/common/http';
+
 import * as moment from 'moment';
 
 
@@ -23,26 +24,30 @@ interface Slot {
 export class SlotTimeComponent implements OnInit {
   message:any
 servicer:any
+selectedTime:any
 slots: any[] = [];
 date:any
 amSlots: any[] = [];
 pmSlots: any[] = [];
 showAM: boolean = true;
 showPM: boolean = false;
+id:any
+slotIndex:any
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.User()
-    this.services(id)
+    this.services(this.id)
     this.getSlots();
     this.getDate()
+  
    }
-  constructor(private activatedRoute: ActivatedRoute,private userService : UserServiceService,private http:HttpClient ){}
+  constructor(private activatedRoute: ActivatedRoute,private userService : UserServiceService,private http:HttpClient, private router : Router ){}
 
   services(id: any) {
     this.userService.getServicer(id).subscribe((res: any) => {
       this.servicer = res
-      console.log(this.servicer);
+
       
     });
   }
@@ -51,17 +56,19 @@ showPM: boolean = false;
       .subscribe(
         (response) => {
           console.log(response, "this is response");
-          
-          const amSlots = response.filter(slot => {
+  
+          this.slots = response; // Update the this.slots array
+  
+          const amSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
             return !slot.booked && !slot.expired && startTime.format('A') === 'AM';
           });
-          
-          const pmSlots = response.filter(slot => {
+  
+          const pmSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
             return !slot.booked && !slot.expired && startTime.format('A') === 'PM';
           });
-          
+  
           this.amSlots = amSlots;
           this.pmSlots = pmSlots;
         },
@@ -70,6 +77,7 @@ showPM: boolean = false;
         }
       );
   }
+  
   
   
 
@@ -102,11 +110,35 @@ showPM: boolean = false;
     this.showAM = false;
   }
 
-  selectSlot(slot: any) {
+  selectSlot(slot: any,id:any) {
     slot.selected = !slot.selected;
     // Perform actions with the selected slot
-    console.log('Selected slot:', slot);
-    // Bind the selected slot's time value to a variable or perform any other necessary operations
+    console.log(id);
+    
+    console.log('Selected slot:', JSON.stringify(slot));
+     this.selectedTime = slot;
+   
   }
+  bookSlot(slot: any) {
+     this.slotIndex = this.slots.indexOf(slot);
+ 
+     
+    // this.http.post(`http://localhost:5000/book/${slotIndex}`, {})
+    //   .subscribe(response => {
+    //     console.log(response);
+    //     this.getSlots();
+    //   }, error => {
+    //     console.error("Error booking slot:", error);
+    //   });
+  }
+  
+  submit(){
+    console.log(this.id, "t", JSON.stringify(this.selectedTime));
+    const encodedSelectedTime = btoa(JSON.stringify(this.selectedTime));
+
+    this.router.navigate([`/slot/${this.id}/time/book/${this.slotIndex}`], { queryParams: { times: encodedSelectedTime } });
+  }
+
+
 
 }

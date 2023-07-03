@@ -17,6 +17,7 @@ import { UserInterceptorInterceptor } from './user-interceptor.interceptor';
 import { SlotBookingComponent } from './slot-booking/slot-booking.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SlotTimeComponent } from './slot-time/slot-time.component';
+import { SlotPaymentComponent } from './slot-payment/slot-payment.component';
 
  
 
@@ -34,6 +35,7 @@ import { SlotTimeComponent } from './slot-time/slot-time.component';
         BookingHomeComponent,
         SlotBookingComponent,
         SlotTimeComponent,
+        SlotPaymentComponent,
     ],
     exports: [
         LoginComponent,
