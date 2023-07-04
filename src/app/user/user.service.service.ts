@@ -19,4 +19,17 @@ export class UserServiceService {
   getUser():Observable<any>{
     return this.http.get(`${this.url}/user`,{withCredentials:true})
   }
+
+  getServiceById(id:any):Observable<any>{
+    return this.http.get(`${this.url}/services/${id}`,{withCredentials:true})
+  }
+
+  getServicer(id:any):Observable<any>{
+    return this.http.get(`${this.url}/servicer/${id}`,{withCredentials:true})
+  }
+
+  getDate():Observable<any>{
+    return this.http.get(`${this.url}/date`,{withCredentials:true})
+  }
+
 }

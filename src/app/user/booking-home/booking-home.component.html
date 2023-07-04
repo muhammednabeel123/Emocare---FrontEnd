@@ -54,7 +54,7 @@
 
 <div class="h-screen w-screen">
     <div class="h-1/2 flex">
-        <div class="flex-1 bg-white" *ngFor="let counselor of counselor">
+        <div class="flex-1 bg-white" *ngFor="let counselor of counselors | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
             <div class="flex flex-col items-center bg-white border border-gray-300 ml-4 md:ml-16 rounded-lg shadow md:flex-col md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-white dark:hover:bg-slate-100">
                 <img class="object-cover w-full rounded-t-lg h-52 md:h-auto md:w-40 md:rounded-none md:rounded-l-lg" src="https://cdn-icons-png.flaticon.com/512/8815/8815112.png" alt="https://cdn-icons-png.flaticon.com/512/8815/8815112.png">
                 <div class="flex flex-col justify-between p-4 leading-normal">
@@ -67,7 +67,9 @@
                 </div>
             </div>
         </div>
+     
     </div>
+   
 </div>
 
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CounselorService } from '../counselor.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent {
 
   constructor(
     private http: HttpClient,
-    private router : Router
+    private router : Router,
+    private counselorService : CounselorService
   ){}
  
   email = new FormControl('', [
@@ -39,10 +41,17 @@ export class LoginComponent {
     this.showAlert = true;
     this.alertMsg = 'Please! You are being logged';
     this.alertColor = 'blue';
-    this.http.post("http://localhost:5000/counselor/login", this.LoginForm.value, { withCredentials: true })
+    this.counselorService.login(this.LoginForm.value)
       .subscribe(
         (res) => {
-          console.log(res, "logged");
+          if (res.message === 'Forbidden') {
+            this.showAlert = true;
+            this.alertMsg = 'You are temporarily blocked';
+            this.alertColor = 'red';
+          } else {
+            localStorage.setItem('CToken',res.token)
+            this.router.navigate(['/counselor/home']);
+          }
         },
         (err) => {
           console.log(err, "logged");

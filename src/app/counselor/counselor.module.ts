@@ -6,6 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ModuleSharedModule } from "../shared/shared.module";
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+
+import { CNavComponent } from './c-nav/c-nav.component';
+
 
 
 
@@ -13,14 +17,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    CNavComponent,
+    
+
   ],
   imports: [
     CommonModule,
     CounseloRoutingModule,
     FormsModule,
     ModuleSharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
+    
+    
     
     
 
