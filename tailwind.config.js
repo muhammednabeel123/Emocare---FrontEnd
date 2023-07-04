@@ -11,6 +11,7 @@ module.exports = {
         'rgb-249-218-208': 'rgb(249, 218, 208)',
         'rg-78-97-55':'rgb(78, 97, 55)',
         'custom-color': 'rgb(249, 218, 208)',
+        'customGreen': 'rgb(78, 97, 55)'
       },
     },
   },

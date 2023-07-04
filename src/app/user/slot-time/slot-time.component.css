@@ -13,3 +13,9 @@
     border-bottom: 2px solid darkgreen; /* Adjust the value to control the width */
   }
   
+  .disabled {
+    pointer-events: none; /* Disable pointer events */
+    opacity: 0.5;
+    color: gray; /* Apply a lower opacity to indicate disabled state */
+    /* Add any other styles you want to apply to disabled div */
+  }
