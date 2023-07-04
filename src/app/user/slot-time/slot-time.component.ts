@@ -33,6 +33,12 @@ showAM: boolean = true;
 showPM: boolean = false;
 id:any
 slotIndex:any
+isAnySlotSelected(): boolean {
+  return (
+    (this.amSlots && this. amSlots.some(slot => slot.selected)) ||
+    (this.pmSlots && this.pmSlots.some(slot => slot.selected))
+  );
+}
 
   ngOnInit(): void {
      this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -65,14 +71,24 @@ slotIndex:any
           
           const amSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
+            const currentTime = moment();
+            if (startTime.isBefore(currentTime)) {
+              slot.expired = true; 
+            }
             return !(slot.servicer === this.id) && startTime.format('A') === 'AM';
           });
           
   
           const pmSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
+            const currentTime = moment();
+            if (startTime.isBefore(currentTime)) {
+              slot.expired = true; 
+            }
+          
             return !(slot.servicer === this.id) && startTime.format('A') === 'PM';
           });
+          
   
           this.amSlots = amSlots;
           this.pmSlots = pmSlots;
@@ -117,30 +133,19 @@ slotIndex:any
 
   selectSlot(slot: any,id:any) {
     slot.selected = !slot.selected;
-    // Perform actions with the selected slot
-    console.log(id);
-    
+    this.amSlots.forEach(s => (s.selected = false));
+    this.pmSlots.forEach(s => (s.selected = false));
+    slot.selected = true;
+    this.slotIndex = this.slots.indexOf(slot);
+    console.log(slot,"2");
     console.log('Selected slot:', JSON.stringify(slot));
-     this.selectedTime = slot;
+    this.selectedTime = slot;
    
   }
-  bookSlot(slot: any) {
-     this.slotIndex = this.slots.indexOf(slot);
  
-     
-    // this.http.post(`http://localhost:5000/book/${slotIndex}`, {})
-    //   .subscribe(response => {
-    //     console.log(response);
-    //     this.getSlots();
-    //   }, error => {
-    //     console.error("Error booking slot:", error);
-    //   });
-  }
   
   submit(){
-    console.log(this.id, "t", JSON.stringify(this.selectedTime));
     const encodedSelectedTime = btoa(JSON.stringify(this.selectedTime));
-
     this.router.navigate([`/slot/${this.id}/time/book/${this.slotIndex}`], { queryParams: { times: encodedSelectedTime } });
   }
 

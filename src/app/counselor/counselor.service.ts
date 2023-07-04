@@ -1,4 +1,4 @@
-import { Observable, map } from 'rxjs';
+import { Observable, map,tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -43,6 +43,7 @@ export class CounselorService {
       })
     );
   }
+  
   
 
   }
