@@ -24,10 +24,6 @@ servicer:any
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.User()
     this.services(id)
-
-    
-
-
   }
 
   services(id: any) {

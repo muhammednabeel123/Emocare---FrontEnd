@@ -39,7 +39,8 @@ import { SlotPaymentComponent } from './slot-payment/slot-payment.component';
     ],
     exports: [
         LoginComponent,
-        UserSignupComponent
+        UserSignupComponent,
+        
     ],
     imports: [
         CommonModule,

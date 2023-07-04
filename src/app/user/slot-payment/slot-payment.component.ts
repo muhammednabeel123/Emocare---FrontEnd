@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user.service.service';
 import { Emitter } from '../emitters/emitter';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-slot-payment',
@@ -9,14 +12,17 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
   styleUrls: ['./slot-payment.component.css']
 })
 export class SlotPaymentComponent implements OnInit {
-  constructor(private userService:UserServiceService,private activatedRoute: ActivatedRoute){}
+  constructor(private userService:UserServiceService,private activatedRoute: ActivatedRoute,private http: HttpClient){}
   message:any
   servicer:any
   time:any
+  index:any
+  userid:any
+  
   ngOnInit(): void {   
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(id,"this is id");
-    this.activatedRoute.queryParamMap.subscribe(params => {
+     this.index = this.activatedRoute.snapshot.paramMap.get('index');
+      this.activatedRoute.queryParamMap.subscribe(params => {
       const times = params.get('times');
       if (times !== null) {
          this.time = JSON.parse(atob(times));
@@ -25,16 +31,18 @@ export class SlotPaymentComponent implements OnInit {
     
     this.User()
     this.services(id)
+    
 }
-  // bookSlot(slot: Slot) {
-  //   this.http.post(`http://localhost:5000/book/${this.slots.indexOf(slot)}`, {})
-  //     .subscribe(response => {
-  //       console.log(response);
-  //       this.getSlots();
-  //     }, error => {
-  //       console.error("thisssa",error);
-  //     });
-  // }
+submit() {
+  this.http.post(`http://localhost:5000/book/${this.index}/${this.servicer._id}/${this.userid}`, {})
+    .subscribe(response => {
+      console.log(response);
+      Swal.fire('Success', 'Your appointment is successfully booked!', 'success');
+    }, error => {
+      console.error("Error booking slot:", error);
+    });
+}
+
 
   services(id: any) {
     this.userService.getServicer(id).subscribe((res: any) => {
@@ -45,6 +53,7 @@ export class SlotPaymentComponent implements OnInit {
   }
   User(){
     this.userService.getUser().subscribe((res:any)=>{
+      this.userid = res._id
       console.log(res);
       
       Emitter.authEmitter.emit(true)

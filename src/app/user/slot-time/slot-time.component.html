@@ -138,6 +138,7 @@
                     [class.bg-green-800]="slot.selected"
                     [class.text-white]="slot.selected"
                     (click)="selectSlot(slot,servicer._id)">
+                  
                       {{ slot.startTime }}
                       <button (click)="bookSlot(slot)" [disabled]="slot.booked || slot.expired">Book</button>
                     </div>
@@ -151,6 +152,7 @@
                     [class.bg-green-800]="slot.selected"
                     [class.text-white]="slot.selected" (click)="selectSlot(slot,servicer._id)">
                       {{ slot.startTime }}
+                    
                       <button (click)="bookSlot(slot)" [disabled]="slot.booked || slot.expired">Book</button>
                     </div>
                   </li>

@@ -36,6 +36,8 @@ slotIndex:any
 
   ngOnInit(): void {
      this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    
+     
     this.User()
     this.services(this.id)
     this.getSlots();
@@ -57,16 +59,19 @@ slotIndex:any
         (response) => {
           console.log(response, "this is response");
   
-          this.slots = response; // Update the this.slots array
-  
+          this.slots = response; 
+          
+        
+          
           const amSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
-            return !slot.booked && !slot.expired && startTime.format('A') === 'AM';
+            return !(slot.servicer === this.id) && startTime.format('A') === 'AM';
           });
+          
   
           const pmSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
-            return !slot.booked && !slot.expired && startTime.format('A') === 'PM';
+            return !(slot.servicer === this.id) && startTime.format('A') === 'PM';
           });
   
           this.amSlots = amSlots;
