@@ -13,7 +13,7 @@
             <span class="sr-only">Icon description</span>
             </button>
             
-            <div class="hidden md:flex h-28 w-80 ml-5 rounded-lg mt-8 shadow-xl bg-white flex">
+            <div class="hidden md:flex h-28 w-80 ml-5 shadow-lg rounded-lg mt-8 bg-white flex">
                 <div class="h-full w-2/6 rounded-l-lg bg-gray-200">
                   <img class="object-cover w-full rounded-t-lg h-52 md:h-auto md:w-40 md:rounded-none md:rounded-l-lg" src="https://cdn-icons-png.flaticon.com/512/8815/8815112.png" alt="https://cdn-icons-png.flaticon.com/512/8815/8815112.png">
                 </div>
@@ -28,7 +28,7 @@
                 
                   <div class="p-4 mt-4">
                     <div class="container">
-                      <div class="flex flex-col md:grid grid-cols-12 text-gray-50 mt-16 mr-7 sm:hidden hidden-confirm-section">
+                      <div class="flex flex-col md:grid grid-cols-12 text-gray-50 mt-16 mr-7 hidden-confirm-section hidden">
               
                     <div class="flex md:contents">
                       <div class="col-start-2 col-end-4 mr-10 md:mx-auto relative ">
@@ -91,101 +91,50 @@
         </div>
         
             
-        
-        <div class="w-9/12 min-h-screen " style="background-color: #fafafa;">
-            <h1 class="text-2xl align text-center text-gray-700 font-quicksand font-extrabold pt-24"> Choose Your Slot</h1>
-            <div class="flex items-center justify-center h-24 mt-12">
-                <div class="h-24 w-80 border rounded-xl shadow-lg border-gray-300">
-                    <h1 class=" font-quicksand  text-lg font-extrabold pt-5 ml-28">{{ date | date:'d MMMM yyyy' }}</h1>
-
-                    <h1 class="font-quicksand text-sm font-bold text-gray-500 ml-32"> {{ date | date:'EEEE' }}</h1>
-                     <!-- <div>
-                        <button (click)="toggleAM()">AM</button>
-                        <button (click)="togglePM()">PM</button>
-                      </div>
-                      
-                       <div *ngIf="showAM">
-                        <h2>AM Slots</h2>
-                        <ul>
-                          <li *ngFor="let slot of amSlots">{{ slot.startTime }}</li>
-                        </ul>
-                      </div>
-                      
-                      <div *ngIf="showPM">
-                        <h2>PM Slots</h2>
-                        <ul>
-                          <li *ngFor="let slot of pmSlots">{{ slot.startTime }}</li>
-                        </ul>
-                      </div>  -->
-
-
-
-                </div>
-            </div>
-            <div class="h-10 w-96 mt-5 flex justify-center items-center border border-gray-400 border-b-0 shadow-lg rounded-t-lg" style="margin-left: 360px;">
-                <div class="h-full w-1/2" [class.underline]="showAM">
-                  <button class="invisible-button ml-20 pt-3 text-2xl font-quicksand font-extrabold text-gray-500" (click)="toggleAM()">AM</button>
-                </div>
-                <div class="h-full w-1/2 " [class.underline]="showPM" >
-                  <button class="invisible-button ml-20 pt-3 text-2xl font-quicksand font-extrabold text-gray-500 " (click)="togglePM()">PM</button>
-                </div>
-              </div>
-
-              <div *ngIf="showPM" class="h-72 w-96 flex justify-center items-center border border-gray-300 border-t-0 shadow-xl rounded-b-lg" style="margin-left: 360px;">
-                <ul class="flex flex-wrap gap-3 ml-9">
-                  <li *ngFor="let slot of pmSlots">
-                    <div class="bg-white font-quicksand border text-sm border-gray-300 text-gray-800 px-4 py-2 rounded-full cursor-pointer shadow-xl" 
-                    [class.disabled]="slot.expired"
-                    [class.bg-red-800]="slot.selected"
-                    [class.text-white]="slot.selected"
-                    [class.cursor-not-allowed]="slot.expired"
-                  
-                    (click)="selectSlot(slot,servicer._id)">
-                  
-                      {{ slot.startTime }}
-               
-                      
-                     
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div *ngIf="showAM" class="h-72 w-96 flex justify-center items-center border border-gray-300 shadow-lg border-t-0 rounded-b-lg" style="margin-left: 360px;">
-                <ul class="flex flex-wrap gap-3 ml-9">
-                  <li *ngFor="let slot of amSlots" >
-                    <div class="bg-white font-quicksand border text-sm border-gray-300 text-gray-800 px-4 py-2 rounded-full cursor-pointer shadow-xl"
-                    [class.bg-red-800]="slot.selected"
-                    [class.disabled]="slot.expired"
-                    [class.cursor-not-allowed]="slot.expired"
-                    [class.text-white]="slot.selected" (click)="selectSlot(slot,servicer._id)">
-                      {{ slot.startTime }}
-                     
-                   
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              
-              
-              
-              
-              
-              
-              
-              
-        
-          
-              <div class="flex justify-center items-center mt-10">
-                <button (click)="submit()" class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold bg-customGreen disabled:bg-gray-500"
-                  [disabled]="!isAnySlotSelected()" >
-                  PROCEED
-                </button>
-              </div>
-              
-              
-              
-              
+        <div class="w-full min-h-screen bg-gray-100">
+          <h1 class="text-2xl text-center text-gray-700 font-quicksand font-extrabold pt-24">Choose Your Slot</h1>
+          <div class="flex items-center justify-center h-24 mt-12">
+            <div class="h-24 w-80 border rounded-xl shadow-lg border-gray-300">
+              <h1 class="font-quicksand text-lg font-extrabold text-center pt-5">{{ date | date:'d MMMM yyyy' }}</h1>
+              <h1 class="font-quicksand text-sm font-bold text-gray-500 text-center">{{ date | date:'EEEE' }}</h1>
             </div>
           </div>
-          
+          <div class="h-10 w-96 mx-auto mt-5 flex justify-center items-center    shadow-lg ">
+            <div class="h-full w-1/2 align text-center"  [class.underline]="showAM">
+              <button class="invisible-button pt-3 text-2xl font-quicksand font-extrabold text-gray-500" (click)="toggleAM()">AM</button>
+            </div>
+            <div class="h-full w-1/2 text-center " [class.underline]="showPM">
+              <button class="invisible-button pt-3 text-2xl font-quicksand font-extrabold text-gray-500" (click)="togglePM()">PM</button>
+            </div>
+          </div>
+          <div *ngIf="showPM" class="h-72 mt-5 mx-auto max-w-3xl">
+            <ul class="grid grid-cols-2 gap-3">
+              <li *ngFor="let slot of pmSlots">
+                <div class=" font-quicksand align text-center border text-sm border-gray-300 text-gray-800 px-4 py-2 rounded-full cursor-pointer shadow-xl"
+                  [class.disabled]="slot.expired" [class.bg-red-400]="slot.selected" [class.text-red]="slot.selected"
+                  [class.cursor-not-allowed]="slot.expired" (click)="selectSlot(slot, servicer._id)">
+                  {{ slot.startTime }}
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="showAM" class="h-72 mt-5 mx-auto max-w-3xl">
+            <ul class="grid grid-cols-2 gap-3">
+              <li *ngFor="let slot of amSlots">
+                <div class="bg-white font-quicksand text-center border text-sm border-gray-300 text-gray-800 px-4 py-2 rounded-full cursor-pointer shadow-xl"
+                  [class.bg-red-700]="slot.selected" [class.disabled]="slot.expired"
+                  [class.cursor-not-allowed]="slot.expired" [class.text-white]="slot.selected" (click)="selectSlot(slot, servicer._id)">
+                  {{ slot.startTime }}
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="flex justify-center items-center mt-10">
+            <button (click)="submit()" class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold bg-customGreen disabled:bg-gray-500"
+              [disabled]="!isAnySlotSelected()">
+              PROCEED
+            </button>
+          </div>
+        </div>
+        
     </div>

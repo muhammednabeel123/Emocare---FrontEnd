@@ -21,22 +21,22 @@
 
 <div class="w-full h-20 bg-custom-color relative flex flex-col md:flex-row items-center">
     <div class="flex justify-end bg-custom-color text-white w-full md:w-6/12 h-24">
-        <div class="mt-6 h-12 bg-white w-full md:w-44 relative rounded-l-full" [ngClass]="{'clicked': isClicked === '649842b7a6c9977f197ccfed'}">
-            <button class="mt-3 font-quicksand ml-4 md:ml-14 font-semibold" [ngStyle]="{'color': isClicked === '649842b7a6c9977f197ccfed' ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices('649842b7a6c9977f197ccfed')">Doctors</button>
+        <div class="mt-6 h-12 bg-white w-full md:w-44 relative rounded-l-full" [ngClass]="{'clicked': isClicked === Docters }">
+            <button class="mt-3 font-quicksand ml-4 md:ml-14 font-semibold" [ngStyle]="{'color': isClicked === Docters ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices(Docters)">Doctors</button>
             <div class="w-0.5 bg-gray-300 absolute top-0 right-0 bottom-0 transform translate-x-full"></div>
         </div>
         
     </div>
     
     <div class="bg-custom-color text-white w-full md:w-2/12 h-24">
-        <div class="mt-6 h-12 bg-white w-full md:w-30" [ngClass]="{'clicked': isClicked === '64983199fe52376aa4502fa0'}">
-            <button class="mt-3 font-quicksand ml-4 md:ml-16 font-semibold" [ngStyle]="{'color': isClicked === '64983199fe52376aa4502fa0' ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices('64983199fe52376aa4502fa0')">Fitness Trainer</button>
+        <div class="mt-6 h-12 bg-white w-full md:w-30" [ngClass]="{'clicked': isClicked === Fitness}">
+            <button class="mt-3 font-quicksand ml-4 md:ml-16 font-semibold" [ngStyle]="{'color': isClicked === Fitness ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices(Fitness)">Fitness Trainer</button>
         </div>
     </div>
     
     <div class="bg-custom-color text-white w-full md:w-6/12 h-24">
-        <div class="mt-6 h-12 bg-white w-full md:w-44 relative rounded-r-full" [ngClass]="{'clicked': isClicked === '649833882629f63a73adab60'}">
-            <button class="mt-3 font-quicksand ml-4 md:ml-10 font-semibold" [ngStyle]="{'color': isClicked === '649833882629f63a73adab60' ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices('649833882629f63a73adab60')">Therapist</button>
+        <div class="mt-6 h-12 bg-white w-full md:w-44 relative rounded-r-full" [ngClass]="{'clicked': isClicked === therapist}">
+            <button class="mt-3 font-quicksand ml-4 md:ml-10 font-semibold" [ngStyle]="{'color': isClicked === therapist ? 'white' : ' rgb(231, 105, 67)'}" (click)="getServices(therapist)">Therapist</button>
             <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-300"></div>
         </div>
     </div>

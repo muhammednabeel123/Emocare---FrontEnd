@@ -67,9 +67,12 @@
                         </div>
                         
                         <div>
-                            <input name="age"  [(ngModel)]="credentials.age" type="number" placeholder="Age" required #age="ngModel" class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
-                            <p  *ngIf="age.invalid && age.touched" class="text-red-500 font-quicksand" >Please enter a valid input</p>
-                        </div>
+                            <input name="age" [(ngModel)]="credentials.age" type="number" placeholder="Age" required
+                              (ngModelChange)="validateAge(credentials.age)" #age="ngModel"
+                              class="block w-full px-4 py-2 mt-2 font-quicksand text-gray-700 bg-orange-500 border border-orange-500 rounded-md dark:bg-white dark:text-gray-700 dark:border-orange-500 focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none focus:ring">
+                        
+                            <p *ngIf="age.invalid && age.touched" class="text-red-500 font-quicksand">Please enter a valid input</p>
+                          </div>
                         <div>
                             <label class="text-white dark:text-gray-200">Certificate</label>
                             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-orange-500 border-dashed rounded-md">
