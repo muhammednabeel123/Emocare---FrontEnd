@@ -23,9 +23,9 @@ export class SignupComponent implements OnInit {
     primaryAddress: '',
     profession: '',
     country: '',
-    pincode: '',
+    pincode:'',
     experience: '',
-    age: '',
+    age:'' ,
     idProof:'',
     certificate:''
   };
@@ -75,9 +75,15 @@ export class SignupComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   onServiceSelection() {
-    console.log(this.credentials.profession); // Log the selected profession ID
-    // You can make an HTTP request to the backend with the selected ID here
-    // Example: this.backendService.updateProfession(this.credentials.professionId).subscribe(...);
+    console.log(this.credentials.profession);
+  }
+
+  validateAge(value:any) {
+    const age = parseInt(value, 10);
+    if (isNaN(age) || age < 21) {
+      return { invalidAge: true };
+    }
+    return null;
   }
 
 

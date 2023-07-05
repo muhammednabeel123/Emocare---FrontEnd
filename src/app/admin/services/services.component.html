@@ -1,45 +1,49 @@
 <app-admin-nav></app-admin-nav>
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-white  border-dashed rounded-lg dark:border-white">
-        <div style="display: flex; justify-content: flex-end;">
-            <button (click)="addService()"   style="width: 200px;" class="dark:bg-gray-800 bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                ADD SERVICE
-            </button>
-        </div>
-
-        <section class="flex items-center bg-gray-200 lg:h-screen font-poppins dark:bg-white ">
-            <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-0">
-                <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
-                    <div *ngFor="let service of services$" class="relative bg-white rounded-2xl dark:bg-gray-700">
-                        <div class="w-full h-56 px-4 pt-4">
-                            <img [src]="service.Image" alt="anythin" class="object-cover w-full h-full rounded-lg">
-                        </div>
-                        <div>
-                            <div class="p-4">
-                                <div class="mb-3">
-                                    <a href="#">
-                                        <h2 class="text-2xl font-semibold dark:text-gray-300">
-                                            {{ service.name }}
-                                        </h2>
-                                    </a>
-                                </div>
-                                <p class="pb-16 text-base font-base text-gray-700 dark:text-gray-400">
-                                    {{ service.description }}
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-end">
-                                <a (click)="viewCounselor(service._id)" class="absolute bottom-0 right-0 px-3 py-4 text-sm text-gray-100 bg-indigo-600 rounded-tl-2xl rounded-br-2xl hover:bg-indigo-700 hover:text-gray-100">
-                                    View all
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-white">
+      <div class="flex justify-end mb-4">
+        <button (click)="addService()" class="w-36 bg-blue-600 text-white font-bold py-2 px-4 rounded">
+          ADD SERVICE
+        </button>
+      </div>
+  
+      <section class="bg-gray-200 dark:bg-white">
+        <div class="max-w-6xl mx-auto px-4 py-4 lg:py-0">
+          <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
+            <div *ngFor="let service of services$.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" class="bg-white rounded-2xl dark:bg-gray-700">
+              <div class="w-full h-56 px-4 pt-4">
+                <img [src]="service.Image" alt="anything" class="object-cover w-full h-full rounded-lg">
+              </div>
+              <div class="p-4">
+                <div class="mb-3">
+                  <a href="#">
+                    <h2 class="text-2xl font-semibold dark:text-gray-300">
+                      {{ service.name }}
+                    </h2>
+                  </a>
                 </div>
+                <p class="pb-16 text-base font-base text-gray-700 dark:text-gray-400">
+                  {{ service.description }}
+                </p>
+              </div>
+              <div class="flex items-center justify-end">
+                <a (click)="viewCounselor(service._id)" class="px-3 py-4 text-sm text-gray-100 bg-indigo-600 rounded-tl-2xl rounded-br-2xl hover:bg-indigo-700 hover:text-gray-100">
+                  View all
+                </a>
+              </div>
+            
             </div>
-        </section>
-        
-        
-       </div>
-      
- 
-</div>
+          </div>
+        </div>
+        <div class="flex justify-center mt-4">
+            <button (click)="previousPage()" [disabled]="currentPage === 1" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-l">
+              Previous
+            </button>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-r">
+              Next
+            </button>
+          </div>
+      </section>
+    </div>
+  </div>
+  

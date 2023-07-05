@@ -133,6 +133,7 @@ isAnySlotSelected(): boolean {
 
   selectSlot(slot: any,id:any) {
     slot.selected = !slot.selected;
+    
     this.amSlots.forEach(s => (s.selected = false));
     this.pmSlots.forEach(s => (s.selected = false));
     slot.selected = true;
