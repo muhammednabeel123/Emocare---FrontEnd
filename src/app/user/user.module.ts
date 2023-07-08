@@ -18,6 +18,8 @@ import { SlotBookingComponent } from './slot-booking/slot-booking.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SlotTimeComponent } from './slot-time/slot-time.component';
 import { SlotPaymentComponent } from './slot-payment/slot-payment.component';
+import { UservideocallComponent } from './uservideocall/uservideocall.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
  
 
@@ -36,6 +38,8 @@ import { SlotPaymentComponent } from './slot-payment/slot-payment.component';
         SlotBookingComponent,
         SlotTimeComponent,
         SlotPaymentComponent,
+        UservideocallComponent,
+        AppointmentsComponent,
     ],
     exports: [
         LoginComponent,

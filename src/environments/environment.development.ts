@@ -13,5 +13,6 @@ export const environment = {
       a_password:'1234',
       admin_api:`http://localhost:5000/admin`,
       user_api:'http://localhost:5000',
-      counselor_api:'http://localhost:5000/counselor'
+      counselor_api:'http://localhost:5000/counselor',
+      stripeAPIKey:'pk_test_51NQlBjSCgCDRqUvkwYzeUvjbi5qcqHJSXnJGhJnR0Vpd6QtfuzC1zsAuOaEUMceoCyRIZu2cpHYZBoeVwaDQMv0t00x26VtrVt'
 };

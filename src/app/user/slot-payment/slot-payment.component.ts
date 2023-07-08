@@ -4,6 +4,7 @@ import { Emitter } from '../emitters/emitter';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -18,6 +19,9 @@ export class SlotPaymentComponent implements OnInit {
   time:any
   index:any
   userid:any
+  paymentHandler: any = null;
+  stripeAPIKey: any = environment.stripeAPIKey ;
+  stripeToken:any
   
   ngOnInit(): void {   
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -27,20 +31,49 @@ export class SlotPaymentComponent implements OnInit {
       if (times !== null) {
          this.time = JSON.parse(atob(times));
   
-        console.log('Times:', this.time);}});
-    
+        }});
+
+     this.invokeStripe();
     this.User()
     this.services(id)
     
 }
 submit() {
-  this.http.post(`http://localhost:5000/book/${this.index}/${this.servicer._id}/${this.userid}`, {})
-    .subscribe(response => {
-      console.log(response);
-      Swal.fire('Success', 'Your appointment is successfully booked!', 'success');
-    }, error => {
-      console.error("Error booking slot:", error);
-    });
+  const paymentHandler = (<any>window).StripeCheckout.configure({
+    key: this.stripeAPIKey,
+    locale: 'auto',
+    token: (stripeToken: any) => {
+      console.log(stripeToken);
+      this.paymentStripe(stripeToken);
+      this.sendCheckoutRequest();
+    },
+  });
+
+  this.openStripePayment(paymentHandler);
+}
+
+openStripePayment(paymentHandler: any) {
+  paymentHandler.open({
+    name: 'Emocare',
+    description: 'Health care',
+    amount: 100,
+  });
+}
+
+paymentStripe(stripeToken: any) {
+  this.stripeToken = stripeToken;
+}
+
+sendCheckoutRequest() {
+  this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken)
+    .subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.error("Error booking slot:", error);
+      }
+    );
 }
 
 
@@ -61,6 +94,34 @@ submit() {
       this.message = 'you are no authenticated'
       Emitter.authEmitter.emit(false)
     })
+  }
+
+
+  //Stripe integration
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+  
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.onload = () => {
+        this.paymentHandler = (<any>window).StripeCheckout.configure({
+          key: this.stripeAPIKey,
+          locale: 'auto',
+          token: function (stripeToken: any) {
+            console.log(stripeToken);
+            alert('Payment has been successfull!');
+          },
+        });
+      };
+  
+      window.document.body.appendChild(script);
+    }
+  }
+
+  makePayment(amount: any) {
+   
   }
   
 }

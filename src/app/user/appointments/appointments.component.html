@@ -1,4 +1,4 @@
-<app-c-nav></app-c-nav>
+<app-nav></app-nav>
 <div class="flex mt-20 ">
     <div class="flex-none w-72 h-screen bg-gray-300">
       
@@ -12,10 +12,10 @@
                 </div>
               </div>
               <div class="pl-2 w-64">
-                <p class="text-lg font-quicksand">{{ appointment.user.name }}</p>
+                <p class="text-lg font-quicksand">{{ appointment.counselor.name }}</p>
                 <p class="text-sm text-gray-500 font-quicksand mt-1 "> Video consultation</p>
                 <span class="text-sm flex items-center font-quicksand justify-start text-green-500">
-                  Slot booked
+                {{ appointment.service.name }}
                 </span>
                 
                   
@@ -27,10 +27,11 @@
                 <button></button>
               </div>
               <div class="w-28 h-full bg-slate-500">
-                <button class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
-                  (click)="startAppointment(appointment._id)">
-                  START
-                </button>
+                <button id="startButton" [disabled]="isButtonDisabled" class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400 disabled:bg-gray-300"
+                (click)="startAppointment(appointment._id)">
+                START
+              </button>
+              
               </div>
               
             </div>
@@ -41,3 +42,4 @@
       03
     </div>
   </div>
+

@@ -27,8 +27,6 @@ export class CounselorService {
   }
 
   getAppointment(): Observable<any> {
-    console.log("here");
-  
     const currentTime = new Date();
   
     return this.http.get(`${this.url}/appointments`, { withCredentials: true }).pipe(
@@ -38,10 +36,24 @@ export class CounselorService {
           console.log(consultTime, "this is");
           console.log(consultTime, "here", currentTime);
   
-          return consultTime > currentTime;
+       
+            return consultTime > currentTime;
+    
         });
       })
     );
+  }
+
+  getAppointmentById(id: any): Observable<any> {
+    return this.http.get<any[]>(`${this.url}/appointments`, { withCredentials: true }).pipe(
+      map((appointments: any[]) => appointments.find(appointment => appointment._id === id))
+    );
+  }
+
+  updateAppointment(id: any): Observable<any> {
+    const url = `${this.url}/appointments/${id}`;
+    const payload = { expired: true, completed: true };
+    return this.http.patch(url, payload, { withCredentials: true });
   }
   
   

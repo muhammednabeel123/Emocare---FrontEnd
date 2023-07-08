@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CounselorService } from '../counselor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { CounselorService } from '../counselor.service';
 export class HomeComponent implements OnInit  {
   message:any
   appointments: any[] = [];
-  constructor(private counselorService : CounselorService){}
+  constructor(private counselorService : CounselorService,private router: Router){}
 
   ngOnInit(): void {
     this.getAppointments()
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit  {
 
     
   getAppointments(){
-    console.log("hererew");
+
     
     this.counselorService.getAppointment().subscribe((res:any)=>{
       this.appointments = res;}, (err)=>{
@@ -30,6 +31,13 @@ export class HomeComponent implements OnInit  {
       
   
   }
+
+  startAppointment(appointmentId: string): void {
+    console.log('Starting appointment:', appointmentId);
+    this.router.navigate(['/counselor/cosulting', appointmentId]);
+
+  }
+  
 }
 
 
