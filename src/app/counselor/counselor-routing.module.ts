@@ -10,7 +10,7 @@ const routes:Routes =[
     {path:'',component:LoginComponent},
     {path:'sigup',component:SignupComponent },
     {path : 'home',component:HomeComponent },
-    {path:'cosulting/:id',component:VideocallComponent}
+    {path:'consulting/:id',component:VideocallComponent}
    
 ]
 @NgModule({

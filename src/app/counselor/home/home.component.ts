@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CounselorService } from '../counselor.service';
 import { Router } from '@angular/router';
 
@@ -7,37 +8,85 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit  {
-  message:any
+export class HomeComponent implements OnDestroy {
+  message: any;
   appointments: any[] = [];
-  constructor(private counselorService : CounselorService,private router: Router){}
+  private appointmentsSubscription: Subscription | undefined;
+  private updateInterval: any;
+
+  constructor(private counselorService: CounselorService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getAppointments()
-    this.counselorService.getCounselor().subscribe((res:any)=>{console.log(res);
-    },(err)=>{
-      this.message = 'you are no authenticated'})
-     
+    this.getAppointments();
+    this.counselorService.getCounselor().subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      (err) => {
+        this.message = 'You are not authenticated';
+      }
+    );
+
+    this.scheduleUpdate();
+  }
+
+  ngOnDestroy(): void {
+    if (this.appointmentsSubscription) {
+      this.appointmentsSubscription.unsubscribe();
     }
 
-    
-  getAppointments(){
+    if (this.updateInterval) {
+      cancelAnimationFrame(this.updateInterval);
+    }
+  }
 
-    
-    this.counselorService.getAppointment().subscribe((res:any)=>{
-      this.appointments = res;}, (err)=>{
-        this.message = 'you are no authenticated'})
-       
-      
-  
+  getAppointments() {
+    this.appointmentsSubscription = this.counselorService.getAppointment().subscribe(
+      (res: any[]) => {
+        console.log(res, 'these are the appointments');
+        this.appointments = res;
+        this.updateButtonStatus();
+      },
+      (err) => {
+        this.message = 'You are not authenticated';
+      }
+    );
+  }
+
+  updateButtonStatus() {
+    const currentTime = Date.now();
+
+    for (let i = 0; i < this.appointments.length; i++) {
+      const appointment = this.appointments[i];
+      const appointmentTime = new Date(appointment.consultingTime).getTime();
+
+      if (currentTime >= appointmentTime) {
+        appointment.isButtonDisabled = false;
+      } else {
+        appointment.isButtonDisabled = true;
+      }
+    }
+  }
+
+  scheduleUpdate() {
+    const updateFn = () => {
+      this.updateButtonStatus();
+      this.updateInterval = requestAnimationFrame(updateFn);
+    };
+
+    this.updateInterval = requestAnimationFrame(updateFn);
   }
 
   startAppointment(appointmentId: string): void {
     console.log('Starting appointment:', appointmentId);
-    this.router.navigate(['/counselor/cosulting', appointmentId]);
-
+    this.router.navigate(['/counselor/consulting', appointmentId]);
   }
-  
 }
+
+
+
+
+
+
 
 

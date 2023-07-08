@@ -27,10 +27,11 @@
                 <button></button>
               </div>
               <div class="w-28 h-full bg-slate-500">
-                <button class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
-                  (click)="startAppointment(appointment._id)">
-                  START
-                </button>
+                <button [disabled]="appointment.isButtonDisabled" [class.bg-gray-400]="appointment.isButtonDisabled" class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
+                (click)="startAppointment(appointment._id)">
+                START
+        </button>
+        
               </div>
               
             </div>

@@ -32,7 +32,7 @@ export class CounselorService {
     return this.http.get(`${this.url}/appointments`, { withCredentials: true }).pipe(
       map((res: any) => {
         return res.filter((appointment: any) => {
-          const consultTime = moment(appointment.consultingTime).toDate();
+          const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
           console.log(consultTime, "this is");
           console.log(consultTime, "here", currentTime);
   
