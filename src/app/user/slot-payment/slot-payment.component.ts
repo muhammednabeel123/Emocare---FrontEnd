@@ -94,7 +94,7 @@ openStripePayment(paymentHandler: any) {
   paymentHandler.open({
     name: 'Emocare',
     description: 'Health care',
-    amount: 100,
+    amount:  this.servicer.fee*100,
   });
 }
 
@@ -131,7 +131,7 @@ sendCheckoutRequest() {
       this.userid = res._id
       console.log(res);
       
-      Emitter.authEmitter.emit(true)
+      Emitter.authEmitter.emit(true) 
     },(err)=>{
       this.message = 'you are no authenticated'
       Emitter.authEmitter.emit(false)

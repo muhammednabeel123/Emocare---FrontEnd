@@ -71,4 +71,10 @@ export class UserServiceService {
     );
   }
 
+  cancelAppointment(id:String):Observable<any>{
+    console.log("resacef");
+    
+    return this.http.get(`${this.url}/cancel-appointments/${id}`, { withCredentials: true })
+  }
+
 }

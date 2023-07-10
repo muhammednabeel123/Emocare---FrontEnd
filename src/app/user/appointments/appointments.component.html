@@ -33,7 +33,7 @@
                  </button>
               </div>
               <div class="w-28 h-full bg-orange-500 shadow-lg flex flex-col space-y-0.5">
-                <button class="flex-1 bg-orange-400 text-white font-quicksand font-bold border border-orange-400 hover:bg-orange-700 hover:text-white" (click)="cancelAppointment()">Cancel</button>
+                <button class="flex-1 bg-orange-400 text-white font-quicksand font-bold border border-orange-400 hover:bg-orange-700 hover:text-white" (click)="cancelAppointment(appointment._id)">Cancel</button>
                 <button class="flex-1 bg-orange-400 text-white font-quicksand font-bold border border-orange-400 hover:bg-orange-700 hover:text-white" (click)="rescheduleAppointment(appointment.counselor._id,appointment._id)">Reschedule</button>
               </div>
               

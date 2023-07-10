@@ -86,7 +86,7 @@ export class AppointmentsComponent implements OnDestroy {
     this.router.navigate(['/video_consult', appointmentId]);
   }
 
-  cancelAppointment(): void {
+  cancelAppointment(id:String): void {
     Swal.fire({
       title: 'Cancel Appointment',
       text: 'Are you sure you want to cancel the appointment?',
@@ -98,8 +98,11 @@ export class AppointmentsComponent implements OnDestroy {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.isConfirmed) {
-       
-        console.log('Appointment canceled');
+        this.userService.cancelAppointment(id).subscribe((res)=>{
+          console.log(res,"hey");
+          
+        })
+     
       }
     });
   }
