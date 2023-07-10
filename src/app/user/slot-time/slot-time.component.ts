@@ -33,6 +33,7 @@ showAM: boolean = true;
 showPM: boolean = false;
 id:any
 slotIndex:any
+optionalParam:String | null
 isAnySlotSelected(): boolean {
   return (
     (this.amSlots && this. amSlots.some(slot => slot.selected)) ||
@@ -41,6 +42,13 @@ isAnySlotSelected(): boolean {
 }
 
   ngOnInit(): void {
+
+    this.activatedRoute.queryParamMap.subscribe(queryParamMap => {
+       this.optionalParam = queryParamMap.get('optionalParam');
+      console.log(  this.optionalParam,"anything"); 
+
+    });
+     
      this.id = this.activatedRoute.snapshot.paramMap.get('id');
     
      
@@ -50,7 +58,8 @@ isAnySlotSelected(): boolean {
     this.getDate()
   
    }
-  constructor(private activatedRoute: ActivatedRoute,private userService : UserServiceService,private http:HttpClient, private router : Router ){}
+   constructor(private activatedRoute: ActivatedRoute, private userService: UserServiceService, private http: HttpClient, private router: Router) {}
+
 
   services(id: any) {
     this.userService.getServicer(id).subscribe((res: any) => {
@@ -147,9 +156,14 @@ isAnySlotSelected(): boolean {
   
   submit(){
     const encodedSelectedTime = btoa(JSON.stringify(this.selectedTime));
-    this.router.navigate([`/slot/${this.id}/time/book/${this.slotIndex}`], { queryParams: { times: encodedSelectedTime } });
+    this.router.navigate([`/slot/${this.id}/time/book/${this.slotIndex}`], {
+      queryParams: {
+        times: encodedSelectedTime,
+        optionalParam: this.optionalParam 
+      }
+    });
+  }
   }
 
 
 
-}

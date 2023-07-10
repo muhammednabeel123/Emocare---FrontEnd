@@ -3,6 +3,7 @@ import { UserServiceService } from '../user.service.service';
 import { Router } from '@angular/router';
 import { Emitter } from '../emitters/emitter';
 import { Subscription, interval } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-appointments',
@@ -84,5 +85,31 @@ export class AppointmentsComponent implements OnDestroy {
     console.log('Starting appointment:', appointmentId);
     this.router.navigate(['/video_consult', appointmentId]);
   }
+
+  cancelAppointment(): void {
+    Swal.fire({
+      title: 'Cancel Appointment',
+      text: 'Are you sure you want to cancel the appointment?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DC3545',
+      cancelButtonColor: '#6C757D',
+      confirmButtonText: 'Yes, cancel',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+       
+        console.log('Appointment canceled');
+      }
+    });
+  }
+
+  rescheduleAppointment(id:String,appointment_id:String): void {
+    this.router.navigate(['/slot', id, 'time'], { queryParams: { optionalParam: appointment_id } });
+
+  }
+
 }
+
+
 

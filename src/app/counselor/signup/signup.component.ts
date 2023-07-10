@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
     country: '',
     pincode:'',
     experience: '',
-    age:'' ,
+    fee:'' ,
     idProof:'',
     certificate:''
   };
@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
     formData.append('country', this.credentials.country);
     formData.append('pincode', this.credentials.pincode);
     formData.append('experience', this.credentials.experience);
-    formData.append('age', this.credentials.age);
+    formData.append('age', this.credentials.fee);
     formData.append('idProof', this.credentials.idProof);
     formData.append('certificate', this.credentials.certificate);
 

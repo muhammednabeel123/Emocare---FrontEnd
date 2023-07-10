@@ -104,37 +104,25 @@ export class UservideocallComponent  implements OnInit{
 
   handleVideoConferenceLeft = () => {
     Swal.fire({
-      title: 'Confirm Action',
-      text: 'What action would you like to perform?',
-      showCancelButton: true,
-      showCloseButton: true,
-      focusConfirm: false,
-      confirmButtonText: 'Complete',
-      confirmButtonColor: '#28A745',
-      cancelButtonText: 'Refresh',
-      cancelButtonColor: '#DC3545',
-      closeButtonAriaLabel: 'Cancel',
-      showClass: {
-        popup: 'swal2-show'
-      },
-      hideClass: {
-        popup: 'swal2-hide'
-      }
+      // Swal.fire options
     }).then((result) => {
-      // if (result.isConfirmed) {
-      //   this.userService.updateAppointment(this.appointmentid).subscribe((response: any) => {
-      
-      //     Swal.fire('Success', 'Appointment updated successfully', 'success');
-  
-      //     // Redirect to another page
-      //     this._router.navigate(['/counselor/home']);
-      //   });
-      // } else if (result.dismiss === Swal.DismissReason.cancel) {
-      //   this._router.navigate([`/counselor/cosulting/${this.appointmentid}`]);
-        
-      // } 
+      if (result.isConfirmed) {
+        // Handle confirmed action if needed
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Handle cancelled action if needed
+      }
+    }).finally(() => {
+      this.destroyConference(); // Call the destroyConference method
     });
   };
+
+  destroyConference(): void {
+  // Perform any necessary cleanup or termination logic here
+  // For example, disconnect from the video conference and release resources
+  if (this.api) {
+    this.api.dispose();
+  }
+}
   
 
 

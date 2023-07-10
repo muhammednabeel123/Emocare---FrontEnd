@@ -33,10 +33,18 @@ export class UserServiceService {
     return this.http.get(`${this.url}/date`,{withCredentials:true})
   }
 
-  checkout(index: any, servicer: any, userid: any, stripeToken: any): Observable<any> {
+  checkout(index: any, servicer: any, userid: any, stripeToken: any, appointmentId?: any): Observable<any> {
     const token = { stripeToken: stripeToken };
-    return this.http.post<any>(`${this.url}/book/${index}/${servicer}/${userid}/`, token, { withCredentials: true });
+    let url = `${this.url}/book/${index}/${servicer}/${userid}`;
+    if (appointmentId) {
+      const appointment_Id = appointmentId;
+      url += '?appointmentId=' + encodeURIComponent(JSON.stringify(appointmentId));
+    }
+  
+    return this.http.post<any>(url, token, { withCredentials: true });
   }
+  
+  
 
   getAppointmentById(id: any): Observable<any> {
     return this.http.get<any[]>(`${this.url}/appointments`, { withCredentials: true }).pipe(

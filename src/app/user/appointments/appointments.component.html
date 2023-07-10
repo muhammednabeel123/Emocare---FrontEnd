@@ -27,20 +27,20 @@
                 <button></button>
               </div>
               <div class="w-28 h-full bg-slate-500">
-                <button [disabled]="appointment.isButtonDisabled" [class.bg-gray-400]="appointment.isButtonDisabled" [class.hover:bg-gray-400]="appointment.isButtonDisabled" class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
+                <button [disabled]="appointment.isButtonDisabled" [class.bg-yellow-400]="appointment.isButtonDisabled" [class.hover:bg-gray-400]="appointment.isButtonDisabled" class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
                 (click)="startAppointment(appointment._id)">
                 START
-              </button>
-              
-              
+                 </button>
+              </div>
+              <div class="w-28 h-full bg-orange-500 shadow-lg flex flex-col space-y-0.5">
+                <button class="flex-1 bg-orange-400 text-white font-quicksand font-bold border border-orange-400 hover:bg-orange-700 hover:text-white" (click)="cancelAppointment()">Cancel</button>
+                <button class="flex-1 bg-orange-400 text-white font-quicksand font-bold border border-orange-400 hover:bg-orange-700 hover:text-white" (click)="rescheduleAppointment(appointment.counselor._id,appointment._id)">Reschedule</button>
               </div>
               
-            </div>
-         </div>
+              
+          </div>
           
     </div>
-    <div class="flex-none h-screen  bg-slate-800 ">
-      03
-    </div>
+  
   </div>
 

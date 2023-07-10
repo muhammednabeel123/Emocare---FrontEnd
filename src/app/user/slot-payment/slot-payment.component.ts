@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./slot-payment.component.css']
 })
 export class SlotPaymentComponent implements OnInit {
-  constructor(private userService:UserServiceService,private activatedRoute: ActivatedRoute,private http: HttpClient){}
+  constructor(private userService:UserServiceService,private activatedRoute: ActivatedRoute,private http: HttpClient ,private router :Router){}
   message:any
   servicer:any
   time:any
@@ -22,8 +22,14 @@ export class SlotPaymentComponent implements OnInit {
   paymentHandler: any = null;
   stripeAPIKey: any = environment.stripeAPIKey ;
   stripeToken:any
+  optionalParam:String|null
   
-  ngOnInit(): void {   
+  ngOnInit(): void { 
+    
+    this.activatedRoute.queryParamMap.subscribe(queryParamMap => {
+      this.optionalParam = queryParamMap.get('optionalParam');
+     console.log(  this.optionalParam,"anything"); 
+    })  
     const id = this.activatedRoute.snapshot.paramMap.get('id');
      this.index = this.activatedRoute.snapshot.paramMap.get('index');
       this.activatedRoute.queryParamMap.subscribe(params => {
@@ -49,7 +55,39 @@ submit() {
     },
   });
 
-  this.openStripePayment(paymentHandler);
+  const url = window.location.href;
+  const hasOptionalParam = url.includes('optionalParam');
+
+  if (!hasOptionalParam) {
+    this.openStripePayment(paymentHandler);
+  } else {
+    const appointmentId = this.optionalParam;
+    this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken, appointmentId)
+    .subscribe(
+      response => {
+        console.log(response);
+  
+      
+        Swal.fire('Success', 'The appointment has been successfully rescheduled.', 'success')
+          .then(() => { 
+         
+            this.router.navigate(['/appointments']);
+          });
+      },
+      error => {
+        console.error("Error booking slot:", error);
+      }
+    );
+  }
+
+
+
+
+
+
+
+
+
 }
 
 openStripePayment(paymentHandler: any) {
@@ -65,7 +103,11 @@ paymentStripe(stripeToken: any) {
 }
 
 sendCheckoutRequest() {
-  this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken)
+  
+  const appoinmentId = this.optionalParam
+
+  
+  this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken,appoinmentId)
     .subscribe(
       response => {
         console.log(response);
