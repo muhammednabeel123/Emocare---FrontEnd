@@ -8,6 +8,8 @@ import { BookingHomeComponent } from "./booking-home/booking-home.component";
 import { SlotBookingComponent } from "./slot-booking/slot-booking.component";
 import { SlotTimeComponent } from "./slot-time/slot-time.component";
 import { SlotPaymentComponent } from "./slot-payment/slot-payment.component";
+import { AppointmentsComponent } from "./appointments/appointments.component";
+import { UservideocallComponent } from "./uservideocall/uservideocall.component";
 
 
 
@@ -20,7 +22,9 @@ const routes: Routes = [
     {path:'booking-home',component:BookingHomeComponent },
     {path:'slot/:id',component:SlotBookingComponent},
     {path:'slot/:id/time',component:SlotTimeComponent},
-    {path:'slot/:id/time/book/:index',component:SlotPaymentComponent}
+    {path:'slot/:id/time/book/:index',component:SlotPaymentComponent},
+    {path:'appointments',component:AppointmentsComponent},
+    {path:'video_consult/:id',component:UservideocallComponent}
 
    ];
    
