@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserServiceService } from '../user.service.service';
+import { Emitter } from '../emitters/emitter';
 import Swal from 'sweetalert2';
 declare var JitsiMeetExternalAPI: any;
 
@@ -42,13 +43,14 @@ export class UservideocallComponent  implements OnInit{
       (res: any) => {
         this.appointmentid = res._id
         this.room = `vpaas-magic-cookie-678ef589ec4b4b688ed39e9fb5f355d5/${res._id}`;
-        this.user = { name: `Emocare` };
+        this.user = { name: res.user.name };
+        Emitter.authEmitter.emit(true)
 
-        // Create the room and options here
+    
         this.createRoom();
       },
       (error: any) => {
-        // Handle error
+        Emitter.authEmitter.emit(false)
         console.error('Failed to retrieve appointment details:', error);
       }
     );
@@ -58,8 +60,8 @@ export class UservideocallComponent  implements OnInit{
   private createRoom(): void {
     this.options = {
       roomName: this.room,
-      width: 900,
-      height: 500,
+      width: 1500,
+      height: 700,
       configOverWrite: {
         proJoinPage: false
       },
@@ -107,18 +109,17 @@ export class UservideocallComponent  implements OnInit{
       // Swal.fire options
     }).then((result) => {
       if (result.isConfirmed) {
-        // Handle confirmed action if needed
+  
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Handle cancelled action if needed
+   
       }
     }).finally(() => {
-      this.destroyConference(); // Call the destroyConference method
+      this.destroyConference();
     });
   };
 
   destroyConference(): void {
-  // Perform any necessary cleanup or termination logic here
-  // For example, disconnect from the video conference and release resources
+
   if (this.api) {
     this.api.dispose();
   }

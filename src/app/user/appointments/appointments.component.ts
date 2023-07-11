@@ -13,8 +13,10 @@ import Swal from 'sweetalert2';
 export class AppointmentsComponent implements OnDestroy {
   message: any;
   isButtonDisabled: boolean = true;
+  isDivDisabled: boolean = true;
   appointments: any[] = [];
   private appointmentsSubscription: Subscription | undefined;
+  appointment: any;
 
   constructor(private userService: UserServiceService, private router: Router) {}
 
@@ -45,7 +47,10 @@ export class AppointmentsComponent implements OnDestroy {
         if (res.length > 0) {
           this.appointments = res;
           this.updateButtonStatus();
+          this.updateDivStatus()
           this.scheduleUpdate();
+         
+         
         } else {
           this.appointments = [];
         }
@@ -71,6 +76,30 @@ export class AppointmentsComponent implements OnDestroy {
       }
     }
   }
+
+  updateDivStatus() {
+    const currentTime = Date.now();
+
+    for (let i = 0; i < this.appointments.length; i++) {
+      const appointment = this.appointments[i];
+      const appointmentTime = new Date(appointment.consultingTime).getTime();
+
+      if (currentTime <= appointmentTime) {
+        appointment.isDivDisabled = false;
+      } else {
+        appointment.isDivDisabled = true;
+      }
+    }
+  }
+
+  isAppointmentTimePassed(): boolean {
+    const appointmentTime = new Date(this.appointment.time); 
+    const currentTime = new Date();
+
+    return currentTime > appointmentTime;
+  }
+
+
 
   scheduleUpdate() {
     const updateFn = () => {
@@ -99,7 +128,7 @@ export class AppointmentsComponent implements OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.cancelAppointment(id).subscribe((res)=>{
-          console.log(res,"hey");
+          this.ngOnInit()
           
         })
      

@@ -32,21 +32,19 @@ export class BookingHomeComponent implements OnInit {
 
    constructor(private http:HttpClient, private userService:UserServiceService,private router: Router){}
    getServices(id: string) {
-      this.userService.getServiceById(id)
-        .subscribe(
-            (response) => {
-                this.counselors = response;
-                this.totalItems = this.counselors.length;
-                this.isClicked = id === this.isClicked ? null : id; 
-              
-            },
-            (error) => {
-        
-           console.log(error);
-           
-            }
-        );
-}
+    this.userService.getServiceById(id)
+      .subscribe(
+        (response) => {
+          this.counselors = response.filter((service: any) => !service.is_Blocked);
+          this.totalItems = this.counselors.length;
+          this.isClicked = id === this.isClicked ? null : id; 
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+  
 onPageChange(pageNumber: number): void {
   this.currentPage = pageNumber;
 }

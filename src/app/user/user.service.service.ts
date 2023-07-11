@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Observable, map } from 'rxjs';
+import { Observable, map ,filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,23 +25,31 @@ export class UserServiceService {
     return this.http.get(`${this.url}/services/${id}`,{withCredentials:true})
   }
 
-  getServicer(id:any):Observable<any>{
-    return this.http.get(`${this.url}/servicer/${id}`,{withCredentials:true})
+  getServicer(id: any): Observable<any> {
+    return this.http.get(`${this.url}/servicer/${id}`, {
+      withCredentials: true,
+    }).pipe(
+      filter((servicer: any) => {
+        return !servicer.is_Blocked;
+      })
+    );
   }
 
   getDate():Observable<any>{
     return this.http.get(`${this.url}/date`,{withCredentials:true})
   }
 
-  checkout(index: any, servicer: any, userid: any, stripeToken: any, appointmentId?: any): Observable<any> {
+  checkout(index: any, servicer: any, userid: any, stripeToken: any, appointmentId?: any, wallet?: any): Observable<any> {
     const token = { stripeToken: stripeToken };
+    console.log(wallet, "this is wallet");
+  
     let url = `${this.url}/book/${index}/${servicer}/${userid}`;
     if (appointmentId) {
-      const appointment_Id = appointmentId;
-      url += '?appointmentId=' + encodeURIComponent(JSON.stringify(appointmentId));
+      url += `?appointmentId=${appointmentId}`;
     }
   
-    return this.http.post<any>(url, token, { withCredentials: true });
+  
+    return this.http.post<any>(url, { token, wallet }, { withCredentials: true });
   }
   
   
@@ -59,10 +67,7 @@ export class UserServiceService {
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
-          console.log(consultTime, "this is");
-          console.log(consultTime, "here", currentTime);
-  
-          if (!appointment.expired && !appointment.completed) {
+          if (!appointment.expired && !appointment.completed && !appointment.canceled) {
             return consultTime > currentTime;
           }
           return false;
@@ -76,5 +81,7 @@ export class UserServiceService {
     
     return this.http.get(`${this.url}/cancel-appointments/${id}`, { withCredentials: true })
   }
+
+  
 
 }

@@ -43,7 +43,7 @@ export class VideocallComponent implements OnInit
       (res: any) => {
         this.appointmentid = res._id
         this.room = `vpaas-magic-cookie-678ef589ec4b4b688ed39e9fb5f355d5/${res._id}`;
-        this.user = { name: `Emocare` };
+        this.user = { name: res.counselor.name };
 
      
         this.createRoom();
@@ -59,8 +59,8 @@ export class VideocallComponent implements OnInit
   private createRoom(): void {
     this.options = {
       roomName: this.room,
-      width: 900,
-      height: 500,
+      width: 1500,
+      height: 700,
       configOverWrite: {
         proJoinPage: false
       },
@@ -127,7 +127,7 @@ export class VideocallComponent implements OnInit
       
           Swal.fire('Success', 'Appointment updated successfully', 'success');
   
-          // Redirect to another page
+         
           this._router.navigate(['/counselor/home']);
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {

@@ -33,11 +33,10 @@ export class CounselorService {
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
-          console.log(consultTime, "this is");
-          console.log(consultTime, "here", currentTime);
-  
-       
+          if (!appointment.expired && !appointment.completed && !appointment.canceled) {
             return consultTime > currentTime;
+          }
+          return false;
     
         });
       })
