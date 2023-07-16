@@ -63,7 +63,7 @@ export class HomeComponent implements OnDestroy {
       if (currentTime >= appointmentTime) {
         appointment.isButtonDisabled = false;
       } else {
-        appointment.isButtonDisabled = true;
+        appointment.isButtonDisabled = false;
       }
     }
   }
@@ -81,7 +81,20 @@ export class HomeComponent implements OnDestroy {
     console.log('Starting appointment:', appointmentId);
     this.router.navigate(['/counselor/consulting', appointmentId]);
   }
+
+  handleOffClick(): void {
+    // Code to execute when the "OFF" label is clicked
+    console.log('OFF label clicked');
+  }
+  
+  handleOnClick(): void {
+    // Code to execute when the "ON" label is clicked
+    console.log('ON label clicked');
+  }
+   
 }
+
+
 
 
 

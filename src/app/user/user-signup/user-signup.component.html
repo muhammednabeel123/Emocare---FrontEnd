@@ -35,16 +35,23 @@
               </div>
               <hr class="mt-4 border-gray-300">
 
-              <div class="flex items-center justify-center mt-4">
-                <a title="Google Inc., Public domain, via Wikimedia Commons" (click)="signInWithGoogle()">
-                <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-300 rounded-full shadow flex items-center text-sm">
-                
-                    <img width="20" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
-                
-                  <span class="ml-1">Sign up with Google</span>
-                </button>
-              </a>
-              </div>
+              <div id="g_id_onload"
+              data-client_id="921223360010-q5bsun4j315o4mqp2om8pe2erhga34pn.apps.googleusercontent.com"
+              data-context="signup"
+              data-ux_mode="popup"
+              data-login_uri="http://localhost:5000/register"
+              data-nonce=""
+              data-auto_prompt="false">
+         </div>
+         
+         <div class="g_id_signin"
+              data-type="standard"
+              data-shape="pill"
+              data-theme="outline"
+              data-text="continue_with"
+              data-size="medium"
+              data-logo_alignment="left">
+         </div>
 
               <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <div class="divide-y divide-white">

@@ -5,6 +5,8 @@ import { Emitter } from '../emitters/emitter';
 import { Subscription, interval } from 'rxjs';
 import Swal from 'sweetalert2';
 
+
+
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
@@ -13,8 +15,12 @@ import Swal from 'sweetalert2';
 export class AppointmentsComponent implements OnDestroy {
   message: any;
   isButtonDisabled: boolean = true;
+  isDivDisabled: boolean = true;
   appointments: any[] = [];
   private appointmentsSubscription: Subscription | undefined;
+  appointment: any;
+  currentPage = 1;
+  itemsPerPage = 3;
 
   constructor(private userService: UserServiceService, private router: Router) {}
 
@@ -45,7 +51,10 @@ export class AppointmentsComponent implements OnDestroy {
         if (res.length > 0) {
           this.appointments = res;
           this.updateButtonStatus();
+          this.updateDivStatus()
           this.scheduleUpdate();
+         
+         
         } else {
           this.appointments = [];
         }
@@ -72,6 +81,30 @@ export class AppointmentsComponent implements OnDestroy {
     }
   }
 
+  updateDivStatus() {
+    const currentTime = Date.now();
+
+    for (let i = 0; i < this.appointments.length; i++) {
+      const appointment = this.appointments[i];
+      const appointmentTime = new Date(appointment.consultingTime).getTime();
+
+      if (currentTime <= appointmentTime) {
+        appointment.isDivDisabled = false;
+      } else {
+        appointment.isDivDisabled = true;
+      }
+    }
+  }
+
+  isAppointmentTimePassed(): boolean {
+    const appointmentTime = new Date(this.appointment.time); 
+    const currentTime = new Date();
+
+    return currentTime > appointmentTime;
+  }
+
+
+
   scheduleUpdate() {
     const updateFn = () => {
       this.updateButtonStatus();
@@ -86,7 +119,7 @@ export class AppointmentsComponent implements OnDestroy {
     this.router.navigate(['/video_consult', appointmentId]);
   }
 
-  cancelAppointment(): void {
+  cancelAppointment(id: string): void {
     Swal.fire({
       title: 'Cancel Appointment',
       text: 'Are you sure you want to cancel the appointment?',
@@ -98,16 +131,38 @@ export class AppointmentsComponent implements OnDestroy {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.isConfirmed) {
-       
-        console.log('Appointment canceled');
+        this.userService.cancelAppointment(id).subscribe(() => {
+          Swal.fire('Appointment Canceled', 'Your appointment has been successfully canceled.', 'success');
+          this.ngOnInit();
+        });
       }
     });
   }
+  
+
+  get totalPages(): number {
+    return Math.ceil(this.appointments.length / this.itemsPerPage);
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
 
   rescheduleAppointment(id:String,appointment_id:String): void {
     this.router.navigate(['/slot', id, 'time'], { queryParams: { optionalParam: appointment_id } });
 
   }
+
+
 
 }
 

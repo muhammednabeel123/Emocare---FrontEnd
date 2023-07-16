@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 import { CNavComponent } from './c-nav/c-nav.component';
 import { VideocallComponent } from './videocall/videocall.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -22,6 +23,7 @@ import { VideocallComponent } from './videocall/videocall.component';
     HomeComponent,
     CNavComponent,
     VideocallComponent,
+    ProfileComponent,
     
 
   ],

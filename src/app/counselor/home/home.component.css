@@ -1,4 +1,16 @@
 .container {
     margin-top:3rem;
   }
-  
+
+  body {
+    background-color: #171717; /* bg-true-gray-900 */
+    color: white;
+  }
+
+  input:checked {
+    background-color: #22c55e; /* bg-green-500 */
+  }
+
+  input:checked ~ span:last-child {
+    --tw-translate-x: 1.75rem; /* translate-x-7 */
+  }

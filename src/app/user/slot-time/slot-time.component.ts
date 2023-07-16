@@ -147,7 +147,7 @@ isAnySlotSelected(): boolean {
     this.pmSlots.forEach(s => (s.selected = false));
     slot.selected = true;
     this.slotIndex = this.slots.indexOf(slot);
-    console.log(slot,"2");
+ 
     console.log('Selected slot:', JSON.stringify(slot));
     this.selectedTime = slot;
    

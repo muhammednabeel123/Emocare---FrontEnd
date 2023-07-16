@@ -23,12 +23,18 @@ export class SlotPaymentComponent implements OnInit {
   stripeAPIKey: any = environment.stripeAPIKey ;
   stripeToken:any
   optionalParam:String|null
+  wallet:number|null
+  selectedPaymentOption: string;
+  remainingBalance:number|null
+  hasOptionalParam:any
+  hasOptionalParams: boolean = false;
   
   ngOnInit(): void { 
     
     this.activatedRoute.queryParamMap.subscribe(queryParamMap => {
       this.optionalParam = queryParamMap.get('optionalParam');
-     console.log(  this.optionalParam,"anything"); 
+      this.hasOptionalParams = queryParamMap.has('optionalParam');
+     
     })  
     const id = this.activatedRoute.snapshot.paramMap.get('id');
      this.index = this.activatedRoute.snapshot.paramMap.get('index');
@@ -56,21 +62,28 @@ submit() {
   });
 
   const url = window.location.href;
-  const hasOptionalParam = url.includes('optionalParam');
+   this.hasOptionalParam = url.includes('optionalParam');
 
-  if (!hasOptionalParam) {
+  if (!this.hasOptionalParam && this.selectedPaymentOption === 'stripe') {
     this.openStripePayment(paymentHandler);
+  } else if (this.selectedPaymentOption === 'wallet') {
+    this. remainingBalance = (this.wallet ?? 0) - this.servicer.fee;
+    if (this.remainingBalance >= 0) {
+      this.wallet = this.remainingBalance;       
+      this.checkoutWithWallet();
+      
+    } else {
+      Swal.fire('Error', 'Insufficient balance in wallet.', 'error');
+    }
   } else {
     const appointmentId = this.optionalParam;
     this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken, appointmentId)
     .subscribe(
       response => {
         console.log(response);
-  
-      
+
         Swal.fire('Success', 'The appointment has been successfully rescheduled.', 'success')
           .then(() => { 
-         
             this.router.navigate(['/appointments']);
           });
       },
@@ -79,27 +92,43 @@ submit() {
       }
     );
   }
-
-
-
-
-
-
-
-
-
 }
 
+selectPaymentOption(option: string) {
+  this.selectedPaymentOption = option;
+}
+;
 openStripePayment(paymentHandler: any) {
   paymentHandler.open({
     name: 'Emocare',
     description: 'Health care',
-    amount: 100,
+    panelLabel: `Pay ${
+      this.servicer.fee.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}`,
   });
 }
 
 paymentStripe(stripeToken: any) {
   this.stripeToken = stripeToken;
+  
+}
+
+checkoutWithWallet() {
+  const appointmentId = this.optionalParam;
+   this.remainingBalance = (this.wallet ?? 0) 
+  this.userService.checkout(this.index, this.servicer._id, this.userid,this.stripeToken,undefined, this.wallet)
+    .subscribe(
+      response => {
+        console.log(response);
+
+        Swal.fire('Success', 'The appointment has been successfully scheduled.', 'success')
+          .then(() => {
+            this.router.navigate(['/appointments']);
+          });
+      },
+      error => {
+        console.error("Error booking slot:", error);
+      }
+    );
 }
 
 sendCheckoutRequest() {
@@ -110,7 +139,11 @@ sendCheckoutRequest() {
   this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken,appoinmentId)
     .subscribe(
       response => {
-        console.log(response);
+
+        Swal.fire('Success', 'The appointment has been successfully scheduled.', 'success')
+        .then(() => {
+          this.router.navigate(['/appointments']);
+        });
       },
       error => {
         console.error("Error booking slot:", error);
@@ -129,9 +162,10 @@ sendCheckoutRequest() {
   User(){
     this.userService.getUser().subscribe((res:any)=>{
       this.userid = res._id
+      this.wallet = res.wallet
       console.log(res);
       
-      Emitter.authEmitter.emit(true)
+      Emitter.authEmitter.emit(true) 
     },(err)=>{
       this.message = 'you are no authenticated'
       Emitter.authEmitter.emit(false)

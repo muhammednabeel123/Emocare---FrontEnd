@@ -11,9 +11,9 @@ declare var JitsiMeetExternalAPI: any;
   templateUrl: './videocall.component.html',
   styleUrls: ['./videocall.component.css']
 })
-export class VideocallComponent implements OnInit
- {
+export class VideocallComponent implements OnInit {
 
+  meetingStartTime: Date;
   isAudioMuted: boolean = false;
   isVideoMuted: boolean = false;
   domain: string = 'meet.jit.si';
@@ -22,34 +22,33 @@ export class VideocallComponent implements OnInit
   api: any;
   options: any;
   public messageText = '';
-  leader: boolean = false;
   id: any;
   param!: string;
-  clubdetails$: any;
-  details:any
-  appointmentid:string
-  showConferencePage: boolean = false; // Flag to control the visibility of the conference page
+  details: any
+  appointmentid: string
 
-  constructor(private _router: Router,private counselorService : CounselorService,private route: ActivatedRoute ){
+
+  constructor(private _router: Router, private counselorService: CounselorService, private route: ActivatedRoute) {
 
     const appointmentId = this.route.snapshot.paramMap.get('id');
-    this.counselorService.getAppointmentById(appointmentId).subscribe((res:any) => { this.details = res } )
+    this.counselorService.getAppointmentById(appointmentId).subscribe((res: any) => { this.details = res })
   }
 
-  
+
   ngOnInit(): void {
     const appointmentId = this.route.snapshot.paramMap.get('id');
     this.counselorService.getAppointmentById(appointmentId).subscribe(
       (res: any) => {
         this.appointmentid = res._id
         this.room = `vpaas-magic-cookie-678ef589ec4b4b688ed39e9fb5f355d5/${res._id}`;
-        this.user = { name: `Emocare` };
+        this.meetingStartTime = new Date();
+        this.user = { name: res.counselor.name };
 
-     
+
         this.createRoom();
       },
       (error: any) => {
-      
+
         console.error('Failed to retrieve appointment details:', error);
       }
     );
@@ -59,8 +58,8 @@ export class VideocallComponent implements OnInit
   private createRoom(): void {
     this.options = {
       roomName: this.room,
-      width: 900,
-      height: 500,
+      width: 1500,
+      height: 700,
       configOverWrite: {
         proJoinPage: false
       },
@@ -72,16 +71,17 @@ export class VideocallComponent implements OnInit
         displayName: this.user.name
       }
     };
-  
 
-    this.api = new JitsiMeetExternalAPI(this.domain,this.options)
+
+    this.api = new JitsiMeetExternalAPI(this.domain, this.options)
     this.api.addEventListeners({
       readyToClose: this.handleClose,
       participantLeft: this.handleParticipantLeft,
       participantJoined: this.handleParticipantJoined,
       videoConferenceJoined: this.handleVideoConferenceJoined,
       videoConferenceLeft: this.handleVideoConferenceLeft,
-  
+      conferenceWillStart: this.handleConferenceWillStart,
+
     })
 
   }
@@ -94,27 +94,51 @@ export class VideocallComponent implements OnInit
   handleParticipantLeft = async (participant: any) => {
     const data = await this.getParticipants();
   };
+  handleConferenceWillStart = () => {
+    console.log("The conference is about to start");
+  };
 
   handleParticipantJoined = async (participant: any) => {
+    console.log("hey there");
+
     const data = await this.getParticipants();
+
   };
 
   handleVideoConferenceJoined = async (participant: any) => {
     const data = await this.getParticipants();
   };
 
+  getMeetingDurationInMinutes(): string {
+    if (this.meetingStartTime === undefined) {
+      return '0 minutes';
+    }
+  
+    const now = new Date();
+    const duration = now.getTime() - this.meetingStartTime.getTime();
+  
+    const minutes = Math.floor(duration / 60000);
+    const seconds = Math.floor((duration % 60000) / 1000);
+  
+    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  
+    return `${formattedTime} minutes`;
+  }
+  
+
   handleVideoConferenceLeft = () => {
+    const duration = this.getMeetingDurationInMinutes();
+  
     Swal.fire({
       title: 'Confirm Action',
-      text: 'What action would you like to perform?',
+      text: 'Are you finished with your consultation?',
       showCancelButton: true,
-      showCloseButton: true,
+      showCloseButton: false,
       focusConfirm: false,
-      confirmButtonText: 'Complete',
+      confirmButtonText: 'Yes',
       confirmButtonColor: '#28A745',
-      cancelButtonText: 'Refresh',
+      cancelButtonText: 'No',
       cancelButtonColor: '#DC3545',
-      closeButtonAriaLabel: 'Cancel',
       showClass: {
         popup: 'swal2-show'
       },
@@ -123,20 +147,19 @@ export class VideocallComponent implements OnInit
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.counselorService.updateAppointment(this.appointmentid).subscribe((response: any) => {
-      
-          Swal.fire('Success', 'Appointment updated successfully', 'success');
-  
-          // Redirect to another page
+        this.counselorService.updateAppointment(this.appointmentid,duration).subscribe((response: any) => {
+          Swal.fire('Success', `The meeting has ended. The duration of the meeting was ${duration}`, 'success');
           this._router.navigate(['/counselor/home']);
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this._router.navigate([`/counselor/cosulting/${this.appointmentid}`]);
-        
+        Swal.fire('Cancelled', 'The meeting has not been updated.', 'info');
+        this._router.navigate([`/counselor/home`]);
       }
     });
   };
   
+
+
 
 
   getParticipants() {

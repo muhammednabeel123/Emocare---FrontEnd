@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserServiceService } from '../user.service.service';
+import { Emitter } from '../emitters/emitter';
 import Swal from 'sweetalert2';
 declare var JitsiMeetExternalAPI: any;
 
@@ -20,14 +21,12 @@ export class UservideocallComponent  implements OnInit{
   user: any;
   api: any;
   options: any;
-  public messageText = '';
-  leader: boolean = false;
   id: any;
   param!: string;
-  clubdetails$: any;
   details:any
   appointmentid:string
-  showConferencePage: boolean = false; // Flag to control the visibility of the conference page
+  meetingStartTime: Date;
+
 
   constructor(private _router: Router,private userService : UserServiceService,private route: ActivatedRoute ){
 
@@ -42,13 +41,15 @@ export class UservideocallComponent  implements OnInit{
       (res: any) => {
         this.appointmentid = res._id
         this.room = `vpaas-magic-cookie-678ef589ec4b4b688ed39e9fb5f355d5/${res._id}`;
-        this.user = { name: `Emocare` };
+        this.meetingStartTime = new Date();
+        this.user = { name: res.user.name };
+        Emitter.authEmitter.emit(true)
 
-        // Create the room and options here
+    
         this.createRoom();
       },
       (error: any) => {
-        // Handle error
+        Emitter.authEmitter.emit(false)
         console.error('Failed to retrieve appointment details:', error);
       }
     );
@@ -58,8 +59,8 @@ export class UservideocallComponent  implements OnInit{
   private createRoom(): void {
     this.options = {
       roomName: this.room,
-      width: 900,
-      height: 500,
+      width: 1500,
+      height: 700,
       configOverWrite: {
         proJoinPage: false
       },
@@ -86,6 +87,25 @@ export class UservideocallComponent  implements OnInit{
   }
 
 
+
+  getMeetingDurationInMinutes(): string {
+    if (this.meetingStartTime === undefined) {
+      return '0 minutes';
+    }
+  
+    const now = new Date();
+    const duration = now.getTime() - this.meetingStartTime.getTime();
+  
+    const minutes = Math.floor(duration / 60000);
+    const seconds = Math.floor((duration % 60000) / 1000);
+  
+    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  
+    return `${formattedTime} minutes`;
+  }
+  
+
+
   handleClose = () => {
     console.log('closing meet');
   };
@@ -103,22 +123,38 @@ export class UservideocallComponent  implements OnInit{
   };
 
   handleVideoConferenceLeft = () => {
+    const duration = this.getMeetingDurationInMinutes();
     Swal.fire({
-      // Swal.fire options
+      title: 'Confirm Action',
+      text: 'Are you finished with your consultation?',
+      showCancelButton: true,
+      showCloseButton: false,
+      focusConfirm: false,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#28A745',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#DC3545',
+      showClass: {
+        popup: 'swal2-show'
+      },
+      hideClass: {
+        popup: 'swal2-hide'
+      }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Handle confirmed action if needed
+        Swal.fire('Success', `The meeting has ended. The duration of the meeting was ${duration}`, 'success');
+        this._router.navigate(['/appointments']);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Handle cancelled action if needed
+        Swal.fire('Cancelled', 'The meeting has not been updated.', 'info');
       }
     }).finally(() => {
-      this.destroyConference(); // Call the destroyConference method
+      this.destroyConference();
     });
   };
+  
 
   destroyConference(): void {
-  // Perform any necessary cleanup or termination logic here
-  // For example, disconnect from the video conference and release resources
+
   if (this.api) {
     this.api.dispose();
   }

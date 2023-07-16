@@ -18,7 +18,7 @@ export class CounselorService {
     return this.http.post(`${this.url}/login`,data, { withCredentials: true });
   }
 
-  getCounselor():Observable<any>{
+  getCounselor():Observable<any>{ 
     return this.http.get(`${this.url}/getCounselor`,{withCredentials:true})
     }
 
@@ -33,11 +33,10 @@ export class CounselorService {
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
-          console.log(consultTime, "this is");
-          console.log(consultTime, "here", currentTime);
-  
-       
+          if (!appointment.expired && !appointment.completed && !appointment.canceled) {
             return consultTime > currentTime;
+          }
+          return false;
     
         });
       })
@@ -50,11 +49,14 @@ export class CounselorService {
     );
   }
 
-  updateAppointment(id: any): Observable<any> {
+  updateAppointment(id: any, duration?: any): Observable<any> {
     const url = `${this.url}/appointments/${id}`;
-    const payload = { expired: true, completed: true };
+    const payload = { expired: true, completed: true, duration };
     return this.http.patch(url, payload, { withCredentials: true });
   }
+
+  editProfile(formData:any):Observable<any>{
+    return this.http.patch(`${this.url}/edit-profile`,formData,{ withCredentials: true })}
   
   
 

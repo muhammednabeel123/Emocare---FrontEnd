@@ -1,0 +1,59 @@
+<app-c-nav></app-c-nav>
+<div class="container rounded bg-white mt-24 mb-5 font-quicksand ">
+    <div class="grid grid-cols-12">
+      <div class="col-span-3 border-r">
+        <div class="flex flex-col items-center justify-center p-3 py-5 ">
+          <label for="uploadImage">
+            <img class="rounded-full mt-5" width="150px" [src]="counselor.Image ? counselor.Image : 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'">
+          </label>
+          <span class="font-bold">{{ counselor.name }}</span>
+          <span class="text-black-50">{{ counselor.email }}</span>
+          <input type="file" id="uploadImage" (change)="handleImageUpload($event)" class="hidden">
+        </div>
+      </div>
+      <div class="col-span-5 border-r">
+        <div class="p-3 py-5 shadow-lg" >
+          <div class="flex justify-end mb-3">
+          </div>
+          
+          <div class="grid grid-cols-1 mt-3 ">
+            <label class="text-xs mt-2 mb-2">Name</label>
+            <input type="text" class="form-input border rounded-lg" placeholder="Enter Phone Number" [(ngModel)]="counselor.name">
+            <label class="text-xs mt-2 mb-2">Current Password</label>
+            <input type="text" class="form-input border rounded-lg" placeholder="Enter your current Password" [(ngModel)]="counselor.currentPassword">
+            <label class="text-xs mt-2 mb-2">New Password</label>
+            <input type="password" class="form-input border rounded-lg" placeholder="Enter your New Password" [(ngModel)]="counselor.newPassword">
+            <label class="text-xs mt-2 mb-2">Address</label>
+            <input type="text" class="form-input border rounded-lg" placeholder="Enter Address Line 2" [(ngModel)]="counselor.address[0]">
+            <label class="text-xs mt-2 mb-2">Postcode</label>
+            <input type="text" class="form-input border rounded-lg" placeholder="Enter Postcode" [(ngModel)]="counselor.pincode">
+            <label class="text-xs mt-2 mb-2">Service</label>
+            <input type="text" class="form-input border rounded-lg" placeholder="Education" [(ngModel)]="counselor.service.name">
+            <label class="text-xs mt-2 mb-2">State</label>
+            <input type="text" class="form-input border rounded-lg" placeholder="Education" [(ngModel)]="counselor.state">
+          </div>
+         
+          <div class="mt-5 flex justify-center">
+            <button class="bg-blue-500 text-white py-2 px-4 rounded-md" (click)="saveProfile()">Save Profile</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-4 shadow-lg">
+        <div class="p-3 py-5">
+          <div>
+            <label class="text-xs">Experience</label><br>
+            <input type="text" class="form-input border rounded-lg" placeholder="Experience" [(ngModel)]="counselor.experience">
+          </div>
+    
+          <div>
+            <label class="text-xs mb-2">Fee</label><br>
+            <input type="number" class="form-input border rounded-lg" placeholder="Fee" [(ngModel)]="counselor.fee">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
