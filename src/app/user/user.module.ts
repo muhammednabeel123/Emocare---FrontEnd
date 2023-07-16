@@ -20,6 +20,9 @@ import { SlotTimeComponent } from './slot-time/slot-time.component';
 import { SlotPaymentComponent } from './slot-payment/slot-payment.component';
 import { UservideocallComponent } from './uservideocall/uservideocall.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FormsModule } from '@angular/forms';
 
  
 
@@ -40,6 +43,8 @@ import { AppointmentsComponent } from './appointments/appointments.component';
         SlotPaymentComponent,
         UservideocallComponent,
         AppointmentsComponent,
+        BookingHistoryComponent,
+        UserProfileComponent,
     ],
     exports: [
         LoginComponent,
@@ -55,6 +60,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
         NgxPaginationModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
+        FormsModule
       
     ],
     providers:[

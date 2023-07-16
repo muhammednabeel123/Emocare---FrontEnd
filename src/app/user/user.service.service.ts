@@ -41,7 +41,6 @@ export class UserServiceService {
 
   checkout(index: any, servicer: any, userid: any, stripeToken: any, appointmentId?: any, wallet?: any): Observable<any> {
     const token = { stripeToken: stripeToken };
-    console.log(wallet, "this is wallet");
   
     let url = `${this.url}/book/${index}/${servicer}/${userid}`;
     if (appointmentId) {
@@ -77,11 +76,25 @@ export class UserServiceService {
   }
 
   cancelAppointment(id:String):Observable<any>{
-    console.log("resacef");
     
     return this.http.get(`${this.url}/cancel-appointments/${id}`, { withCredentials: true })
   }
 
+  getAppointmentHistory(): Observable<any> {
+    return this.http.get(`${this.url}/appointments`, { withCredentials: true })
+      .pipe(
+        map((response: any) => {
+          const appointments: any[] = Object.values(response);
+          return appointments.filter((appointment: any) => appointment.completed == true);
+        })
+      );
+  } 
+
+  editProfile(formData:any):Observable<any>{
+      return this.http.patch(`${this.url}/edit-profile`,formData,{ withCredentials: true })
+
+  }
+  
   
 
 }

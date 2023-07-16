@@ -16,7 +16,7 @@ export class ServicesComponent implements OnInit {
 
 ngOnInit(): void {
   this.services()
-  console.log(this.services$,"esdas");
+
   
 }
 

@@ -5,6 +5,8 @@ import { Emitter } from '../emitters/emitter';
 import { Subscription, interval } from 'rxjs';
 import Swal from 'sweetalert2';
 
+
+
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
@@ -17,6 +19,8 @@ export class AppointmentsComponent implements OnDestroy {
   appointments: any[] = [];
   private appointmentsSubscription: Subscription | undefined;
   appointment: any;
+  currentPage = 1;
+  itemsPerPage = 3;
 
   constructor(private userService: UserServiceService, private router: Router) {}
 
@@ -115,7 +119,7 @@ export class AppointmentsComponent implements OnDestroy {
     this.router.navigate(['/video_consult', appointmentId]);
   }
 
-  cancelAppointment(id:String): void {
+  cancelAppointment(id: string): void {
     Swal.fire({
       title: 'Cancel Appointment',
       text: 'Are you sure you want to cancel the appointment?',
@@ -127,19 +131,38 @@ export class AppointmentsComponent implements OnDestroy {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.cancelAppointment(id).subscribe((res)=>{
-          this.ngOnInit()
-          
-        })
-     
+        this.userService.cancelAppointment(id).subscribe(() => {
+          Swal.fire('Appointment Canceled', 'Your appointment has been successfully canceled.', 'success');
+          this.ngOnInit();
+        });
       }
     });
   }
+  
+
+  get totalPages(): number {
+    return Math.ceil(this.appointments.length / this.itemsPerPage);
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
 
   rescheduleAppointment(id:String,appointment_id:String): void {
     this.router.navigate(['/slot', id, 'time'], { queryParams: { optionalParam: appointment_id } });
 
   }
+
+
 
 }
 

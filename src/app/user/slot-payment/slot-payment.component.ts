@@ -139,7 +139,11 @@ sendCheckoutRequest() {
   this.userService.checkout(this.index, this.servicer._id, this.userid, this.stripeToken,appoinmentId)
     .subscribe(
       response => {
-        console.log(response);
+
+        Swal.fire('Success', 'The appointment has been successfully scheduled.', 'success')
+        .then(() => {
+          this.router.navigate(['/appointments']);
+        });
       },
       error => {
         console.error("Error booking slot:", error);

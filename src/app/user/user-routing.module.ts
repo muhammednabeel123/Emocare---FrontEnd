@@ -1,3 +1,4 @@
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
 import { NgModule } from "@angular/core";
 import { RouterModule,Routes } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
@@ -10,6 +11,7 @@ import { SlotTimeComponent } from "./slot-time/slot-time.component";
 import { SlotPaymentComponent } from "./slot-payment/slot-payment.component";
 import { AppointmentsComponent } from "./appointments/appointments.component";
 import { UservideocallComponent } from "./uservideocall/uservideocall.component";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 
@@ -24,7 +26,9 @@ const routes: Routes = [
     {path:'slot/:id/time',component:SlotTimeComponent},
     {path:'slot/:id/time/book/:index',component:SlotPaymentComponent},
     {path:'appointments',component:AppointmentsComponent},
-    {path:'video_consult/:id',component:UservideocallComponent}
+    {path:'video_consult/:id',component:UservideocallComponent},
+    {path:'booking-history',component:BookingHistoryComponent },
+    {path:'user-profile',component:UserProfileComponent }
 
    ];
    

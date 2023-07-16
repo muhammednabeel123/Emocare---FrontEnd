@@ -1,0 +1,41 @@
+<app-nav></app-nav>
+<div class="flex justify-center  mt-48">
+    <div class="w-1/4 border-r shadow-xl">
+        <div class="flex flex-col items-center justify-center p-3 py-5">
+          <label for="profile-image" class="cursor-pointer">
+            <div class="relative">
+              <img id="preview-image" class="rounded-full mt-5 w-48 h-48" [src]="user.Image">
+            </div>
+          </label>
+          <span class="text-blue-500">Upload Image</span>
+          <input id="profile-image" type="file" class="hidden" accept="image/*" (change)="handleImageUpload($event)">
+          <input type="text" class="form-input font-quicksand text-gray-500" placeholder="Enter address line 1" value="{{ user.email }}">
+        </div>
+      </div>
+      
+      
+      
+      
+      
+    <div class="w-5/12 border shadow-xl ml-10">
+      <div class="p-3 py-5">
+        <div class="grid grid-cols-1 mt-3">
+            <label class="font-quicksand mb-2">Name</label>
+            <input type="text" class="form-input mb-4" placeholder="Enter name" [(ngModel)]="user.name">
+            <label class="font-quicksand mb-2">Email</label>
+            <input type="text" class="form-input mb-4 font-quicksand text-gray-500" placeholder="Enter email" [(ngModel)]="user.email" [disabled]="true">
+
+            <label class="block mb-2">Password</label>
+            <input type="text" class="form-input mb-4" placeholder="Enter old password" [(ngModel)]="user.oldPassword">
+            <label class="block mb-2">New Password</label>
+            <input type="password" class="form-input" placeholder="Enter new password" [(ngModel)]="user.newPassword">
+          </div>              
+      </div>
+      <div class="mt-5 flex justify-end">
+        <button class="bg-blue-500 text-white py-2 px-4 rounded-md" (click)="saveProfile()">Save Profile</button>
+
+      </div>
+    </div>
+  </div>
+  
+  
