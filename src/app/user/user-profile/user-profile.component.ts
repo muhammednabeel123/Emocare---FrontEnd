@@ -27,11 +27,12 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((res)=>{  Emitter.authEmitter.emit(true), this.user = res});
-     
+
   }
 
   handleImageUpload(event: any): void {
     const file = event.target.files[0];
+    this.user.file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -50,12 +51,12 @@ export class UserProfileComponent implements OnInit {
     formData.append('email', this.user.email);
     formData.append('oldPassword', this.user.oldPassword);
     formData.append('newPassword', this.user.newPassword);
-    formData.append('file', this.user.file);
+    formData.append('image',this.user.file);
 
 
 
 
-    
+
     this.userService.editProfile(formData).subscribe(
       (response) => {
         Swal.fire({
@@ -75,7 +76,7 @@ export class UserProfileComponent implements OnInit {
         });
       }
     );
-    
+
   }
 
 
