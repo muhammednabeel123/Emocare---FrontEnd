@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import { CounselorService } from './../counselor.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,13 +19,14 @@ export class ProfileComponent implements OnInit {
     state: '',
     experience: '',
     fee: '',
-    Image: ''
+    Image: '',
+    file: '',
   };
 
-  constructor(private counselorService : CounselorService){}
+  constructor(private counselorService : CounselorService, private router:Router  ){}
 
   ngOnInit(): void {
-    console.log("hello anything");
+ 
     
     this.counselorService.getCounselor().subscribe(
       (res: any) => {
@@ -38,6 +40,7 @@ export class ProfileComponent implements OnInit {
  
   handleImageUpload(event: any): void {
     const file = event.target.files[0];
+    this.counselor.file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -57,26 +60,27 @@ export class ProfileComponent implements OnInit {
     formData.append('newPassword', this.counselor.newPassword);
     formData.append('address', this.counselor.address[0]);
     formData.append('pincode', this.counselor.pincode);
+    formData.append('service', this.counselor.service.name);
     formData.append('state', this.counselor.state);
     formData.append('experience', this.counselor.experience);
     formData.append('fee', this.counselor.fee);
-    formData.append('Image', this.counselor.Image);
-
-
+    formData.append('image',this.counselor.file);
     this.counselorService.editProfile(formData).subscribe(
-      (response) => {
+      (response) =>{
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'User profile updated successfully'
-        });
-        // Navigate to home component
+          text: 'User profile updated successfully',
+        }).then(() => {
+          this.router.navigate(['/counselor/home']);
+        });;
       },
       (error) => {
+        const errorMessage = error.error?.error || 'Incorrect Password';
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Failed to update user profile'
+          text: errorMessage,
         });
       }
     );
