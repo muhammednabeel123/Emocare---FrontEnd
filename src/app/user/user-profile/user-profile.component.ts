@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user.service.service';
@@ -5,6 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { Emitter } from '../emitters/emitter';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { select,Store } from '@ngrx/store'
+import {  User } from '../userState/user.interface';
+import { invokeUserApi } from '../userState/user.actions';
+import { selectUser } from '../userState/user.selectors';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private http:HttpClient,private userService:UserServiceService, private router :Router ){}
+  constructor(private http:HttpClient,private userService:UserServiceService, private router :Router,private store:Store<{User:User}> ){}
   previewImageUrl: string = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
   users:any
   user = {
@@ -24,11 +29,14 @@ export class UserProfileComponent implements OnInit {
     file: '',
     Image:''
   };
+  users$ = this.store.pipe(select(selectUser)).subscribe((res)=>{Emitter.authEmitter.emit(true)})
 
   ngOnInit(): void {
+    this.store.dispatch(invokeUserApi())
     this.userService.getUser().subscribe((res)=>{  Emitter.authEmitter.emit(true), this.user = res});
-
+ `   console.log(this.users$,"hey rte");`
   }
+  
 
   handleImageUpload(event: any): void {
     const file = event.target.files[0];

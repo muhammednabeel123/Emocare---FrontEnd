@@ -34,7 +34,6 @@ export class CustomersComponent implements OnInit {
   blockUser(id: any): void {
     this.swalService.confirmBlock().then((result) => {
       if (result.isConfirmed) {
-        console.log("reaching here");
         this.adminService.blockUser(id).subscribe(
           (res: any) => {
             this.ngOnInit()

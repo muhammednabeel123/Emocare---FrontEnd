@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Observable, map ,filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from './userState/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class UserServiceService {
     return this.http.post(`${this.url}/login`,data, { withCredentials: true });
   }
   getUser():Observable<any>{
-    return this.http.get(`${this.url}/user`,{withCredentials:true})
+    return this.http.get<User>(`${this.url}/user`,{withCredentials:true})
   }
 
   getServiceById(id:any):Observable<any>{
