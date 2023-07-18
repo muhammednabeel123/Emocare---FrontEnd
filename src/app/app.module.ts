@@ -1,3 +1,4 @@
+import { Appointment } from './admin/adminState/adminInterface';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,10 +12,15 @@ import { UserModule } from './user/user.module';
 
 
 import { ModuleSharedModule } from './shared/shared.module';
-import { ServiceNameService } from './auth.service';
 import { CounselorModule } from './counselor/counselor.module';
 import { AdminModule } from './admin/admin.module';
 import { CounsellorsComponent } from './admin/counsellors/counsellors.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './user/userState/user.effects';
+import { UserReducer } from './user/userState/user.reducer';
+import { AppointmentReducer } from './admin/adminState/admin.reducer';
+import { adminEffect } from './admin/adminState/admin.effects';
 
 
 
@@ -37,9 +43,11 @@ import { CounsellorsComponent } from './admin/counsellors/counsellors.component'
     ModuleSharedModule,
     AdminModule,
     AppRoutingModule,
-    CounselorModule
+    CounselorModule,
+    StoreModule.forRoot({ User: UserReducer, allAppointment: AppointmentReducer }),
+    EffectsModule.forRoot([UserEffects,adminEffect])
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ServiceNameService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

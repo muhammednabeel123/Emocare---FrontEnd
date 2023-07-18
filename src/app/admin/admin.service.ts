@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable, Subject, map } from 'rxjs';
+import { Appointment } from './adminState/adminInterface';
 
 
 @Injectable({
@@ -94,6 +95,12 @@ export class AdminService {
 
   Logout():Observable<any>{
     return this.http.post<any>(`${this.url}/logout`,{withCredentials: true })
+  }
+
+  getAppointment():Observable<any>{
+    console.log("herasddsad");
+    
+    return this.http.get<Appointment>(`${this.url}/getAppointment`,{withCredentials:true})
   }
 
  

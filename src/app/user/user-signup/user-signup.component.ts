@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ServiceNameService } from 'src/app/auth.service';
 
 
 
@@ -16,7 +15,7 @@ import { ServiceNameService } from 'src/app/auth.service';
 export class UserSignupComponent {
   
   
-  constructor(private http:HttpClient,private router:Router,private auth:ServiceNameService ){}
+  constructor(private http:HttpClient,private router:Router ){}
   token:any
   userId:any
 
@@ -96,7 +95,5 @@ export class UserSignupComponent {
     }
   }
 
-  signInWithGoogle(){
-  this.auth.googleSignIn()
-  }
+ 
 }
