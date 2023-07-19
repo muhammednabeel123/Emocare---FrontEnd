@@ -21,6 +21,8 @@ import { UserEffects } from './user/userState/user.effects';
 import { UserReducer } from './user/userState/user.reducer';
 import { AppointmentReducer } from './admin/adminState/admin.reducer';
 import { adminEffect } from './admin/adminState/admin.effects';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
 
 
 
@@ -47,6 +49,13 @@ import { adminEffect } from './admin/adminState/admin.effects';
     StoreModule.forRoot({ User: UserReducer, allAppointment: AppointmentReducer }),
     EffectsModule.forRoot([UserEffects,adminEffect])
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
 
   bootstrap: [AppComponent]
 })

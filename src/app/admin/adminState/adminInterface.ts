@@ -1,4 +1,5 @@
 export interface Appointment {
+    completed: boolean;
     _id: string;
     user: string;
     counselor: string;

@@ -25,7 +25,6 @@ export class AdminService {
 
 
   getCounselor(): Observable<any> {
-
     return this.http.get<any>(`${this.url}/counselor`, { withCredentials: true }).pipe(
       map((response: any) => {
         const verifiedCounselors = response.filter((counselor: any) => counselor.is_verified=== true);
@@ -33,6 +32,8 @@ export class AdminService {
       })
     );
   }
+
+    
   
  getCounselorById(id: any): Observable<any> {
   return this.http.get<any>(`${this.url}/counselor`, { withCredentials: true }).pipe(
@@ -97,11 +98,18 @@ export class AdminService {
     return this.http.post<any>(`${this.url}/logout`,{withCredentials: true })
   }
 
-  getAppointment():Observable<any>{
-    console.log("herasddsad");
-    
+  getAppointment():Observable<any>{  
     return this.http.get<Appointment>(`${this.url}/getAppointment`,{withCredentials:true})
   }
 
+  getCompletedAppointmentsCount(): Observable<number> {
+    return this.getAppointment().pipe(
+      map(appointments => appointments.filter((appointment: { completed: boolean; }) => appointment.completed === true).length)
+    );
+  }
+
+  getRevenue():Observable<any>{
+    return this.http.get<any>(`${this.url}/getRevenue`,{withCredentials:true})
+  }
  
 }
