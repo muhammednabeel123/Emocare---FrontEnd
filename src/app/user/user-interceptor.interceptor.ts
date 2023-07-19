@@ -7,19 +7,19 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
-export class UserInterceptorInterceptor implements HttpInterceptor {
+// @Injectable()
+// export class UserInterceptorInterceptor implements HttpInterceptor {
 
-  constructor() {}
+//   constructor() {}
 
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = localStorage.getItem('userToken')
-    console.log(token,"this is token");
-    let newRequest = request.clone({ headers: request.headers.set('Authorization','bearer' + token)
+//   // intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+//   //   let token = localStorage.getItem('userToken')
+//   //   console.log(token,"this is token");
+//   //   let newRequest = request.clone({ headers: request.headers.set('Authorization','bearer' + token)
 
-    })
+//   //   })
     
-    return next.handle(newRequest);
-  }
-}
+//   //   return next.handle(newRequest);
+//   // }
+// }

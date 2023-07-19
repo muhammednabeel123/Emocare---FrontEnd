@@ -1,0 +1,83 @@
+<app-admin-nav></app-admin-nav>
+<div class="p-4 sm:ml-64">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <th scope="col" class="p-4">
+                        
+          </th>
+          <th scope="col" class="px-6 py-3">
+              User
+          </th>
+          <th scope="col" class="px-6 py-3">
+              Servicer
+          </th>
+          <th scope="col" class="px-6 py-3">
+              Status
+          </th>
+          <th scope="col" class="px-6 py-3">
+              Service
+          </th>
+          <th scope="col" class="px-6 py-3">
+              Payment
+          </th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let appointment of appointments$ | async; let i = index"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          >
+            <td class="w-4 p-4">
+              <div class="flex items-center">
+                <label for="checkbox-table-search-1" class="sr-only">No</label>
+              </div>
+            </td>
+            <th
+              scope="row"
+              class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+            >
+             
+              <div class="pl-3">
+                <div class="text-base font-semibold">{{ appointment?.user.name }}</div>
+                <div class="font-normal text-gray-500">{{ appointment?.user.email }}</div>
+              </div>
+            </th>
+            <td class="px-6 py-4">
+              {{ appointment.counselor.name }}
+            </td>
+            <td class="px-6 py-4">
+              <ng-container *ngIf="appointment.canceled === true; else completedBlock">
+                <span class="text-red-500">Cancelled</span>
+              </ng-container>
+              <ng-template #completedBlock>
+                <ng-container *ngIf="appointment.completed === true; else pendingBlock">
+                  {{ appointment.duration }}
+                </ng-container>
+                <ng-template #pendingBlock>
+                  <span class="text-yellow-500">Pending </span>
+                </ng-template>
+              </ng-template>
+            </td>
+            <td class="px-6 py-4">
+              {{ appointment.service.name }}
+            </td>
+            <td class="px-6 py-4">
+         
+                  <ng-container *ngIf="appointment.canceled === true; else completedOrFeeBlock">
+                    <span class="text-red-500">Refunded</span>
+                  </ng-container>
+                  <ng-template #completedOrFeeBlock>
+                    {{ appointment.canceled ? '' : appointment.fee }}
+                  </ng-template>
+                </td>
+                
+     
+          
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

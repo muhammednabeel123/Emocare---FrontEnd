@@ -23,7 +23,7 @@ export class UserServiceService {
   }
 
   getServiceById(id:any):Observable<any>{
-    return this.http.get(`${this.url}/services/${id}`,{withCredentials:true})
+    return this.http.get(`${this.url}/services/${id}`)
   }
 
   getServicer(id: any): Observable<any> {

@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.development';
 import { VerifyComponent } from './verify/verify.component';
 import { NavComponent } from '../nav/nav.component';
 import { BookingHomeComponent } from './booking-home/booking-home.component';
-import { UserInterceptorInterceptor } from './user-interceptor.interceptor';
+
 import { SlotBookingComponent } from './slot-booking/slot-booking.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SlotTimeComponent } from './slot-time/slot-time.component';
@@ -62,7 +62,6 @@ import { FormsModule } from '@angular/forms';
       
     ],
     providers:[
-        {provide:HTTP_INTERCEPTORS,useClass:UserInterceptorInterceptor,multi:true}
     ]
 })
 export class UserModule { }

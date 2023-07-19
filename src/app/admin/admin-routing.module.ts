@@ -12,6 +12,7 @@ import { NewCounselorComponent } from './new-counselor/new-counselor.component';
 import { ServicesComponent } from './services/services.component';
 import { AddServicesComponent } from './add-services/add-services.component';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
         { path: 'customers', component: CustomersComponent },
         { path: 'new-counselor', component: NewCounselorComponent },
         { path: 'services', component: ServicesComponent },
-        { path: 'add-services', component: AddServicesComponent }
+        { path: 'add-services', component: AddServicesComponent },
+        { path:'Appointments',component:AppointmentsComponent }
       ]
     }
   ];

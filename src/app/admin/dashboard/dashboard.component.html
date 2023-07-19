@@ -3,7 +3,111 @@
 
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-white">
- 
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+            <!-- Card Item Start -->
+
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-xl dark:border-strokedark dark:bg-boxdark">
+              <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                <video src="../../../assets/wired-flat-981-consultation.mp4" class="w-36 h-36" autoplay loop></video>
+              </div>
+        
+              <div class="mt-4 flex items-end justify-between">
+                <div>
+                  
+                  <span class="text-sm ml-10 font-medium font-quicksand">Total Appoitments</span>
+                </div>
+        
+                <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
+                  {{ completedAppointmentsCount }}
+                  <svg class="fill-meta-3" width="10" height="11" viewBox="0 0 10 11" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
+                      fill="" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <!-- Card Item End -->
+        
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-xl dark:border-strokedark dark:bg-boxdark">
+              <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                <video src="../../../assets/wired-flat-290-coin.mp4" class="w-32 h-32" autoplay loop></video>
+
+
+              </div>
+        
+              <div class="mt-9 flex items-end justify-between">
+                <div>
+                
+                  <span class="text-sm ml-3 font-medium font-quicksand">Total Revenue</span>
+                </div>
+        
+                <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
+                     {{ admin[0].revenue | currency: 'INR': 'symbol':'1.0-0' }}
+                  <svg class="fill-meta-3" width="10" height="11" viewBox="0 0 10 11" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
+                      fill="" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <!-- Card Item End -->
+        
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-xl dark:border-strokedark dark:bg-boxdark">
+              <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                <video src="../../../assets/wired-flat-955-demand.mp4" class="w-32 h-32" autoplay loop></video>
+
+              </div>
+        
+              <div class="mt-9 flex items-end justify-between">
+                <div>
+                 
+                  <span class="text-sm font-medium font-quicksand">Total Counselors</span>
+                </div>
+        
+                <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
+                    {{length}}
+                  <svg class="fill-meta-3" width="10" height="11" viewBox="0 0 10 11" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
+                      fill="" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <!-- Card Item End -->
+        
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-xl dark:border-strokedark dark:bg-boxdark">
+              <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                <video src="../../../assets/wired-flat-268-avatar-man.mp4" class="w-32 h-32" autoplay loop></video>
+              </div>
+        
+              <div class="mt-9 flex items-end justify-between">
+                <div>
+                 `
+                  <span class="text-sm font-medium font-quicksand ">Total Users</span>
+                </div>
+        
+                <span class="flex items-center gap-1 text-sm font-medium text-meta-5">
+                {{user}}
+                  <svg class="fill-meta-5" width="10" height="11" viewBox="0 0 10 11" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M5.64284 7.69237L9.09102 4.33987L10 5.22362L5 10.0849L-8.98488e-07 5.22362L0.908973 4.33987L4.35716 7.69237L4.35716 0.0848701L5.64284 0.0848704L5.64284 7.69237Z"
+                      fill="" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <!-- Card Item End -->
+          </div>
     </div>
   
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

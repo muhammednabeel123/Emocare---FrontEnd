@@ -14,6 +14,7 @@ import { NewCounselorComponent } from './new-counselor/new-counselor.component';
 import { ServicesComponent } from './services/services.component';
 import { AddServicesComponent } from './add-services/add-services.component';
 import { ServiceViewComponent } from './service-view/service-view.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 
 
@@ -32,7 +33,8 @@ import { ServiceViewComponent } from './service-view/service-view.component';
          NewCounselorComponent,
          ServicesComponent,
          AddServicesComponent,
-         ServiceViewComponent
+         ServiceViewComponent,
+         AppointmentsComponent
       
   ],
   imports: [
