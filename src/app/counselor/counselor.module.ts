@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CNavComponent } from './c-nav/c-nav.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { ProfileComponent } from './profile/profile.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
 
 
@@ -24,6 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
     CNavComponent,
     VideocallComponent,
     ProfileComponent,
+    BookingHistoryComponent,
     
 
   ],

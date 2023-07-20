@@ -43,9 +43,23 @@ ngOnInit(): void {
     }
   });
 }
-logout():void{
-  this.http.post('http://localhost:5000/logout',{},{withCredentials:true}).subscribe(() => this.authenticated = false)
+
+logout(): void {
+  this.http.post('http://localhost:5000/logout', {}, { withCredentials: true }).subscribe(
+    () => {
+      localStorage.removeItem('userToken');
+      this.authenticated = false;
+      this.router.navigate(['/']);
+    },
+    (err) => {
+      console.log('Error during logout:', err);
+      localStorage.removeItem('userToken');
+      this.authenticated = false;
+      this.router.navigate(['/']);
+    }
+  );
 }
+
 
   
 }

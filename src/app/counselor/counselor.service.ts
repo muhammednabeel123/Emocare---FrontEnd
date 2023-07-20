@@ -33,7 +33,7 @@ export class CounselorService {
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
-          if (!appointment.expired && !appointment.completed && !appointment.canceled) {
+          if (!appointment.expired && !appointment.completed && !appointment.canceled ) {
             return consultTime > currentTime;
           }
           return false;
@@ -57,11 +57,31 @@ export class CounselorService {
 
   editProfile(formData:any):Observable<any>{
     return this.http.patch(`${this.url}/edit-profile`,formData,{ withCredentials: true })}
-  
+
+    isAvailableOn(id: string): Observable<any> {
+      const body = { id: id }; 
+      return this.http.post<any>(`${this.url}/available`, body);
+    }
+
+   isAvailableOff(id: string):Observable<any>{
+    const body = { id: id };
+      return this.http.post<any>(`${this.url}/not-available`,body)
+       }
   
 
+  getAppointmentHistory(): Observable<any> {
+    return this.http.get(`${this.url}/appointments`,{ withCredentials: true })
+      .pipe(
+        map((response: any) => {
+          const appointments: any[] = Object.values(response);
+          return appointments.filter((appointment: any) => appointment.completed == true);
+        })
+      );
   }
 
+}
+
+ 
 
 
 

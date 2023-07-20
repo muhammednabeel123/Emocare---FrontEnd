@@ -1,6 +1,6 @@
 import { RegisterResponse } from './interface/registerForm';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,8 +12,14 @@ import { Router } from '@angular/router';
   templateUrl: './user-signup.component.html',
   styleUrls: ['./user-signup.component.css']
 })
-export class UserSignupComponent {
+export class UserSignupComponent implements OnInit {
   
+  ngOnInit(): void {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      this.router.navigate(['/booking-home']);
+    }
+  }
   
   constructor(private http:HttpClient,private router:Router ){}
   token:any

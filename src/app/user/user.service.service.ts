@@ -16,10 +16,10 @@ export class UserServiceService {
   login(data:any):Observable<any>{  
     console.log(data);
     
-    return this.http.post(`${this.url}/login`,data, { withCredentials: true });
+    return this.http.post(`${this.url}/login`,data);
   }
   getUser():Observable<any>{
-    return this.http.get<User>(`${this.url}/user`,{withCredentials:true})
+    return this.http.get<User>(`${this.url}/user`)
   }
 
   getServiceById(id:any):Observable<any>{
@@ -37,7 +37,7 @@ export class UserServiceService {
   }
 
   getDate():Observable<any>{
-    return this.http.get(`${this.url}/date`,{withCredentials:true})
+    return this.http.get(`${this.url}/date`)
   }
 
   checkout(index: any, servicer: any, userid: any, stripeToken: any, appointmentId?: any, wallet?: any): Observable<any> {
@@ -49,13 +49,13 @@ export class UserServiceService {
     }
   
   
-    return this.http.post<any>(url, { token, wallet }, { withCredentials: true });
+    return this.http.post<any>(url, { token, wallet });
   }
   
   
 
   getAppointmentById(id: any): Observable<any> {
-    return this.http.get<any[]>(`${this.url}/appointments`, { withCredentials: true }).pipe(
+    return this.http.get<any[]>(`${this.url}/appointments`).pipe(
       map((appointments: any[]) => appointments.find(appointment => appointment._id === id))
     );
   }
@@ -63,7 +63,7 @@ export class UserServiceService {
   getAppointment(): Observable<any> {
     const currentTime = new Date();
   
-    return this.http.get(`${this.url}/appointments`, { withCredentials: true }).pipe(
+    return this.http.get(`${this.url}/appointments`).pipe(
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
@@ -78,11 +78,11 @@ export class UserServiceService {
 
   cancelAppointment(id:String):Observable<any>{
     
-    return this.http.get(`${this.url}/cancel-appointments/${id}`, { withCredentials: true })
+    return this.http.get(`${this.url}/cancel-appointments/${id}`)
   }
 
   getAppointmentHistory(): Observable<any> {
-    return this.http.get(`${this.url}/appointments`, { withCredentials: true })
+    return this.http.get(`${this.url}/appointments`)
       .pipe(
         map((response: any) => {
           const appointments: any[] = Object.values(response);
@@ -92,7 +92,7 @@ export class UserServiceService {
   } 
 
   editProfile(formData:any):Observable<any>{
-      return this.http.patch(`${this.url}/edit-profile`,formData,{ withCredentials: true })
+      return this.http.patch(`${this.url}/edit-profile`,formData)
 
   }
   
