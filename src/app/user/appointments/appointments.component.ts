@@ -21,6 +21,7 @@ export class AppointmentsComponent implements OnDestroy {
   appointment: any;
   currentPage = 1;
   itemsPerPage = 3;
+  name:string
 
   constructor(private userService: UserServiceService, private router: Router) {}
 
@@ -28,7 +29,7 @@ export class AppointmentsComponent implements OnDestroy {
     this.getAppointments();
     this.userService.getUser().subscribe(
       (res: any) => {
-        console.log(res);
+       this.name = res.name
       },
       (err) => {
         this.message = 'You are not authenticated';

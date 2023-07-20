@@ -35,7 +35,7 @@ export class BookingHomeComponent implements OnInit {
     this.userService.getServiceById(id)
       .subscribe(
         (response) => {
-          this.counselors = response.filter((service: any) => !service.is_Blocked);
+          this.counselors = response.filter((service: any) => !service.is_Blocked &&  service.is_Available );
           this.totalItems = this.counselors.length;
           this.isClicked = id === this.isClicked ? null : id; 
         },

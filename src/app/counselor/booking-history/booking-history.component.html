@@ -1,0 +1,53 @@
+
+<app-c-nav></app-c-nav>
+<div class="flex" style="margin-top: 50px;">
+    <div class="flex-none w-72 max-h-screen bg-red-100">
+      
+    </div>
+    <div class="flex-auto w-72 h-screen bg-white">
+        <div class="container mx-auto px-12 ">
+            <div *ngFor="let appointment of history.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage) " class="flex w-3/4 mt-8 ml-10 h-40 bg-white border border-gray-100 rounded-xl shadow-xl  overflow-hidden items-center justify-start" style="cursor: auto;">
+              <div class="relative w-36 h-40 flex-shrink-0">
+                <div class="absolute left-0 top-0 w-full h-full  items-center justify-center">
+                  <img alt="Placeholder Photo" class="absolute ml-4 mt-5    w-28 h-28 object-cover object-center transition duration-50" loading="lazy" src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png">
+                </div>
+              </div>
+              <div class="pl-2 w-64">
+                <p class="text-lg font-quicksand">{{ appointment.user.name }}</p>
+                <p class="text-sm text-gray-500 font-quicksand mt-1 "> Video consultation</p>
+                <span class="text-sm flex items-center font-quicksand justify-start text-green-500">
+                {{ appointment.service.name }}
+                </span>
+                
+                  
+              </div>
+              <div class="w-64  ml-10">
+                <p class="text-sm text-gray-500 font-quicksand mt-1">
+                    {{ appointment.consultingTime | date: 'dd MMMM yyyy, hh:mm a' : 'Asia/Kolkata' }}
+                  </p>
+                  <p class="text-sm text-gray-500 font-quicksand mt-1">
+                    {{ appointment.duration  }}
+                  </p>
+              </div>
+              <div class="w-28 h-full bg-white shadow-lg">
+                <p class="text-sm text-green-500 font-quicksand pt-16 pl-11">
+                    {{ appointment.fee  }}/-
+                  </p>
+              </div>
+            
+              
+              
+          </div>
+          
+          
+    </div>
+    <div class="flex justify-center mt-4">
+        <button (click)="previousPage()" [disabled]="currentPage === 1" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-l">
+          Previous
+        </button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-r">
+          Next
+        </button>
+      </div>
+  
+  </div>

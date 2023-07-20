@@ -12,25 +12,32 @@ import { SlotPaymentComponent } from "./slot-payment/slot-payment.component";
 import { AppointmentsComponent } from "./appointments/appointments.component";
 import { UservideocallComponent } from "./uservideocall/uservideocall.component";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthUserGuard } from './auth-user.guard';
+
+
 
 
 
 const routes: Routes = [
-    
-    {path:'login',component:LoginComponent},
+    { path: 'login', component: LoginComponent },
+    { path: 'sign-up', component: UserSignupComponent },
     {path:'',component:HomeComponent},
-    {path:'sign-up',component:UserSignupComponent},
-    {path:'user/:id/verify/:token',component:VerifyComponent},
-    {path:'booking-home',component:BookingHomeComponent },
-    {path:'slot/:id',component:SlotBookingComponent},
-    {path:'slot/:id/time',component:SlotTimeComponent},
-    {path:'slot/:id/time/book/:index',component:SlotPaymentComponent},
-    {path:'appointments',component:AppointmentsComponent},
-    {path:'video_consult/:id',component:UservideocallComponent},
-    {path:'booking-history',component:BookingHistoryComponent },
-    {path:'user-profile',component:UserProfileComponent }
-
-   ];
+    {
+      path: '', canActivate: [AuthUserGuard],children: [ 
+        { path: 'user/:id/verify/:token', component: VerifyComponent },
+        { path: 'booking-home', component: BookingHomeComponent },
+        { path: 'slot/:id', component: SlotBookingComponent },
+        { path: 'slot/:id/time', component: SlotTimeComponent },
+        { path: 'slot/:id/time/book/:index', component: SlotPaymentComponent },
+        { path: 'appointments', component: AppointmentsComponent },
+        { path: 'video_consult/:id', component: UservideocallComponent },
+        { path: 'booking-history', component: BookingHistoryComponent },
+        { path: 'user-profile', component: UserProfileComponent },
+        { path: 'login', redirectTo:'login', pathMatch: 'full' },
+       
+      ]
+    }
+  ];
    
 @NgModule({
     imports:[RouterModule.forChild(routes)],

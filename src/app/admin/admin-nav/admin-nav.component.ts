@@ -11,7 +11,7 @@ export class AdminNavComponent {
   constructor(private router:Router,private AdminService:AdminService ){}
 
   logout(){
-    console.log("cookiis");
+
     
     this.AdminService.Logout().subscribe((res)=>{ this.router.navigate(['/admin'])}
     ,(err)=>{console.log(err);

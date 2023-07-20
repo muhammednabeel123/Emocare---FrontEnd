@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../user-signup/interface/message';
@@ -11,7 +11,16 @@ import { UserServiceService } from '../user.service.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+  ngOnInit(): void {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      // Redirect to the HomeComponent
+      this.router.navigate(['/booking-home']);
+    }
+  }
+
   constructor(
     private http: HttpClient,
     private router : Router,
