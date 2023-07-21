@@ -23,6 +23,8 @@ import { AppointmentReducer } from './admin/adminState/admin.reducer';
 import { adminEffect } from './admin/adminState/admin.effects';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
+import { ServerErrorComponent } from './error/server-error/server-error.component';
+import { NotFoundErrorComponent } from './error/not-found-error/not-found-error.component';
 
 
 
@@ -34,6 +36,8 @@ import { TokenInterceptor } from './token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
+    ServerErrorComponent,
+    NotFoundErrorComponent,
     
   
     

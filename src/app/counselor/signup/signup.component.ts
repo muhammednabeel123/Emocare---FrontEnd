@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.http.get('http://localhost:5000/counselor/services').subscribe((res: any) => {
       this.services = Object.values(res).map((service: any) => service);
-      console.log(this.services); 
+
     });
     
     

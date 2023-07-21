@@ -28,7 +28,7 @@
                 <button></button>
               </div>
               <div class="w-28 h-full bg-slate-500">
-                <button [disabled]="appointment.isButtonDisabled" [class.bg-slate-400]="appointment.isButtonDisabled" [class.hover:bg-gray-400]="appointment.isButtonDisabled" class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
+                <button [disabled]="appointment.isButtonDisabled"  [class.hover:bg-gray-400]="appointment.isButtonDisabled" class="w-full h-full shadow-xl bg-red-500 font-quicksand text-white font-extrabold hover:bg-red-400"
                 (click)="startAppointment(appointment._id)">
                 START
                  </button>

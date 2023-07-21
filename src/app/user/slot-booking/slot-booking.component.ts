@@ -27,11 +27,20 @@ servicer:any
   }
 
   services(id: any) {
-    this.userService.getServicer(id).subscribe((res: any) => {
-      this.servicer = res
-      console.log(this.servicer);
-      
-    });
+    this.userService.getServicer(id).subscribe(
+      (res: any) => {
+        this.servicer = res;
+        console.log(this.servicer);
+      },
+      (error: any) => {
+        if (error.status === 500) {
+          // Handle the 500 error and navigate to another page
+          this.router.navigate(['/500']);
+        } else {
+          console.log('Other error occurred:', error);
+        }
+      }
+    );
   }
 
   User(){

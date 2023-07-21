@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class AppointmentsComponent implements OnDestroy {
   message: any;
-  isButtonDisabled: boolean = true;
+  isButtonDisabled: boolean = false;
   isDivDisabled: boolean = true;
   appointments: any[] = [];
   private appointmentsSubscription: Subscription | undefined;
