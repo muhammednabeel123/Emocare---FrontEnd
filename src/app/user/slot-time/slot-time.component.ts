@@ -45,7 +45,6 @@ isAnySlotSelected(): boolean {
 
     this.activatedRoute.queryParamMap.subscribe(queryParamMap => {
        this.optionalParam = queryParamMap.get('optionalParam');
-      console.log(  this.optionalParam,"anything"); 
 
     });
      
@@ -61,13 +60,22 @@ isAnySlotSelected(): boolean {
    constructor(private activatedRoute: ActivatedRoute, private userService: UserServiceService, private http: HttpClient, private router: Router) {}
 
 
-  services(id: any) {
-    this.userService.getServicer(id).subscribe((res: any) => {
-      this.servicer = res
-
-      
-    });
+   services(id: any) {
+    this.userService.getServicer(id).subscribe(
+      (res: any) => {
+        this.servicer = res;
+        console.log(this.servicer);
+      },
+      (error: any) => {
+        if (error.status === 500) {
+          this.router.navigate(['/500']);
+        } else {
+          console.log('Other error occurred:', error);
+        }
+      }
+    );
   }
+  
   getSlots() {
     this.http.get<any[]>('http://localhost:5000/slots')
       .subscribe(

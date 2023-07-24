@@ -1,9 +1,12 @@
+
+
+import { UserServiceService } from 'src/app/user/user.service.service';
 import { RegisterResponse } from './interface/registerForm';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 
 
 
@@ -13,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-signup.component.css']
 })
 export class UserSignupComponent implements OnInit {
+ 
   
   ngOnInit(): void {
     const userToken = localStorage.getItem('userToken');
@@ -21,7 +25,7 @@ export class UserSignupComponent implements OnInit {
     }
   }
   
-  constructor(private http:HttpClient,private router:Router ){}
+  constructor(private http:HttpClient,private router:Router,private userService:UserServiceService ){}
   token:any
   userId:any
 
@@ -100,6 +104,31 @@ export class UserSignupComponent implements OnInit {
       this.alertColor = 'blue';
     }
   }
-
- 
+  googleSign() {
+    this.userService.GoogleAuth().then((res) => {
+      const data = {
+        credential: res,
+      };
+  
+      this.userService.googleSignIN(data).subscribe((result: any) => {
+      console.log(result,"sadsadasds");
+      
+        if (result.status) {
+          localStorage.setItem('userToken', result.token);
+          this.router.navigate(['/']);
+        } else {
+          this.showAlert = true;
+          this.alertMsg = result.message;
+          this.alertColor = 'red';
+          localStorage.setItem('userToken', result.token);
+          this.router.navigate(['/']);
+        }
+      }, (error: any) => {
+        // Handle error if needed
+      });
+    }).catch((error: any) => {
+      // Handle error if needed
+    });
+  }
+  
 }

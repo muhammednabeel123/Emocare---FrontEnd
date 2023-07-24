@@ -22,8 +22,19 @@ export class AppointmentsComponent implements OnDestroy {
   currentPage = 1;
   itemsPerPage = 3;
   name:string
+  searchTerm: string = '';
+
 
   constructor(private userService: UserServiceService, private router: Router) {}
+
+  performSearch() {
+    // Filter the appointments based on the search term
+    this.appointments = this.appointments.filter(appointment => 
+      appointment.counselor.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      appointment.service.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  
 
   ngOnInit(): void {
     this.getAppointments();
@@ -35,6 +46,7 @@ export class AppointmentsComponent implements OnDestroy {
         this.message = 'You are not authenticated';
       }
     );
+      this.performSearch();
   }
 
   ngOnDestroy(): void {
@@ -43,29 +55,32 @@ export class AppointmentsComponent implements OnDestroy {
     }
   }
 
-  getAppointments() {
-    this.appointmentsSubscription = this.userService.getAppointment().subscribe(
-      (res: any[]) => {
-        console.log(res, 'these are the appointments');
-        Emitter.authEmitter.emit(true);
+ getAppointments() {
+  this.appointmentsSubscription = this.userService.getAppointment().subscribe(
+    (res: any[]) => {
+      Emitter.authEmitter.emit(true);
 
-        if (res.length > 0) {
-          this.appointments = res;
-          this.updateButtonStatus();
-          this.updateDivStatus()
-          this.scheduleUpdate();
-         
-         
-        } else {
-          this.appointments = [];
-        }
-      },
-      (err) => {
-        Emitter.authEmitter.emit(false);
-        this.message = 'You are not authenticated';
+      if (res.length > 0) {
+        this.appointments = res;
+        this.updateButtonStatus();
+        this.updateDivStatus();
+        this.scheduleUpdate();
+      } else {
+        this.appointments = [];
       }
-    );
-  }
+
+      // If a search term is provided, perform the search on the current appointments list
+      if (this.searchTerm !== '') {
+        this.performSearch();
+      }
+    },
+    (err) => {
+      Emitter.authEmitter.emit(false);
+      this.message = 'You are not authenticated';
+    }
+  );
+}
+
 
   updateButtonStatus() {
     const currentTime = Date.now();

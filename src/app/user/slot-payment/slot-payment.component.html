@@ -103,14 +103,16 @@
             </div>
             
 <!-- HTML -->
-<div *ngIf="!hasOptionalParams" style="display: flex; justify-content: center;">
+<div *ngIf="!hasOptionalParams" style="display: flex; justify-content: center;" class="mt-10">
   <input type="radio" id="stripePaymentOption" name="paymentOption" value="stripe" (click)="selectPaymentOption('stripe')" [checked]="selectedPaymentOption === 'stripe'">
-  <label for="stripePaymentOption">Stripe</label>
+  <label for="stripePaymentOption"  class="font-quicksand ml-2" >Stripe</label>
 
-  <input type="radio" id="walletPaymentOption" name="paymentOption" value="wallet" (click)="selectPaymentOption('wallet')" [checked]="selectedPaymentOption === 'wallet'">
-  <label for="walletPaymentOption">Wallet ({{ wallet }}/-)</label>
+
+  <input type="radio" class="ml-5 " id="walletPaymentOption" name="paymentOption" value="wallet" (click)="selectPaymentOption('wallet')" [checked]="selectedPaymentOption === 'wallet'">
+  <label for="walletPaymentOption" class="font-quicksand ml-2">Wallet ({{ wallet }}/-)</label>
 
 </div>
+
 
 <div class="flex justify-center items-center mt-20">
   <button [disabled]="!selectedPaymentOption && !hasOptionalParams" [style.background-color]="selectedPaymentOption ? '#4e6137' : '#ccc'" (click)="submit()" class="w-72 h-12 rounded-3xl font-quicksand text-white font-extrabold shadow-lg" style="letter-spacing: 1px;">PROCEED</button>
