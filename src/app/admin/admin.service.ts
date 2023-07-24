@@ -93,6 +93,16 @@ export class AdminService {
   getCookie():Observable<any>{ 
     return this.http.get<any>(`${this.url}/cookie`,{withCredentials: true })
   }
+  
+  ListingService(id:String):Observable<any>{
+    return this.http.post<any>(`${this.url}/list-services/${id}`,{withCredentials: true })
+  }
+
+  unListingService(id:String):Observable<any>{
+    console.log("anythxzcxing");
+    
+    return this.http.post<any>(`${this.url}/unlist-services/${id}`,{withCredentials: true })
+  }
 
   Logout():Observable<any>{
     return this.http.post<any>(`${this.url}/logout`,{withCredentials: true })

@@ -23,6 +23,10 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { BookingHistoryComponent } from './booking-history/booking-history.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
  
 
@@ -58,7 +62,15 @@ import { FormsModule } from '@angular/forms';
         UserRoutinMOdule,
         HttpClientModule,
         NgxPaginationModule,
-        FormsModule
+        FormsModule,
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        provideFirebaseApp(() => initializeApp(environment.firebase)),//intialize our firebase config from environment
+        provideFirestore(() => getFirestore()),
+    
+        
+
+
       
     ],
     providers:[

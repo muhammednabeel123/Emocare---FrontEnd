@@ -47,9 +47,7 @@ export class AddServicesComponent implements OnInit{
     const formData = new FormData();
     formData.append('name', this.credentials.name);
     formData.append('description', this.credentials.description);
-    formData.append('image', this.credentials.image);
-    console.log(formData,"ted");
-    
+    formData.append('image', this.credentials.image);  
     this.adminService.addService(formData).subscribe((res)=>{this.router.navigate(['/admin/services'])})
     
    }

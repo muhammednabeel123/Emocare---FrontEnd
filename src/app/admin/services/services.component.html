@@ -26,11 +26,18 @@
                   {{ service.description }}
                 </p>
               </div>
-              <div class="flex items-center justify-end">
-                <a (click)="viewCounselor(service._id)" class="px-3 py-4 text-sm text-gray-100 bg-indigo-600 rounded-tl-2xl rounded-br-2xl hover:bg-indigo-700 hover:text-gray-100">
-                  View all
+              <div class="flex items-center justify-end" *ngIf="!service.Listed ">
+                <a (click)="ListCounselor(service._id)" class="px-3 py-4 text-sm text-gray-100 bg-indigo-600 rounded-tl-2xl rounded-br-2xl hover:bg-indigo-700 hover:text-gray-100">
+                  List
                 </a>
               </div>
+
+              <div class="flex items-center justify-end" *ngIf="service.Listed ">
+                <a (click)="unListCounselor(service._id)" class="px-3 py-4 text-sm text-gray-100 bg-indigo-600 rounded-tl-2xl rounded-br-2xl hover:bg-indigo-700 hover:text-gray-100">
+                Unlist
+                </a>
+              </div>
+              
             
             </div>
           </div>

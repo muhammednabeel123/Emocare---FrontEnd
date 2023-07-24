@@ -1,6 +1,7 @@
 import { AdminService } from './../admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-services',
@@ -27,10 +28,80 @@ services(){ this.adminService.getService().subscribe((res) => {this.services$ = 
       this.router.navigate(['/admin/add-services'])
   }
 
-  viewCounselor(id:any){
-      
-
+  ListCounselor(id: string) {
+    // Show the confirmation dialog
+    Swal.fire({
+      title: 'List Service  ',
+      text: 'Are you sure you want to list the counselor?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, list it!'
+    }).then((result) => {
+      // If the user confirms, call the listing service
+      if (result.isConfirmed) {
+        this.adminService.ListingService(id).subscribe(
+          (res) => {
+            // Show success message if the response is successful
+            Swal.fire({
+              title: 'Success!',
+              text: 'Service listed successfully.',
+              icon: 'success'
+            });
+            console.log(res);
+          },
+          (error) => {
+            console.error(error);
+            // Show error message if the response is unsuccessful
+            Swal.fire({
+              title: 'Error!',
+              text: 'Failed to list the counselor.',
+              icon: 'error'
+            });
+          }
+        );
+      }
+    });
   }
+  
+  unListCounselor(id: string) {
+    // Show the confirmation dialog
+    Swal.fire({
+      title: 'Unlist Service',
+      text: 'Are you sure you want to unlist the Service?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, unlist it!'
+    }).then((result) => {
+      // If the user confirms, call the unlisting service
+      if (result.isConfirmed) {
+        this.adminService.unListingService(id).subscribe(
+          (res) => {
+            // Show success message if the response is successful
+            Swal.fire({
+              title: 'Success!',
+              text: 'Counselor unlisted successfully.',
+              icon: 'success'
+            });
+            console.log(res);
+          },
+          (error) => {
+            console.error(error);
+            // Show error message if the response is unsuccessful
+            Swal.fire({
+              title: 'Error!',
+              text: 'Failed to unlist the Service.',
+              icon: 'error'
+            });
+          }
+        );
+      }
+    });
+  }
+  
   
   get totalPages(): number {
     return Math.ceil(this.services$.length / this.itemsPerPage);

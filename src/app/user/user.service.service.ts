@@ -1,17 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
+import { Auth, GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { getStorage, FirebaseStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Observable, map ,filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './userState/user.interface';
+import { initializeApp, FirebaseApp } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  private readonly url = environment.user_api;
 
-  constructor(private http:HttpClient) { }
+  app: FirebaseApp;
+  auth: Auth;
+  storage: FirebaseStorage;
+
+  private readonly url = environment.user_api;
+  constructor(private http:HttpClient ) {
+  this.app = initializeApp({
+      apiKey: "AIzaSyA27-V-S0kegWQl8p7fBWEli5__A3rDzs4",
+      authDomain: "emocare-75329.firebaseapp.com",
+      projectId: "emocare-75329",
+      storageBucket: "emocare-75329.appspot.com",
+      messagingSenderId: "134401673664",
+      appId: "1:134401673664:web:c537f52d11065ff0c6e025"
+    })
+
+
+   }
 
   login(data:any):Observable<any>{  
     console.log(data);
@@ -94,6 +112,47 @@ export class UserServiceService {
   editProfile(formData:any):Observable<any>{
       return this.http.patch(`${this.url}/edit-profile`,formData)
 
+  }
+
+
+   // Sign in with Google
+   GoogleAuth() {
+    
+    const provider = new GoogleAuthProvider(); // Create an instance of GoogleAuthProvider
+    return this.AuthLogin(provider)
+      .then((res: any) => {
+        return res.accessToken
+      });
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin(provider: any) {
+    console.log("log");
+    const app = initializeApp({
+      apiKey: "AIzaSyA27-V-S0kegWQl8p7fBWEli5__A3rDzs4",
+      authDomain: "emocare-75329.firebaseapp.com",
+      projectId: "emocare-75329",
+      storageBucket: "emocare-75329.appspot.com",
+      messagingSenderId: "134401673664",
+      appId: "1:134401673664:web:c537f52d11065ff0c6e025"
+    })
+    
+    const auth = getAuth(app);
+    auth.languageCode = 'it';
+    
+    return signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+      return result.user
+    })
+    .catch((error) => {
+     console.log(error,"error");
+     
+    });
+  }
+
+  googleSignIN(data:any): Observable<any> {
+    return this.http.post(`${this.url}/googleLog`,data)
   }
   
   

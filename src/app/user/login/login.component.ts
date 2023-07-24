@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
-      // Redirect to the HomeComponent
       this.router.navigate(['/booking-home']);
     }
   }
@@ -74,6 +73,32 @@ export class LoginComponent implements OnInit {
     );
   }
   
+  googleSign() {
+    this.userService.GoogleAuth().then((res) => {
+      const data = {
+        credential: res,
+      };
+  
+      this.userService.googleSignIN(data).subscribe((result: any) => {    
+        if (result.status) {
+          localStorage.setItem('userToken', result.token);
+          this.router.navigate(['/']);
+        } else {
+          this.showAlert = true;
+          this.alertMsg = result.message;
+          this.alertColor = 'red';
+          localStorage.setItem('userToken', result.token);
+          this.router.navigate(['/']);
+        }
+      }, (error: any) => {
+        // Handle error if needed
+      });
+    }).catch((error: any) => {
+      // Handle error if needed
+    });
+  }
+  
+
   
     
 
