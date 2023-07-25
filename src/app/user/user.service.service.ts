@@ -34,7 +34,7 @@ export class UserServiceService {
   login(data:any):Observable<any>{  
     console.log(data);
     
-    return this.http.post(`${this.url}/login`,data);
+    return this.http.post(`${this.url}/login`,data,{withCredentials:true});
   }
   getUser():Observable<any>{
     return this.http.get<User>(`${this.url}/user`)
