@@ -45,9 +45,9 @@ export class BookingHomeComponent implements OnInit {
       );
   }
   
-onPageChange(pageNumber: number): void {
-  this.currentPage = pageNumber;
-}
+// onPageChange(pageNumber: number): void {
+//   this.currentPage = pageNumber;
+// }
 
 BookId(id:any){
   console.log(id);

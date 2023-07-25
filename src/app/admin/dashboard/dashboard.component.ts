@@ -25,6 +25,7 @@ export class DashboardComponent implements OnDestroy {
   
 
   ngOnInit() {
+    
     this.store.dispatch(AppointmentAPI());
     this.appointments$ = this.store.pipe(select(selectAppointment));
 

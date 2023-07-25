@@ -23,11 +23,13 @@ export class CNavComponent {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-  logout():void{
-    this.counselorService.logOut().subscribe(() =>{
-      this.router.navigate(['/counselor'])
-    })
+  logout(): void {
+    this.counselorService.logOut().subscribe(() => {
+      localStorage.removeItem('CToken');
+      this.router.navigate(['/counselor']);
+    });
   }
+  
   
 
 }

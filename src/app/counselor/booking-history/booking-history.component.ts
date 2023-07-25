@@ -15,9 +15,7 @@ export class BookingHistoryComponent {
   constructor(private counselorService: CounselorService, private router: Router) {}
   ngOnInit() {
     this.counselorService.getAppointmentHistory().subscribe((res)=>{
-      this.history = res
-      
-    })
+      this.history = res })
   }
 
   get totalPages(): number {

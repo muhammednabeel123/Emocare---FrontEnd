@@ -20,18 +20,29 @@ export class HomeComponent implements OnDestroy {
   constructor(private counselorService: CounselorService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getAppointments();
-    this.counselorService.getCounselor().subscribe(
-      (res: any) => {
-        this.id= res._id
-        this.isAvailable = res.is_Available
-      },
-      (err) => {
-        this.message = 'You are not authenticated';
-      }
-    );
+  
+    const token = localStorage.getItem('CToken');
+    if (token) {
+      this.getAppointments(token);
+      this.counselorService.getCounselor(token).subscribe(
+        (res: any) => {
+          this.id= res._id
+          this.isAvailable = res.is_Available
+        },
+        (err) => {
+          this.message = 'You are not authenticated';
+        }
+      );
+  
+      this.scheduleUpdate();
+    
+    } else { 
 
-    this.scheduleUpdate();
+
+  console.log('Token not found in localStorage');
+}
+
+   
   }
 
   ngOnDestroy(): void {
@@ -44,10 +55,9 @@ export class HomeComponent implements OnDestroy {
     }
   }
 
-  getAppointments() {
-    this.appointmentsSubscription = this.counselorService.getAppointment().subscribe(
+  getAppointments(token:string) {
+    this.appointmentsSubscription = this.counselorService.getAppointment(token).subscribe(
       (res: any[]) => {
-        console.log(res, 'these are the appointments');
         this.appointments = res;
         this.updateButtonStatus();
       },
@@ -82,7 +92,6 @@ export class HomeComponent implements OnDestroy {
   }
 
   startAppointment(appointmentId: string): void {
-    console.log('Starting appointment:', appointmentId);
     this.router.navigate(['/counselor/consulting', appointmentId]);
   }
 
