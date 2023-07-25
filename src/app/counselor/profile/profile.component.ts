@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  id:string
+  message:string
+  token:string|null
+
   counselor: any = {
     name: '',
     currentPassword: '',
@@ -27,13 +31,26 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
  
+    const token = localStorage.getItem('CToken');
+    this.token = localStorage.getItem('CToken');
+    if (token) {
+      this.counselorService.getCounselor(token).subscribe(
+        (res: any) => {
+          this.id= res._id
+          this.counselor = res
+       
+        },
+        (err) => {
+          this.message = 'You are not authenticated';
+        }
+      );
+
     
-    this.counselorService.getCounselor().subscribe(
-      (res: any) => {
-      this.counselor = res 
-      },
-      
-    );
+    } else { 
+
+
+  console.log('Token not found in localStorage');
+}
    
   }
 
@@ -64,8 +81,10 @@ export class ProfileComponent implements OnInit {
     formData.append('state', this.counselor.state);
     formData.append('experience', this.counselor.experience);
     formData.append('fee', this.counselor.fee);
+    formData.append('email', this.counselor.email);
     formData.append('image',this.counselor.file);
-    this.counselorService.editProfile(formData).subscribe(
+    
+    this.counselorService.editProfile(formData,this.token).subscribe(
       (response) =>{
         Swal.fire({
           icon: 'success',

@@ -18,18 +18,18 @@ export class CounselorService {
     return this.http.post(`${this.url}/login`,data, { withCredentials: true });
   }
 
-  getCounselor():Observable<any>{ 
-    return this.http.get(`${this.url}/getCounselor`,{withCredentials:true})
+  getCounselor(token:string):Observable<any>{ 
+    return this.http.get(`${this.url}/getCounselor/${token}`)
     }
 
   logOut():Observable<any>{
     return this.http.post(`${this.url}/logout`,{},{withCredentials:true})
   }
 
-  getAppointment(): Observable<any> {
+  getAppointment(token:string): Observable<any> {
     const currentTime = new Date();
   
-    return this.http.get(`${this.url}/appointments`, { withCredentials: true }).pipe(
+    return this.http.get(`${this.url}/appointments/${token}`).pipe(
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
@@ -44,7 +44,7 @@ export class CounselorService {
   }
 
   getAppointmentById(id: any): Observable<any> {
-    return this.http.get<any[]>(`${this.url}/appointments`, { withCredentials: true }).pipe(
+    return this.http.get<any[]>(`${this.url}/appointments`).pipe(
       map((appointments: any[]) => appointments.find(appointment => appointment._id === id))
     );
   }
@@ -52,11 +52,14 @@ export class CounselorService {
   updateAppointment(id: any, duration?: any): Observable<any> {
     const url = `${this.url}/appointments/${id}`;
     const payload = { expired: true, completed: true, duration };
-    return this.http.patch(url, payload, { withCredentials: true });
+    return this.http.patch(url, payload,);
   }
 
-  editProfile(formData:any):Observable<any>{
-    return this.http.patch(`${this.url}/edit-profile`,formData,{ withCredentials: true })}
+  editProfile(formData:any,token:string|null):Observable<any>{
+    formData.token = token;
+    console.log(  formData.token,"heyther");
+    
+    return this.http.patch(`${this.url}/edit-profile`,formData)}
 
     isAvailableOn(id: string): Observable<any> {
       const body = { id: id }; 
@@ -70,7 +73,7 @@ export class CounselorService {
   
 
   getAppointmentHistory(): Observable<any> {
-    return this.http.get(`${this.url}/appointments`,{ withCredentials: true })
+    return this.http.get(`${this.url}/appointments`)
       .pipe(
         map((response: any) => {
           const appointments: any[] = Object.values(response);

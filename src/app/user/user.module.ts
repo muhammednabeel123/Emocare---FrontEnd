@@ -15,7 +15,6 @@ import { NavComponent } from '../nav/nav.component';
 import { BookingHomeComponent } from './booking-home/booking-home.component';
 
 import { SlotBookingComponent } from './slot-booking/slot-booking.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { SlotTimeComponent } from './slot-time/slot-time.component';
 import { SlotPaymentComponent } from './slot-payment/slot-payment.component';
 import { UservideocallComponent } from './uservideocall/uservideocall.component';
@@ -61,7 +60,6 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
         ModuleSharedModule,
         UserRoutinMOdule,
         HttpClientModule,
-        NgxPaginationModule,
         FormsModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebase),

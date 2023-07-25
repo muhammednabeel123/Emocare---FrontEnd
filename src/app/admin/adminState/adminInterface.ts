@@ -1,8 +1,8 @@
 export interface Appointment {
     completed: boolean;
     _id: string;
-    user: string;
-    counselor: string;
+    user?: User;
+    counselor: Counselor;
     service: string;
     booked: boolean;
     consultingTime: string;
@@ -12,5 +12,13 @@ export interface Appointment {
     date: string;
     __v: number;
     canceled: boolean;
+  }
+  
+  export interface User {
+    name: string;
+  }
+
+ export interface Counselor {
+    name: string;
   }
   

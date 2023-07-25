@@ -54,7 +54,6 @@ export class LoginComponent {
           }
         },
         (err) => {
-          console.log(err, "logged");
           this.showAlert = true;
           this.alertMsg = err.error.message;
           this.alertColor = 'red';

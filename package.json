@@ -25,7 +25,6 @@
     "firebase": "^10.1.0",
     "flowbite": "^1.6.5",
     "moment": "^2.29.4",
-    "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",

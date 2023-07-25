@@ -9,15 +9,11 @@ import { map, switchMap, tap } from 'rxjs';
 
 export class adminEffect {
      constructor(private actions$:Actions,private adminService:AdminService){}
-
      loadAllAppointments$ = createEffect(() =>
      this.actions$.pipe(
        ofType(AppointmentAPI),
        switchMap(() =>  { 
-        console.log("he there");
-        
         return this.adminService.getAppointment().pipe(
-        tap((data) => console.log(data,"yhis is data")),
         map((data) => FetchAppointmentAPI({ allAppointment:data }))
        )})
      )
