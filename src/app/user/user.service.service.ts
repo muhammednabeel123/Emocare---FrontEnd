@@ -131,13 +131,13 @@ export class UserServiceService {
       return result.user
     })
     .catch((error) => {
-     console.log(error,"error");
+     console.log(error,"errsr");
      
     });
   }
 
   googleSignIN(data:any): Observable<any> {
-    return this.http.post(`${this.url}/googleLog`,data)
+    return this.http.post(`${this.url}/googleLog`,data,{withCredentials:true})
   }
   
   
