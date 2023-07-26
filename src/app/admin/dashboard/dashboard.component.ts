@@ -31,7 +31,7 @@ export class DashboardComponent implements OnDestroy {
 
     this.adminService.getCompletedAppointmentsCount().subscribe(length => {this.completedAppointmentsCount = length });
     
-    // this.adminService.getRevenue().subscribe((res)=>{ this.admin = res})
+    this.adminService.getRevenue().subscribe((res)=>{ this.admin = res})
 
     this.adminService.getCounselor().subscribe(response => { this.length = response.length,console.log(response.length);
      });

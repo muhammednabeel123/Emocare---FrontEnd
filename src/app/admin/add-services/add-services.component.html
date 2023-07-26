@@ -1,7 +1,7 @@
 <app-admin-nav></app-admin-nav>
 
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-300 border rounded-lg dark:border-gray-600">
+    <div class="p-4 border-2 border-gray-300  rounded-lg dark:border-gray-600">
       <form #registerForm="ngForm" (ngSubmit)="submit()" enctype="multipart/form-data">
         <input type="text" [(ngModel)]="credentials.name" name="name" placeholder="Service name">
         <input type="file" (change)="onFileSelected($event)">
