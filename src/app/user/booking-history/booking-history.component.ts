@@ -14,15 +14,16 @@ export class BookingHistoryComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 3;
   history:any
-  constructor(private userService: UserServiceService, private router: Router) {}
-  
-  ngOnInit() {
+  constructor(private userService: UserServiceService, private router: Router) {
     this.userService.getAppointmentHistory().subscribe((res)=>{
+      Emitter.authEmitter.emit(true)
       this.history = res
       
-      Emitter.authEmitter.emit(true)
-      
-    })
+       })
+  }
+  
+  ngOnInit() {
+    
   }
 
 

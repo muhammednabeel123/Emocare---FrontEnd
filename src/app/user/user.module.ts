@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component'
 import { environment } from 'src/environments/environment.development';
 
 import { VerifyComponent } from './verify/verify.component';
-import { NavComponent } from '../nav/nav.component';
+import { NavComponent } from './nav/nav.component';
 import { BookingHomeComponent } from './booking-home/booking-home.component';
 
 import { SlotBookingComponent } from './slot-booking/slot-booking.component';

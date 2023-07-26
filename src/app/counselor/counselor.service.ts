@@ -43,11 +43,16 @@ export class CounselorService {
     );
   }
 
-  getAppointmentById(id: any): Observable<any> {
-    return this.http.get<any[]>(`${this.url}/appointments`).pipe(
-      map((appointments: any[]) => appointments.find(appointment => appointment._id === id))
+  getAppointmentById(id: string | null ,token:string | null): Observable<any> {
+    console.log("Fetching appointments from the server...");
+  
+    return this.http.get<any[]>(`${this.url}/appointments/${token}`).pipe(
+      tap((appointments: any[]) => console.log("Appointments from the server:", appointments)),
+      map((appointments: any[]) => appointments.find(appointment => appointment._id === id)),
+      tap((filteredAppointment: any) => console.log("Filtered Appointment:", filteredAppointment))
     );
   }
+  
 
   updateAppointment(id: any, duration?: any): Observable<any> {
     const url = `${this.url}/appointments/${id}`;
