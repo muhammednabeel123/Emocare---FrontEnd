@@ -12,25 +12,19 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthGuardGuard implements CanActivate {
-  constructor(private adminService:AdminService,private router : Router){}
+  constructor(private router: Router) {}
+
   canActivate(): Observable<boolean> {
-    return this.adminService.getCookie().pipe(
-      map((res) => {
-        console.log(res);
-        if (res.isAuthenticated) {
-          return true; 
-          
-        } else {
-          this.router.navigate(['/admin']); 
-          return false; 
-        }
-      }),
-      catchError(() => {
-     
-        return of(false);
-      })
-    );
+
+    const token = localStorage.getItem('Atoken');
+
+    if (token) {
+  
+      return of(true);
+    } else {
+    
+      this.router.navigate(['/admin']);
+      return of(false);
+    }
   }
-  
-  
 }

@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
   constructor(private adminService :AdminService, private router:Router){}
 
   ngOnInit(): void {
-    this.adminService.getCookie().subscribe((res) => {
-      console.log(res);
-      if (res.isAuthenticated) {
-        this.router.navigate(['/admin/dashboard']); // Redirect to another route if authenticated
-      }
-    });
+    const token = localStorage.getItem('Atoken');
+  
+    if (token) {
+      this.router.navigate(['/admin/dashboard']);
+    } 
   }
+  
   
   showAlert = false;
   alertMsg = 'Please! You are beign logged.';
@@ -34,32 +34,34 @@ export class LoginComponent implements OnInit {
     email: '',
     password:''
   }
-  login(){
+  login() {
     this.showAlert = true;
-    this.alertMsg = 'Please! Your beign logged';
+    this.alertMsg = 'Please! Your are being logged';
     this.alertColor = 'blue';
-
-    this.adminService.login(this.credentials).subscribe((res:any) => {
-      if (res.message) {
-     
-        this.router.navigate(['/admin/dashboard']);
-      } else {
-        console.log("Invalid credentials.");
+  
+    this.adminService.login(this.credentials).subscribe(
+      (res: any) => {
+        if (res.message) {
+          // Store the token in the local storage
+          localStorage.setItem('Atoken', res.token);
+  
+          this.router.navigate(['/admin/dashboard']);
+        } else {
+          console.log("Invalid credentials.");
+          this.showAlert = true;
+          this.alertMsg = 'Invalid credentials';
+          this.alertColor = 'red';
+          this.router.navigate(['/admin']);
+        }
+      },
+      (err) => {
         this.showAlert = true;
-        this.alertMsg = 'Invalid credentials';
+        this.alertMsg = err.message;
         this.alertColor = 'red';
-        this.router.navigate(['/admin']);
       }
-    
-        
-    },(err) => {
-      this.showAlert = true;
-      this.alertMsg = err.message;
-      this.alertColor = 'red'
-    })
-     
-      
-      }
+    );
+  }
+  
       
     
 

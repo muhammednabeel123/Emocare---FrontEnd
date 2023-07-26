@@ -10,11 +10,17 @@ import { Component } from '@angular/core';
 export class AdminNavComponent {
   constructor(private router:Router,private AdminService:AdminService ){}
 
-  logout(){
-
-    
-    this.AdminService.Logout().subscribe((res)=>{ this.router.navigate(['/admin'])}
-    ,(err)=>{console.log(err);
-    })
+  logout() {
+    this.AdminService.Logout().subscribe(
+      (res) => {
+       
+        localStorage.removeItem('Atoken');
+        this.router.navigate(['/admin']);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
+  
 }
