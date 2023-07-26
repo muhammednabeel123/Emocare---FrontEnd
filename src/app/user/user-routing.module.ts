@@ -22,9 +22,10 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'sign-up', component: UserSignupComponent },
     {path:'',component:HomeComponent},
+    { path: 'user/:id/verify/:token', component: VerifyComponent },
     {
       path: '', canActivate: [AuthUserGuard],children: [ 
-        { path: 'user/:id/verify/:token', component: VerifyComponent },
+   
         { path: 'booking-home', component: BookingHomeComponent },
         { path: 'slot/:id', component: SlotBookingComponent },
         { path: 'slot/:id/time', component: SlotTimeComponent },
