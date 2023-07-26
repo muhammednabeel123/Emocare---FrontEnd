@@ -10,8 +10,8 @@ export const environment = {
     },
       admin:"Nabeel@2000",
       a_password:'1234',
-      admin_api:`http://localhost:5000/admin`,
-      user_api:'http://localhost:5000',
-      counselor_api:'http://localhost:5000/counselor',
+      admin_api:`https://muhammed-nabeel.onrender.com`,
+      user_api:'https://muhammed-nabeel.onrender.com',
+      counselor_api:'https://muhammed-nabeel.onrender.com',
       stripeAPIKey:'pk_test_51NQlBjSCgCDRqUvkwYzeUvjbi5qcqHJSXnJGhJnR0Vpd6QtfuzC1zsAuOaEUMceoCyRIZu2cpHYZBoeVwaDQMv0t00x26VtrVt'
 };
