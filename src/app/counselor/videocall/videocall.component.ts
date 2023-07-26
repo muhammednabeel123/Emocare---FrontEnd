@@ -26,18 +26,23 @@ export class VideocallComponent implements OnInit {
   param!: string;
   details: any
   appointmentid: string
+  token:string | null
 
 
   constructor(private _router: Router, private counselorService: CounselorService, private route: ActivatedRoute) {
 
     const appointmentId = this.route.snapshot.paramMap.get('id');
-    this.counselorService.getAppointmentById(appointmentId).subscribe((res: any) => { this.details = res })
+    this.token = localStorage.getItem('CToken');
+    
+    this.counselorService.getAppointmentById(appointmentId,this.token).subscribe((res: any) => { this.details = res })
+    console.log(this.details,"asdasdsa2132");
+    
   }
 
 
   ngOnInit(): void {
     const appointmentId = this.route.snapshot.paramMap.get('id');
-    this.counselorService.getAppointmentById(appointmentId).subscribe(
+    this.counselorService.getAppointmentById(appointmentId,this.token).subscribe(
       (res: any) => {
         this.appointmentid = res._id
         this.room = `vpaas-magic-cookie-678ef589ec4b4b688ed39e9fb5f355d5/${res._id}`;

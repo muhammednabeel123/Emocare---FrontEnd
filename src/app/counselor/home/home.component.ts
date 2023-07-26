@@ -92,7 +92,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   startAppointment(appointmentId: string): void {
-    this.router.navigate(['/counselor/consulting', appointmentId]);
+    this.router.navigate(['/counselor/consulting',appointmentId]);
   }
 
   handleOffClick(): void {
@@ -139,22 +139,22 @@ export class HomeComponent implements OnDestroy {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        // User clicked "Yes," proceed with setting availability on
+      
         this.isAvailable = false;
         this.counselorService.isAvailableOn(this.id).subscribe(
           (res) => {
             console.log(res);
-            // Optionally, show a success message after the request is completed
+       
             Swal.fire('Success', 'Availability set to on', 'success');
           },
           (error) => {
-            // Handle any errors from the API request
+        
             console.error(error);
-            // Optionally, show an error message
+         
             Swal.fire('Error', 'Failed to set availability on', 'error');
           }
         );
-        // Optionally, refresh the data after the request is completed
+     
         this.ngOnInit();
       }
     });

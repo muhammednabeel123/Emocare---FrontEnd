@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(invokeUserApi())
     this.userService.getUser().subscribe((res)=>{  Emitter.authEmitter.emit(true), this.user = res});
- `   console.log(this.users$,"hey rte");`
+
   }
   
 

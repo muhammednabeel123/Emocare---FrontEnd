@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Emitter } from '../user/emitters/emitter';
+import { Emitter } from '../emitters/emitter';
 import { ActivatedRoute } from '@angular/router'; 
 import { Router, NavigationEnd } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -26,12 +26,10 @@ export class NavComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 ngOnInit(): void {
-  Emitter.authEmitter.subscribe((auth:boolean)=>{
-    
-    this.authenticated = auth
-    console.log(this.authenticated);
-    
-  })
+  const token = localStorage.getItem('userToken');
+  this.authenticated = !!token;
+
+  console.log(this.authenticated);
   this.router.events.subscribe((event) => {
     if (event instanceof NavigationEnd) {
       const url: string = event.url;
