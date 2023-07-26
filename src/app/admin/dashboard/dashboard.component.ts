@@ -25,15 +25,16 @@ export class DashboardComponent implements OnDestroy {
   
 
   ngOnInit() {
-    
+
     this.store.dispatch(AppointmentAPI());
     this.appointments$ = this.store.pipe(select(selectAppointment));
 
     this.adminService.getCompletedAppointmentsCount().subscribe(length => {this.completedAppointmentsCount = length });
+    
+    // this.adminService.getRevenue().subscribe((res)=>{ this.admin = res})
 
-    this.adminService.getRevenue().subscribe((res)=>{ this.admin = res})
-
-    this.adminService.getCounselor().subscribe(response => { this.length = response.length});
+    this.adminService.getCounselor().subscribe(response => { this.length = response.length,console.log(response.length);
+     });
 
     this.adminService.getUsers().subscribe(response => { this.user = response.length});
 
