@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -36,17 +37,14 @@ export class VerifyComponent implements OnInit {
     
   }
   verifyEmail(): void {
-    this.http.get(`http://localhost:5000/user/${this.userId}/verify/${this.token}`)
+    const apiUrl = environment.user_api;
+    this.http.get(`${apiUrl}/user/${this.userId}/verify/${this.token}`)
       .subscribe(
         (res) => {
-         
-          
           this.router.navigate(['/login']);
-     
         },
-        (err:any) => {
+        (err: any) => {
           console.log(err);
-          
         }
       );
   }
