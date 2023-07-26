@@ -57,7 +57,7 @@ export class CounselorService {
 
   editProfile(formData:any,token:string|null):Observable<any>{
     formData.token = token;
-    console.log(  formData.token,"heyther");
+
     
     return this.http.patch(`${this.url}/edit-profile`,formData)}
 
