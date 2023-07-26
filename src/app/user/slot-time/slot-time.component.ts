@@ -3,6 +3,7 @@ import { UserServiceService } from '../user.service.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Emitter } from '../emitters/emitter';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 import * as moment from 'moment';
 
@@ -75,17 +76,16 @@ isAnySlotSelected(): boolean {
       }
     );
   }
-  
+
   getSlots() {
-    this.http.get<any[]>('http://localhost:5000/slots')
+    this.http.get<any[]>(`${environment.user_api}/slots`)
       .subscribe(
         (response) => {
           console.log(response, "this is response");
   
           this.slots = response; 
           
-        
-          
+  
           const amSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
             const currentTime = moment();
@@ -115,6 +115,7 @@ isAnySlotSelected(): boolean {
         }
       );
   }
+  
   
   
   

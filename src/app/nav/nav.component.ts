@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Emitter } from '../user/emitters/emitter';
 import { ActivatedRoute } from '@angular/router'; 
 import { Router, NavigationEnd } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -45,7 +46,7 @@ ngOnInit(): void {
 }
 
 logout(): void {
-  this.http.post('http://localhost:5000/logout', {}, { withCredentials: true }).subscribe(
+  this.http.post(`${environment.user_api}/logout`, {}, { withCredentials: true }).subscribe(
     () => {
       localStorage.removeItem('userToken');
       this.authenticated = false;
@@ -59,6 +60,7 @@ logout(): void {
     }
   );
 }
+
 
 
   

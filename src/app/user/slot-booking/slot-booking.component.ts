@@ -59,14 +59,4 @@ servicer:any
   }
 
 
-
-//   bookSlot(slot: Slot) {
-//     this.http.post(`http://localhost:5000/book/${this.slots.indexOf(slot)}`, {})
-//       .subscribe(response => {
-//         console.log(response);
-//         this.getSlots();
-//       }, error => {
-//         console.error("thisssa",error);
-//       });
-//   }
  }

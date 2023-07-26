@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Toast } from '../../sweet alert/sweetalert'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -40,9 +41,8 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.http.get('http://localhost:5000/counselor/services').subscribe((res: any) => {
+    this.http.get(`${environment.user_api}/counselor/services`).subscribe((res: any) => {
       this.services = Object.values(res).map((service: any) => service);
-
     });
     
     
@@ -110,23 +110,23 @@ export class SignupComponent implements OnInit {
     formData.append('certificate', this.credentials.certificate);
 
 
-    console.log(this.credentials,"this is form data");
-    this.http.post('http://localhost:5000/counselor/signup', formData)
-      .subscribe(
-        (response) => {
-          console.log('Success:', this.credentials);
-          Toast.fire({
-            icon: 'success',
-            title: 'Request sent successfully!'
-          });
-        },
-        (error) => {
-          console.error('Failed to sent the request');
-          Toast.fire({
-            icon: 'error',
-            title:'Failed to sent the request'
-          });
-        }
+ 
+    this.http.post(`${environment.user_api}/counselor/signup`, formData)
+    .subscribe(
+      (response) => {
+        console.log('Success:', this.credentials);
+        Toast.fire({
+          icon: 'success',
+          title: 'Request sent successfully!'
+        });
+      },
+      (error) => {
+        console.error('Failed to send the request');
+        Toast.fire({
+          icon: 'error',
+          title: 'Failed to send the request'
+        });
+      }
     );
     
   }

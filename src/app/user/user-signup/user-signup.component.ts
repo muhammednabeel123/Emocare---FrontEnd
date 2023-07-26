@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 
@@ -59,32 +60,19 @@ export class UserSignupComponent implements OnInit {
     terms: this.terms
   });
 
-  // register(): void {
-  //   this.showAlert = true;
-  //   this.alertMsg = 'Please! Your Account is being created.';
-  //   this.alertColor = 'blue';
-  //   this.http.post("http://localhost:5000/register",this.registerForm.value,{withCredentials:true}).subscribe((res)=>
-  //     console.log(res),(err)=>{ 
-  //       this.showAlert = true;
-  //       this.alertMsg = err.error.message ;
-  //       this.alertColor = 'red';
-  //      })
-    
-
-  // }
+  
   register(): void {
     this.showAlert = true;
     this.alertMsg = 'Please! Verify Your mail.';
     this.alertColor = 'blue';
-    this.http.post<RegisterResponse>("http://localhost:5000/register", this.registerForm.value, { withCredentials: true })
+    this.http.post<RegisterResponse>(`${environment.user_api}/register`, this.registerForm.value, { withCredentials: true })
       .subscribe((res: RegisterResponse) => {
-        console.log(res, "this is response");
   
         this.token = res.token;
-        console.log(this.token, "this is token");
+  
   
         this.userId = res.userId;
-        console.log(this.userId, "this is id");
+  
   
         // Registration successful, do not call verifyEmail() here
       }, (err) => {
@@ -93,6 +81,7 @@ export class UserSignupComponent implements OnInit {
         this.alertColor = 'red';
       });
   }
+  
   
   
   
@@ -111,7 +100,7 @@ export class UserSignupComponent implements OnInit {
       };
   
       this.userService.googleSignIN(data).subscribe((result: any) => {
-      console.log(result,"sadsadasds");
+    
       
         if (result.status) {
           localStorage.setItem('userToken', result.token);
