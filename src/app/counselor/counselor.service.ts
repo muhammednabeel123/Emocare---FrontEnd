@@ -34,7 +34,7 @@ export class CounselorService {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
           if (!appointment.expired && !appointment.completed && !appointment.canceled ) {
-            return consultTime > currentTime;
+            return consultTime ;
           }
           return false;
     
