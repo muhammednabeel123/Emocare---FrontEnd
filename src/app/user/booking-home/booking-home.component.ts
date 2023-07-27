@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class BookingHomeComponent implements OnInit {
   counselors: any[] = [];
   Docters = '64c0fe419299d39550938fcb'; 
-  Fitness = '64983199fe52376aa4502fa0'
-  therapist = '649833882629f63a73adab60'
+  Fitness = '64c2cb4faacd600d86b411cf'
+  therapist = '64c2cbb5aacd600d86b411d2'
   currentPage = 1;
   itemsPerPage = 10;
   totalItems = 2; 
