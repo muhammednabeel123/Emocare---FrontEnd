@@ -153,12 +153,12 @@
               >
                
                 <div class="pl-3">
-                  <div class="text-base font-semibold">{{ appointment?.user.name }}</div>
-                  <div class="font-normal text-gray-500">{{ appointment?.user.email }}</div>
+                  <div class="text-base font-semibold">{{ appointment?.user?.name }}</div>
+                  <div class="font-normal text-gray-500">{{ appointment?.user?.email }}</div>
                 </div>
               </th>
               <td class="px-6 py-4">
-                {{ appointment?.counselor.name }}
+                {{ appointment?.counselor?.name }}
               </td>
               <td class="px-6 py-4">
                 <ng-container *ngIf="appointment.canceled === true; else completedBlock">
@@ -174,7 +174,7 @@
                 </ng-template>
               </td>
               <td class="px-6 py-4">
-                {{ appointment?.service.name }}
+                {{ appointment?.service?.name }}
               </td>
               <td class="px-6 py-4">
            
