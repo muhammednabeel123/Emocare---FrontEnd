@@ -29,12 +29,12 @@ export class CounselorService {
   getAppointment(token:string): Observable<any> {
     const currentTime = new Date();
   
-    return this.http.get(`${this.url}/appointments/${token}`).pipe(
+    return this.http.get(`${this.url}/appointments/${token}`,{withCredentials:true}).pipe(
       map((res: any) => {
         return res.filter((appointment: any) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
           if (!appointment.expired && !appointment.completed && !appointment.canceled ) {
-            return consultTime ;
+            return consultTime > currentTime;
           }
           return false;
     
