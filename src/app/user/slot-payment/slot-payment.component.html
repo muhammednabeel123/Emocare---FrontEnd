@@ -38,7 +38,7 @@
                 
               <div class="p-4 mt-4">
                 <div class="container">
-                  <div class="flex flex-col md:grid grid-cols-12 text-gray-50 mt-16 mr-7 hidden-confirm-section hidden sm:flex">
+                  <div class=" flex-col md:grid grid-cols-12 text-gray-50 mt-16 mr-7 hidden-confirm-section hidden sm:flex">
                     <div class="flex md:contents">
                       <div class="col-start-2 col-end-4 mr-10 md:mx-auto relative">
                         <div class="h-full w-6 flex items-center justify-center">
@@ -104,7 +104,9 @@
                     <h1 class=" font-quicksand  text-lg font-extrabold pt-5 ml-28"></h1>
 
                     <h1 class="font-quicksand text-lg font-bold text-gray-500 ml-32"> {{ time.startTime }}</h1>
-                    <h1 class="font-quicksand text-sm font-bold text-gray-500 pt-2 ml-32">amount:{{ servicer.fee }}/-</h1>
+                    <h1 *ngIf="servicer?.fee" class="font-quicksand text-sm font-bold text-gray-500 pt-2 ml-32">
+                      amount: {{ servicer.fee }}/-
+                    </h1>
                 
 
 
