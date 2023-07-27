@@ -34,7 +34,6 @@ servicer:any
       },
       (error: any) => {
         if (error.status === 500) {
-          // Handle the 500 error and navigate to another page
           this.router.navigate(['/500']);
         } else {
           console.log('Other error occurred:', error);
