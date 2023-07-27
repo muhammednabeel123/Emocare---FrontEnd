@@ -28,8 +28,13 @@ export class BookingHistoryComponent implements OnInit {
 
 
   get totalPages(): number {
-    return Math.ceil(this.history.length / this.itemsPerPage);
+  
+    if (this.history) {
+      return Math.ceil(this.history.length / this.itemsPerPage);
+    }
+    return 0;
   }
+
 
   previousPage() {
     if (this.currentPage > 1) {
