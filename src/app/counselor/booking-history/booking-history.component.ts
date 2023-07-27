@@ -30,7 +30,11 @@ export class BookingHistoryComponent {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.history.length / this.itemsPerPage);
+  
+    if (this.history) {
+      return Math.ceil(this.history.length / this.itemsPerPage);
+    }
+    return 0;
   }
 
   previousPage() {
