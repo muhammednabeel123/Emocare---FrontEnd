@@ -14,9 +14,9 @@ export class BookingHistoryComponent {
   history:any
   constructor(private counselorService: CounselorService, private router: Router) {}
   ngOnInit() {
-    const userToken = localStorage.getItem('CToken');
-    if (userToken) {
-      this.counselorService.getAppointmentHistory().subscribe(
+    const Token = localStorage.getItem('CToken');
+    if (Token) {
+      this.counselorService.getAppointmentHistory(Token).subscribe(
         (res) => {
           this.history = res;
         },

@@ -77,8 +77,8 @@ export class CounselorService {
        }
   
 
-  getAppointmentHistory(): Observable<any> {
-    return this.http.get(`${this.url}/appointments`)
+  getAppointmentHistory(Token:string): Observable<any> {
+    return this.http.get(`${this.url}/appointments/${Token}`)
       .pipe(
         map((response: any) => {
           const appointments: any[] = Object.values(response);
