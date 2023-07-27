@@ -35,7 +35,6 @@ export class VideocallComponent implements OnInit {
     this.token = localStorage.getItem('CToken');
     
     this.counselorService.getAppointmentById(appointmentId,this.token).subscribe((res: any) => { this.details = res })
-    console.log(this.details,"asdasdsa2132");
     
   }
 
@@ -63,7 +62,7 @@ export class VideocallComponent implements OnInit {
   private createRoom(): void {
     this.options = {
       roomName: this.room,
-      width: 1500,
+      width: 1000,
       height: 700,
       configOverWrite: {
         proJoinPage: false
