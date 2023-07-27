@@ -14,8 +14,19 @@ export class BookingHistoryComponent {
   history:any
   constructor(private counselorService: CounselorService, private router: Router) {}
   ngOnInit() {
-    this.counselorService.getAppointmentHistory().subscribe((res)=>{
-      this.history = res })
+    const userToken = localStorage.getItem('CToken');
+    if (userToken) {
+      this.counselorService.getAppointmentHistory().subscribe(
+        (res) => {
+          this.history = res;
+        },
+        (error) => {
+          console.error('Error fetching appointment history:', error);
+        }
+      );
+    } else {
+      console.error('User token not found in local storage.');
+    }
   }
 
   get totalPages(): number {
