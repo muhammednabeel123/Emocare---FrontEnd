@@ -62,7 +62,7 @@ export class VideocallComponent implements OnInit {
   private createRoom(): void {
     this.options = {
       roomName: this.room,
-      width: 1250,
+      width: 1300,
       height: 700,
       configOverWrite: {
         proJoinPage: false

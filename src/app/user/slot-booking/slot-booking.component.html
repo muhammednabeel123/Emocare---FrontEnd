@@ -32,9 +32,21 @@
                   <img class="object-cover w-full rounded-t-lg h-52 md:h-auto md:w-40 md:rounded-none md:rounded-l-lg" src="https://cdn-icons-png.flaticon.com/512/8815/8815112.png" alt="https://cdn-icons-png.flaticon.com/512/8815/8815112.png">
                 </div>
                 <div class="h-full w-4/6 p-4">
-                  <!-- <h2 class="font-quicksand font-bold text-xl text-gray-500" style="overflow-wrap: break-word;">{{ servicer.name }}</h2> -->
-                  <p class="text-black font-quicksand text-sm pt-2" style="overflow-wrap: break-word;">{{ servicer.experience }}+ years of experience</p>
-                  <p class="text-green-500 font-quicksand text-sm" style="overflow-wrap: break-word;">{{ servicer.fee }}/-</p>
+<!-- Check if servicer.name exists before displaying it -->
+<h2 *ngIf="servicer?.name" class="font-quicksand font-bold text-xl text-gray-500" style="overflow-wrap: break-word;">
+  {{ servicer.name }}
+</h2>
+
+<!-- Check if servicer.experience exists before displaying it -->
+<p *ngIf="servicer?.experience" class="text-black font-quicksand text-sm pt-2" style="overflow-wrap: break-word;">
+  {{ servicer.experience }}+ years of experience
+</p>
+
+<!-- Check if servicer.fee exists before displaying it -->
+<p *ngIf="servicer?.fee" class="text-green-500 font-quicksand text-sm" style="overflow-wrap: break-word;">
+  {{ servicer.fee }}/-
+</p>
+
                 </div>
               </div>
               
