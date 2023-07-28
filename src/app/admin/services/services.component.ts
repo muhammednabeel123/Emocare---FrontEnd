@@ -49,7 +49,7 @@ services(){ this.adminService.getService().subscribe((res) => {this.services$ = 
               text: 'Service listed successfully.',
               icon: 'success'
             });
-            console.log(res);
+            this.ngOnInit()
           },
           (error) => {
             console.error(error);
@@ -86,7 +86,7 @@ services(){ this.adminService.getService().subscribe((res) => {this.services$ = 
               text: 'Counselor unlisted successfully.',
               icon: 'success'
             });
-            console.log(res);
+       this.ngOnInit()
           },
           (error) => {
             console.error(error);
