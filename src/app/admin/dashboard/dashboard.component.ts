@@ -3,7 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Appointment } from '../adminState/adminInterface';
 import { AppointmentAPI } from '../adminState/admin.action';
-import { selectAppointment } from '../adminState/admin.selector';
+import { selectAllAppointment, selectAppointment } from '../adminState/admin.selector';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnDestroy {
   ngOnInit() {
 
     this.store.dispatch(AppointmentAPI());
-    this.appointments$ = this.store.pipe(select(selectAppointment));
+    this.appointments$ = this.store.pipe(select(selectAllAppointment));
 
     
 
