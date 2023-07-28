@@ -25,8 +25,9 @@ export class CNavComponent {
   }
   logout(): void {
     this.counselorService.logOut().subscribe(() => {
-      localStorage.removeItem('CToken');
       this.router.navigate(['/counselor']);
+      localStorage.removeItem('CToken');
+    
     });
   }
   
