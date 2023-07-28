@@ -28,7 +28,7 @@ export class DashboardComponent implements OnDestroy {
 
     this.store.dispatch(AppointmentAPI());
     this.appointments$ = this.store.pipe(select(selectAppointment));
-    console.log(this.appointments$,"this is appointments");
+
     
 
     this.adminService.getCompletedAppointmentsCount().subscribe(length => {this.completedAppointmentsCount = length });

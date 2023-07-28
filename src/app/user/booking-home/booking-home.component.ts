@@ -54,6 +54,9 @@ BookId(id:any){
   this.router.navigate(['/slot',id]);
   
 }
+handleButtonClick(): void {
+this.router.navigate(['/'])
+}
 
 
 

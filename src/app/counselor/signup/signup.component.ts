@@ -119,6 +119,7 @@ export class SignupComponent implements OnInit {
           icon: 'success',
           title: 'Request sent successfully!'
         });
+        this.router.navigate(['/counselor'])
       },
       (error) => {
         console.error('Failed to send the request');
