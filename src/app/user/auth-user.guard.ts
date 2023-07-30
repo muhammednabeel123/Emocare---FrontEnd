@@ -11,7 +11,6 @@ export class AuthUserGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const userToken = localStorage.getItem('userToken');
-    console.log(userToken);
     const url = state.url;
 
     if (userToken) {

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../user-signup/interface/message';
+import { Subscription } from 'rxjs';
+
 import { UserServiceService } from '../user.service.service';
 
 
@@ -52,13 +54,11 @@ export class LoginComponent implements OnInit {
     this.alertColor = 'blue';
   
     this.userService.login(this.LoginForm.value).subscribe(
-      (res: any) => {
-        console.log(res,"anything");
-        
+      (res: any) => {    
       
-        if (res.message === 'Forbidden') {
+        if (res.message === 'Forbidden' || res.message === 'Password is incorrect') {
           this.showAlert = true;
-          this.alertMsg = 'You are temporarily blocked';
+          this.alertMsg = res.message ;
           this.alertColor = 'red';
         } else {
           localStorage.setItem('userToken',res.token)
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         this.showAlert = true;
-        this.alertMsg = 'something went wrong';
+        this.alertMsg = err.error.message;
         this.alertColor = 'red';
       }
     );

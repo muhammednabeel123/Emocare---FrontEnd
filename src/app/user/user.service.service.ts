@@ -5,7 +5,7 @@ import { Auth, GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/aut
 import { getStorage, FirebaseStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Observable, map ,filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from './userState/user.interface';
+import { User,UserLogin,CounselorView,getAllService } from './userState/user.interface';
 import { initializeApp, FirebaseApp } from 'firebase/app';
 
 @Injectable({
@@ -24,27 +24,24 @@ export class UserServiceService {
 
    }
 
-  login(data:any):Observable<any>{  
-    console.log(data);
-    
+  login(data:UserLogin):Observable<UserLogin>{   
     return this.http.post(`${this.url}/login`,data,{withCredentials:true});
   }
   getUser():Observable<any>{
     return this.http.get<User>(`${this.url}/user`,{withCredentials:true})
   }
 
-  getServiceById(id:any):Observable<any>{
-    return this.http.get(`${this.url}/services/${id}`,{withCredentials:true})
+  getServiceById(id:any):Observable<CounselorView[]>{
+    return this.http.get<CounselorView[]>(`${this.url}/services/${id}`,{withCredentials:true})
   }
 
-  getServicer(id: any): Observable<any> {
+  getServicer(id:any): Observable<any> {
     return this.http.get(`${this.url}/servicer/${id}`, {
-      withCredentials: true,
-    }).pipe(
-      filter((servicer: any) => {
-        return !servicer.is_Blocked;
-      })
-    );
+      withCredentials: true,}).pipe(filter((servicer: any) => {
+        return !servicer.is_Blocked}) );
+  }
+  getAllServices(): Observable<getAllService[]> {
+    return this.http.get<getAllService[]>(`${this.url}/allservices`, {withCredentials: true,});
   }
 
   getDate():Observable<any>{

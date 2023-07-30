@@ -27,7 +27,7 @@ export class SlotTimeComponent implements OnInit {
 servicer:any
 selectedTime:any
 slots: any[] = [];
-date:any
+date:Date
 amSlots: any[] = [];
 pmSlots: any[] = [];
 showAM: boolean = true;
@@ -98,6 +98,7 @@ isAnySlotSelected(): boolean {
   
           const pmSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
+            
             const currentTime = moment();
             if (startTime.isBefore(currentTime)) {
               slot.expired = true; 
