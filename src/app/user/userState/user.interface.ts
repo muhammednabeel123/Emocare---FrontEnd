@@ -27,6 +27,7 @@ export interface CounselorView {
   fee?: number;
   is_Blocked: boolean;
   is_Available: boolean;
+  is_verified:boolean
  
 }
 
@@ -35,3 +36,20 @@ export interface getAllService{
   name?:string;
   Listed?:true
 }
+
+export interface getServicer{
+  _id?:string
+  name:string
+  Image?:string
+  is_Available:true
+  is_Blocked:false
+  is_verified:true
+  experience:number
+  fee:number
+}
+
+export interface MyApiResponse {
+  date: string | Date;
+}
+
+

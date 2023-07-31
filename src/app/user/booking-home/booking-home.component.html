@@ -51,15 +51,15 @@
   
   <div class="h-screen w-screen">
     <div class="h-auto md:h-1/2 flex justify-center">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-        <div *ngFor="let counselor of counselors" class="bg-white border border-gray-300 rounded-lg shadow hover:bg-gray-100 dark:border-gray-300 dark:bg-white dark:hover:bg-slate-100">
-          <div class="flex flex-row">
-            <img class="object-cover w-20 h-20 rounded-t-lg md:h-auto md:w-40 md:rounded-none md:rounded-l-lg mt-4 ml-4" src="https://cdn-icons-png.flaticon.com/512/8815/8815112.png" alt="https://cdn-icons-png.flaticon.com/512/8815/8815112.png">
+      <div class="grid grid-cols-1 h-72 md:grid-cols-2 gap-8 p-4">
+        <div *ngFor="let counselor of counselors" class="bg-white border border-gray-300 rounded-lg shadow hover:bg-gray-100 dark:border-gray-300 dark:bg-white dark:hover:bg-slate-100 ">
+          <div class="flex flex-row ml-3">
+            <img class="object-cover w-14 h-14 rounded-t-lg md:h-auto md:w-40 md:rounded-none md:rounded-l-lg mt-4 ml-4" src="https://cdn-icons-png.flaticon.com/512/8815/8815112.png" alt="https://cdn-icons-png.flaticon.com/512/8815/8815112.png">
             <div class="flex flex-col justify-between p-4 leading-normal">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-green-600 font-quicksand text-center" style="color:rgb(78, 97, 55);">{{ counselor.name }}</h5>
-              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ counselor.experience }}+ years of experience</p>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">{{ counselor.experience }}+ years of experience</p>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">{{counselor.state}}, {{ counselor.country }}</p>
-              <div class="text-white w-full md:w-80 h-8 rounded-lg align text-center mb-6" style="background-color: rgb(78, 97, 55);">
+              <div class="text-white w-full md:w-80 h-8 rounded-lg align text-center mt-3" style="background-color: rgb(78, 97, 55);">
                 <button class="dark:text-white font-quicksand p-1" (click)="BookId(counselor._id)">BOOK NOW</button>
               </div>
             </div>
@@ -68,6 +68,7 @@
       </div>
     </div>
   </div>
+  
   
   
   

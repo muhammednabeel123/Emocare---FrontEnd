@@ -173,7 +173,7 @@ services(id: any) {
     this.userService.getUser().subscribe((res:any)=>{
       this.userid = res._id
       this.wallet = res.wallet
-      console.log(res);
+ 
       
       Emitter.authEmitter.emit(true) 
     },(err)=>{

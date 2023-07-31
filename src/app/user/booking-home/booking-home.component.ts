@@ -15,9 +15,6 @@ import { CounselorView } from '../userState/user.interface';
 export class BookingHomeComponent implements OnInit, OnDestroy {
   counselors: CounselorView[] = [];
   services : getAllService[] = []
-  Docters = '64c0fe419299d39550938fcb';
-  Fitness = '64c2cb4faacd600d86b411cf';
-  therapist = '64c2cbb5aacd600d86b411d2';
   currentPage = 1;
   itemsPerPage = 10;
   totalItems = 2;
@@ -49,9 +46,9 @@ export class BookingHomeComponent implements OnInit, OnDestroy {
     this.userService.getServiceById(id).subscribe(
       (response: CounselorView | CounselorView[]) => {
         if (Array.isArray(response)) {
-          this.counselors = response.filter((counselor: CounselorView) => !counselor.is_Blocked && counselor.is_Available);
+          this.counselors = response.filter((counselor: CounselorView) => !counselor.is_Blocked && counselor.is_Available && counselor.is_verified);
         } else {
-          this.counselors = [response].filter((counselor: CounselorView) => !counselor.is_Blocked && counselor.is_Available);
+          this.counselors = [response].filter((counselor: CounselorView) => !counselor.is_Blocked && counselor.is_Available &&  counselor.is_verified );
         }
       },
       (error) => {
