@@ -156,7 +156,7 @@ services(id: any) {
   this.userService.getServicer(id).subscribe(
     (res: any) => {
       this.servicer = res;
-      console.log(this.servicer);
+   
     },
     (error: any) => {
       if (error.status === 500) {
@@ -173,7 +173,7 @@ services(id: any) {
     this.userService.getUser().subscribe((res:any)=>{
       this.userid = res._id
       this.wallet = res.wallet
-      console.log(res);
+ 
       
       Emitter.authEmitter.emit(true) 
     },(err)=>{

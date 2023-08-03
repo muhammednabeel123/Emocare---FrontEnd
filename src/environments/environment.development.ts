@@ -11,8 +11,8 @@
           admin:"Nabeel@2000",
           a_password:'1234',
           admin_api:`https://emocare.online/admin`,
-      user_api:'https://emocare.online',
-      counselor_api:'https://emocare.online/counselor',
+          user_api:'https://emocare.online',
+          counselor_api:'https://emocare.online/counselor',
           stripeAPIKey:'pk_test_51NQlBjSCgCDRqUvkwYzeUvjbi5qcqHJSXnJGhJnR0Vpd6QtfuzC1zsAuOaEUMceoCyRIZu2cpHYZBoeVwaDQMv0t00x26VtrVt'
     };
     

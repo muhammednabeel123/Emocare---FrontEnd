@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 import * as moment from 'moment';
+import { MyApiResponse, getServicer } from '../userState/user.interface';
 
 
 
@@ -23,18 +24,24 @@ interface Slot {
   styleUrls: ['./slot-time.component.css']
 })
 export class SlotTimeComponent implements OnInit {
-  message:any
-servicer:any
+
+message:string
+servicer:getServicer
 selectedTime:any
 slots: any[] = [];
-date:any
+date:Date
 amSlots: any[] = [];
 pmSlots: any[] = [];
 showAM: boolean = true;
 showPM: boolean = false;
-id:any
+id:string | null
 slotIndex:any
 optionalParam:String | null
+
+constructor(private activatedRoute: ActivatedRoute, private userService: UserServiceService, private http: HttpClient, private router: Router) {}
+
+
+
 isAnySlotSelected(): boolean {
   return (
     (this.amSlots && this. amSlots.some(slot => slot.selected)) ||
@@ -58,16 +65,16 @@ isAnySlotSelected(): boolean {
     this.getDate()
   
    }
-   constructor(private activatedRoute: ActivatedRoute, private userService: UserServiceService, private http: HttpClient, private router: Router) {}
+  
 
-
-   services(id: any) {
-    this.userService.getServicer(id).subscribe(
-      (res: any) => {
+   services(id: string| null) {
+    const servicerId: string | null = id !== undefined ? id : null;
+    this.userService.getServicer(servicerId).subscribe(
+      (res: getServicer) => {
         this.servicer = res;
-        console.log(this.servicer);
+       
       },
-      (error: any) => {
+      (error) => {
         if (error.status === 500) {
           this.router.navigate(['/500']);
         } else {
@@ -81,7 +88,7 @@ isAnySlotSelected(): boolean {
     this.http.get<any[]>(`${environment.user_api}/slots`)
       .subscribe(
         (response) => {
-          console.log(response, "this is response");
+        
   
           this.slots = response; 
           
@@ -98,6 +105,7 @@ isAnySlotSelected(): boolean {
   
           const pmSlots = this.slots.filter(slot => {
             const startTime = moment(slot.startTime, 'hh:mm A');
+            
             const currentTime = moment();
             if (startTime.isBefore(currentTime)) {
               slot.expired = true; 
@@ -120,25 +128,10 @@ isAnySlotSelected(): boolean {
   
   
 
-  User(){
-    this.userService.getUser().subscribe((res:any)=>{
-      console.log(res);
-      
-      Emitter.authEmitter.emit(true)
-    },(err)=>{
-      this.message = 'you are no authenticated'
-      Emitter.authEmitter.emit(false)
-    })
-  }
+  User(){this.userService.getUser()}
 
-  getDate(){
-    this.userService.getDate().subscribe((res) =>{  
-        console.log(res);
-        
-      this.date = res.date
-    })
-    
-  }
+  getDate() {this.userService.getDate().subscribe((res) => {this.date = res.date});}
+
   toggleAM() {
     this.showAM = !this.showAM;
     this.showPM = false;
@@ -149,7 +142,7 @@ isAnySlotSelected(): boolean {
     this.showAM = false;
   }
 
-  selectSlot(slot: any,id:any) {
+  selectSlot(slot: any,id:string | undefined) {
     slot.selected = !slot.selected;
     
     this.amSlots.forEach(s => (s.selected = false));
