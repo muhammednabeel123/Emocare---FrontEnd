@@ -1,11 +1,11 @@
 <app-nav></app-nav>
 
 <div class="flex" style="margin-top: 50px;">
-    <div class="flex-none w-72 max-h-screen bg-red-100">
+     <div class="hidden sm:block w-72 max-h-screen bg-red-100">
       
     </div>
     <div class="flex-auto w-72 h-screen bg-white">
-        <div class="container mx-auto px-12 ">
+        <div class="container mx-auto px-12 flex flex-col ">
           <div *ngFor="let appointment of history?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" class="flex w-3/4 mt-8 ml-10 h-40 bg-white border border-gray-100 rounded-xl shadow-xl  overflow-hidden items-center justify-start" style="cursor: auto;">
 
               <div class="relative w-36 h-40 flex-shrink-0">

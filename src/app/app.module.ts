@@ -25,6 +25,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { ServerErrorComponent } from './error/server-error/server-error.component';
 import { NotFoundErrorComponent } from './error/not-found-error/not-found-error.component';
+import { UserServiceService } from './user/user.service.service';
 
 
 
@@ -59,7 +60,7 @@ import { NotFoundErrorComponent } from './error/not-found-error/not-found-error.
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    },
+    }
   ],
 
   bootstrap: [AppComponent]
