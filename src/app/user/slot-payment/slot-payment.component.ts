@@ -156,7 +156,7 @@ services(id: any) {
   this.userService.getServicer(id).subscribe(
     (res: any) => {
       this.servicer = res;
-      console.log(this.servicer);
+   
     },
     (error: any) => {
       if (error.status === 500) {
