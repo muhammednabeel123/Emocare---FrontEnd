@@ -5,8 +5,9 @@ import { Auth, GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/aut
 import { getStorage, FirebaseStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Observable, map ,filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User,UserLogin,CounselorView,getAllService,getServicer, MyApiResponse } from './userState/user.interface';
+import { User,UserLogin,CounselorView,getAllService,getServicer, MyApiResponse, Appointment, CancelAppointmentResponse } from './userState/user.interface';
 import { initializeApp, FirebaseApp } from 'firebase/app';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +55,8 @@ export class UserServiceService {
     return this.http.get(`${this.url}/date`, { withCredentials: true });
   }
   
-  checkout(index: any, servicer: any, userid: any, stripeToken: any, appointmentId?: any, wallet?: any): Observable<any> {
+  checkout(index:String | number , servicer: String | number, userid: String | number, stripeToken: String | number, appointmentId?: String | number | undefined | null, wallet?: String  | number | undefined | null): Observable<any> {
+    
     const token = { stripeToken: stripeToken };
   
     let url = `${this.url}/book/${index}/${servicer}/${userid}`;
@@ -74,15 +76,18 @@ export class UserServiceService {
     );
   }
 
-  getAppointment(): Observable<any> {
+  getAppointment(): Observable<Appointment[]> {
     const currentTime = new Date();
   
-    return this.http.get(`${this.url}/appointments`,{withCredentials:true}).pipe(
-      map((res: any) => {
-        return res.filter((appointment: any) => {
+    return this.http.get(`${this.url}/appointments`, { withCredentials: true }).pipe(
+      tap((res: any) => {
+        console.log('Response from getAppointment:');
+      }),
+      map((res: Appointment[]) => {
+        return res.filter((appointment: Appointment) => {
           const consultTime = moment(appointment.consultingTime).add(50, 'minutes').toDate();
           if (!appointment.expired && !appointment.completed && !appointment.canceled) {
-            return consultTime > currentTime;
+            return consultTime > currentTime;;
           }
           return false;
         });
@@ -90,20 +95,21 @@ export class UserServiceService {
     );
   }
 
-  cancelAppointment(id:String):Observable<any>{
-    
-    return this.http.get(`${this.url}/cancel-appointments/${id}`,{withCredentials:true})
+  cancelAppointment(id: string): Observable<CancelAppointmentResponse> {
+    return this.http.get(`${this.url}/cancel-appointments/${id}`, { withCredentials: true })
   }
 
   getAppointmentHistory(): Observable<any> {
-    return this.http.get(`${this.url}/appointments`,{withCredentials:true})
-      .pipe(
-        map((response: any) => {
-          const appointments: any[] = Object.values(response);
-          return appointments.filter((appointment: any) => appointment.completed == true);
-        })
-      );
-  } 
+    return this.http.get(`${this.url}/appointments`, { withCredentials: true }).pipe(
+      tap((res: any) => {
+        console.log('Response from getAppointmentHistory:', res);
+      }),
+      map((response: any) => {
+        const appointments: any[] = Object.values(response);
+        return appointments.filter((appointment: any) => appointment.completed == true);
+      })
+    );
+  }
 
   editProfile(formData:any):Observable<any>{
       return this.http.patch(`${this.url}/edit-profile`,formData,{withCredentials:true})

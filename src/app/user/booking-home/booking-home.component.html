@@ -18,18 +18,19 @@
     <div class="flex flex-col md:flex-row border-2 bg-white border-gray-100 rounded-l-3xl rounded-r-3xl my-4 w-auto">
       <!-- Use *ngFor to iterate through the services array -->
       <div
-        *ngFor="let service of services; let last = last"
-        class="p-2 m-1 font-quicksand md:flex-1 relative"
-        (click)="getServices(service._id)"
-      >
+      *ngFor="let service of services; let last = last"
+      class="p-2 m-1 font-quicksand md:flex-1 relative"
+      (click)="getServices(service._id)"
+      [ngClass]="{ 'selected': selectedServiceId === service._id }"
+    >
         <div
           class="w-full md:w-32 cursor-pointer text-center"
           [ngStyle]="{
-            'background-color': selectedServiceId === service._id ? 'rgb(231, 105, 67)' : 'transparent',
-            'color': selectedServiceId === service._id ? 'white' : 'orange'
+            'background-color': selectedServiceId === service._id ? 'white' : 'white',
+            'color': selectedServiceId === service._id ? 'orange' : 'orange'
           }"
         >
-          <h1 class="font-extrabold text-orange-400">{{ service.name }}</h1>
+          <h1 class="font-extrabold ">{{ service.name }}</h1>
           <!-- Assuming 'name' and '_id' are properties of the 'getAllService' interface -->
         </div>
         <div

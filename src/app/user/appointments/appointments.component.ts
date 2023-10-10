@@ -131,7 +131,7 @@ export class AppointmentsComponent implements OnDestroy {
   }
 
   startAppointment(appointmentId: string): void {
-    console.log('Starting appointment:', appointmentId);
+   
     this.router.navigate(['/video_consult', appointmentId]);
   }
 

@@ -18,10 +18,11 @@ export class BookingHomeComponent implements OnInit, OnDestroy {
   currentPage = 1;
   itemsPerPage = 10;
   totalItems = 2;
+  
 
   message: string;
   isClicked: string | null = null;
-  selectedServiceId: string | null | undefined = null;
+  selectedServiceId: string | null | undefined | number = null;
   private userSubscription: Subscription | undefined;
 
   constructor(private http: HttpClient, private userService: UserServiceService, private router: Router) {}
