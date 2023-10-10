@@ -52,4 +52,27 @@ export interface MyApiResponse {
   date: string | Date;
 }
 
+export interface Appointment {
+  booked: boolean;
+  completed: boolean;
+  consultingTime: string;
+  counselor: CounselorView;
+  date: string;
+  fee: number;
+  isButtonDisabled: boolean;
+  isDivDisabled: boolean;
+  payment_status: string;
+  service: getAllService;
+  expired?:boolean
+  canceled?:boolean
+  slotId: string;
+  user: User;
+  __v: number;
+  _id: string;
+}
 
+export interface CancelAppointmentResponse {
+  message?: string;
+  slotId?: string;
+  // Add other properties as needed
+}

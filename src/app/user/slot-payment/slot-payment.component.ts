@@ -55,7 +55,7 @@ submit() {
     key: this.stripeAPIKey,
     locale: 'auto',
     token: (stripeToken: any) => {
-      console.log(stripeToken);
+
       this.paymentStripe(stripeToken);
       this.sendCheckoutRequest();
     },

@@ -15,6 +15,27 @@
     color: orange;
   }
  
+  .selected {
+    background-color: white;
+    color: white;
+    /* Add any other styling you need for the selected state */
+  }
   
   
+  /* Add this CSS to provide the underline effect */
+.flex .flex-col .relative .cursor-pointer {
+  background:
+    linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255)),
+    linear-gradient(to right, rgb(218, 128, 9), rgb(255, 0, 0), rgba(0, 100, 200, 1));
+  background-size: 100% 0.1em, 0 0.1em;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+.flex .flex-col .relative .cursor-pointer:hover,
+.flex .flex-col .relative .cursor-pointer:focus {
+  background-size: 0 0.1em, 100% 0.1em;
+}
+
   
